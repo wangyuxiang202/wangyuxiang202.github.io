@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":"ture","bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 <meta name="description" content="遇到的问题：1、Error: Top-level design entity “simulate” is undefinedverilog文件（.v）里的模块名和顶层实体名(Top-level design entity，一般就是.v文件的文件名)不一致。2、中文 ！和 英文 !  的区别。3、always语句—加时钟—并行语句—非阻塞赋值— “&lt;&#x3D;”always语句—不加时钟—串行语句—阻">
 <meta property="og:type" content="article">
 <meta property="og:title" content="FPGA学习笔记（一）------流水灯">
@@ -224,7 +224,7 @@
     
     <div class="post-body" itemprop="articleBody">
         <h3 id="遇到的问题："><a href="#遇到的问题：" class="headerlink" title="遇到的问题："></a>遇到的问题：</h3><p>1、Error: Top-level design entity “simulate” is undefined<br>verilog文件（.v）里的模块名和顶层实体名(Top-level design entity，一般就是.v文件的文件名)不一致。<br>2、中文 ！和 英文 !  的区别。<br>3、always语句—加时钟—并行语句—非阻塞赋值— “&lt;=”<br>always语句—不加时钟—串行语句—阻塞赋值—“=”<br>4、注意符号(，；)的使用。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">//***********Copyright (c)************//</span><br><span class="line">//-------------------------------------</span><br><span class="line">// File name:           my_flow_led</span><br><span class="line">// Last modified Date:  2020/6/8 22:30</span><br><span class="line">// Last Version:        V1.1</span><br><span class="line">// Descriptions:        流水灯</span><br><span class="line">//-------------------------------------</span><br><span class="line">// LED流水灯引脚分配，高电平点亮</span><br><span class="line">// LED0        D11</span><br><span class="line">// LED1        C11</span><br><span class="line">// LED2        E10</span><br><span class="line">// LED3        F9</span><br><span class="line">// sys_clk     E1</span><br><span class="line">// sys_rst_n   M1</span><br><span class="line">//-------------------------------------</span><br><span class="line">//*************************************//</span><br><span class="line"></span><br><span class="line">module my_flow_led</span><br><span class="line">(</span><br><span class="line">input sys_clk,     					//系统时钟50MHZ</span><br><span class="line">input sys_rst_n,  					//复位，低电平有效</span><br><span class="line"></span><br><span class="line">output  reg  [3:0]  led      	   //4个LED灯</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">//reg define</span><br><span class="line">reg [23:0] counter ;					 //50MHZ（周期20ns）,定时200ms,需要24位。</span><br><span class="line"></span><br><span class="line">//计数器对系统时钟计数，计时0.2秒。0.2s/20ns=1000_0000(d)</span><br><span class="line">always @(posedge sys_clk or negedge sys_rst_n) //时钟上升沿，复位下降沿</span><br><span class="line">begin</span><br><span class="line">	if (!sys_rst_n)         		  //如果复位sys_rst_n=0(默认为高) *注意！!区别		   </span><br><span class="line">		counter &lt;=24&#x27;d0;				  //计数器清0，重新开始计时</span><br><span class="line">	else 						           //if嵌套</span><br><span class="line">		if (counter&lt;24&#x27;d1000_0000)	  //没有计时到0.2s</span><br><span class="line">			counter&lt;=counter+1&#x27;b1;	  //计数器加1</span><br><span class="line">		else</span><br><span class="line">			counter&lt;=24&#x27;d0;			  //到0.2s，计数器清0</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">//通过移位寄存器控制IO口的高低电平，从而改变LED的显示状态</span><br><span class="line">always @(posedge sys_clk or negedge sys_rst_n)</span><br><span class="line"> begin</span><br><span class="line"> if (!sys_rst_n)						        //如果复位</span><br><span class="line">        led &lt;= 4&#x27;b0001;			           //0001 LED0点亮		</span><br><span class="line">    else </span><br><span class="line">		if(counter == 24&#x27;d1000_0000)       //计时到0.2s</span><br><span class="line">			led[3:0] &lt;= &#123;led[2:0],led[3]&#125;;  //拼接运算符&#123;a,b&#125;</span><br><span class="line">		else</span><br><span class="line">			led &lt;= led;							  //保持	</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">endmodule</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//***********Copyright (c)************//</span></span><br><span class="line"><span class="comment">//-------------------------------------</span></span><br><span class="line"><span class="comment">// File name:           my_flow_led</span></span><br><span class="line"><span class="comment">// Last modified Date:  2020/6/8 22:30</span></span><br><span class="line"><span class="comment">// Last Version:        V1.1</span></span><br><span class="line"><span class="comment">// Descriptions:        流水灯</span></span><br><span class="line"><span class="comment">//-------------------------------------</span></span><br><span class="line"><span class="comment">// LED流水灯引脚分配，高电平点亮</span></span><br><span class="line"><span class="comment">// LED0        D11</span></span><br><span class="line"><span class="comment">// LED1        C11</span></span><br><span class="line"><span class="comment">// LED2        E10</span></span><br><span class="line"><span class="comment">// LED3        F9</span></span><br><span class="line"><span class="comment">// sys_clk     E1</span></span><br><span class="line"><span class="comment">// sys_rst_n   M1</span></span><br><span class="line"><span class="comment">//-------------------------------------</span></span><br><span class="line"><span class="comment">//*************************************//</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> my_flow_led</span><br><span class="line">(</span><br><span class="line"><span class="keyword">input</span> sys_clk,     					<span class="comment">//系统时钟50MHZ</span></span><br><span class="line"><span class="keyword">input</span> sys_rst_n,  					<span class="comment">//复位，低电平有效</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">output</span>  <span class="keyword">reg</span>  [<span class="number">3</span>:<span class="number">0</span>]  led      	   <span class="comment">//4个LED灯</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">//reg define</span></span><br><span class="line"><span class="keyword">reg</span> [<span class="number">23</span>:<span class="number">0</span>] counter ;					 <span class="comment">//50MHZ（周期20ns）,定时200ms,需要24位。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//计数器对系统时钟计数，计时0.2秒。0.2s/20ns=1000_0000(d)</span></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> sys_clk <span class="keyword">or</span> <span class="keyword">negedge</span> sys_rst_n) <span class="comment">//时钟上升沿，复位下降沿</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">	<span class="keyword">if</span> (!sys_rst_n)         		  <span class="comment">//如果复位sys_rst_n=0(默认为高) *注意！!区别		   </span></span><br><span class="line">		counter &lt;=<span class="number">24&#x27;d0</span>;				  <span class="comment">//计数器清0，重新开始计时</span></span><br><span class="line">	<span class="keyword">else</span> 						           <span class="comment">//if嵌套</span></span><br><span class="line">		<span class="keyword">if</span> (counter&lt;<span class="number">24&#x27;d1000_0000</span>)	  <span class="comment">//没有计时到0.2s</span></span><br><span class="line">			counter&lt;=counter+<span class="number">1&#x27;b1</span>;	  <span class="comment">//计数器加1</span></span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			counter&lt;=<span class="number">24&#x27;d0</span>;			  <span class="comment">//到0.2s，计数器清0</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//通过移位寄存器控制IO口的高低电平，从而改变LED的显示状态</span></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> sys_clk <span class="keyword">or</span> <span class="keyword">negedge</span> sys_rst_n)</span><br><span class="line"> <span class="keyword">begin</span></span><br><span class="line"> <span class="keyword">if</span> (!sys_rst_n)						        <span class="comment">//如果复位</span></span><br><span class="line">        led &lt;= <span class="number">4&#x27;b0001</span>;			           <span class="comment">//0001 LED0点亮		</span></span><br><span class="line">    <span class="keyword">else</span> </span><br><span class="line">		<span class="keyword">if</span>(counter == <span class="number">24&#x27;d1000_0000</span>)       <span class="comment">//计时到0.2s</span></span><br><span class="line">			led[<span class="number">3</span>:<span class="number">0</span>] &lt;= &#123;led[<span class="number">2</span>:<span class="number">0</span>],led[<span class="number">3</span>]&#125;;  <span class="comment">//拼接运算符&#123;a,b&#125;</span></span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			led &lt;= led;							  <span class="comment">//保持	</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -232,6 +232,53 @@
     
 
     <footer class="post-footer">
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://twitter.com/username">
+          <span class="icon">
+            <i class="fab fa-twitter"></i>
+          </span>
+
+          <span class="label">Twitter</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://t.me/channel_name">
+          <span class="icon">
+            <i class="fab fa-telegram"></i>
+          </span>
+
+          <span class="label">Telegram</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/images/wechat_channel.jpg">
+          <span class="icon">
+            <i class="fab fa-weixin"></i>
+          </span>
+
+          <span class="label">WeChat</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
           <div class="post-tags">
               <a href="/tags/%E7%A1%AC%E4%BB%B6/" rel="tag"># 硬件</a>
           </div>
@@ -240,13 +287,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2021/10/03/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89------%E6%8C%89%E9%94%AELED/" rel="prev" title="FPGA学习笔记（二）------按键LED">
-                  <i class="fa fa-chevron-left"></i> FPGA学习笔记（二）------按键LED
+                <a href="/2021/10/03/DS1302%E6%97%B6%E9%92%9F%E7%A8%8B%E5%BA%8F%E8%A7%A3%E8%AF%BB/" rel="prev" title="DS1302时钟程序解读">
+                  <i class="fa fa-chevron-left"></i> DS1302时钟程序解读
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2021/10/03/DS1302%E6%97%B6%E9%92%9F%E7%A8%8B%E5%BA%8F%E8%A7%A3%E8%AF%BB/" rel="next" title="DS1302时钟程序解读">
-                  DS1302时钟程序解读 <i class="fa fa-chevron-right"></i>
+                <a href="/2021/10/03/%E6%AD%A3%E7%82%B9%E5%8E%9F%E5%AD%90STM32%E4%B8%B2%E5%8F%A3%E8%87%AA%E5%AE%9A%E6%95%B0%E6%8D%AE%E6%8E%A5%E6%94%B6%E5%8D%8F%E8%AE%AE/" rel="next" title="STM32串口自定义数据接收协议">
+                  STM32串口自定义数据接收协议 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>

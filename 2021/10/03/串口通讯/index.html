@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":"ture","bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 <meta name="description" content="@[toc] 一、概念单片机与外部设备交换信息时，通常采用串行通讯和并行通讯。并行通信通常是将数据字节的各位用多条数据线同时进行传送 。特点：控制简单、传输速度快；由于传输线较多，长距离传送时成本高且接收方的各位同时接收存在困难。串行通信是将数据字节分成一位一位的形式在一条传输线上逐个地传送。特点：传输线少，长距离传送时成本低，且可以利用电话网等现成的设备，但数据的传送控制比并行通信复杂 。 串行">
 <meta property="og:type" content="article">
 <meta property="og:title" content="串口通讯协议">
@@ -246,9 +246,9 @@
 <h1 id="三、串行口工作模式1"><a href="#三、串行口工作模式1" class="headerlink" title="三、串行口工作模式1"></a>三、串行口工作模式1</h1><h2 id="1）-计算波特率"><a href="#1）-计算波特率" class="headerlink" title="1）.计算波特率"></a>1）.计算波特率</h2><p>知：<br>$$<br>波特率=\frac{2^{SMOD}}{32}<em>T1溢出率<br>$$<br>$$<br>T1溢出率=\frac{fosc}{12</em>(256-TH1)}<br>$$<br>故：<br>$$<br>波特率=\frac{2^{SMOD}<em>fosc}{32</em>12*(256-T_初)}<br>$$</p>
 <h2 id="2）-相关寄存器配置"><a href="#2）-相关寄存器配置" class="headerlink" title="2）.相关寄存器配置"></a>2）.相关寄存器配置</h2><p>设置T1的工作方式（编程TMOD寄存器）；<br>计算T1的初值，装载TH1、TL1；<br>启动T1（编程TCON中的TR1位）；<br>确定串行口控制（编程SCON寄存器）；<br>如需串行口在中断方式工作时，要进行中断设置编程IE寄存器。</p>
 <h1 id="四、代码块"><a href="#四、代码块" class="headerlink" title="四、代码块"></a>四、代码块</h1><p>串口初始化</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">/*串口初始化*/</span><br><span class="line">void UART_init()</span><br><span class="line">&#123;</span><br><span class="line">	TMOD = 0x20;  	//T1工作模式2  8位自动重装</span><br><span class="line">	TH1 = 0xfd;</span><br><span class="line">	TL1 = 0xfd; 	//比特率9600</span><br><span class="line">//TH1=TL1=256-fosc/12/32/BADU</span><br><span class="line">	TR1 = 1;		//启动T1定时器</span><br><span class="line">	SM0 = 0;</span><br><span class="line">	SM1 = 1; 		//串口工作方式1</span><br><span class="line">	REN = 1;		//串口允许接收</span><br><span class="line">	EA  = 1;		//开总中断</span><br><span class="line">	ES  = 1;		//串口中断打开</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/*串口初始化*/</span></span><br><span class="line">void UART_init()</span><br><span class="line">&#123;</span><br><span class="line">	TMOD = <span class="number">0</span>x20;  	<span class="regexp">//</span>T1工作模式<span class="number">2</span>  <span class="number">8</span>位自动重装</span><br><span class="line">	TH1 = <span class="number">0</span>xfd;</span><br><span class="line">	TL1 = <span class="number">0</span>xfd; 	<span class="regexp">//</span>比特率<span class="number">9600</span></span><br><span class="line"><span class="regexp">//</span>TH1=TL1=<span class="number">256</span>-fosc<span class="regexp">/12/</span><span class="number">32</span>/BADU</span><br><span class="line">	TR1 = <span class="number">1</span>;		<span class="regexp">//</span>启动T1定时器</span><br><span class="line">	SM0 = <span class="number">0</span>;</span><br><span class="line">	SM1 = <span class="number">1</span>; 		<span class="regexp">//</span>串口工作方式<span class="number">1</span></span><br><span class="line">	REN = <span class="number">1</span>;		<span class="regexp">//</span>串口允许接收</span><br><span class="line">	EA  = <span class="number">1</span>;		<span class="regexp">//</span>开总中断</span><br><span class="line">	ES  = <span class="number">1</span>;		<span class="regexp">//</span>串口中断打开</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>TI:发送中断请求标志位（停止位开始发送时内部硬件置位1，软件复位0）<br>RI:接收中断请求标志位（接收到停止位内部硬件置位1，软件复位0）</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">/*串口中断服务程序*/</span><br><span class="line">void UART() interrupt 4</span><br><span class="line">&#123;</span><br><span class="line">	if(RI)	//检测是否接收完成</span><br><span class="line">	&#123;	</span><br><span class="line">		RI = 0;</span><br><span class="line">		num = SBUF;	  //num 取出接收缓存器的值</span><br><span class="line">		P1 = SBUF;</span><br><span class="line">		num++;</span><br><span class="line">		SBUF = num;	</span><br><span class="line">		while(!TI);  //TI=1则置零</span><br><span class="line">		TI = 0;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/*串口中断服务程序*/</span></span><br><span class="line">void UART() interrupt <span class="number">4</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span>(RI)	<span class="regexp">//</span>检测是否接收完成</span><br><span class="line">	&#123;	</span><br><span class="line">		RI = <span class="number">0</span>;</span><br><span class="line">		num = SBUF;	  <span class="regexp">//</span>num 取出接收缓存器的值</span><br><span class="line">		P1 = SBUF;</span><br><span class="line">		num++;</span><br><span class="line">		SBUF = num;	</span><br><span class="line">		<span class="keyword">while</span>(!TI);  <span class="regexp">//</span>TI=<span class="number">1</span>则置零</span><br><span class="line">		TI = <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -256,6 +256,53 @@
     
 
     <footer class="post-footer">
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://twitter.com/username">
+          <span class="icon">
+            <i class="fab fa-twitter"></i>
+          </span>
+
+          <span class="label">Twitter</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://t.me/channel_name">
+          <span class="icon">
+            <i class="fab fa-telegram"></i>
+          </span>
+
+          <span class="label">Telegram</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/images/wechat_channel.jpg">
+          <span class="icon">
+            <i class="fab fa-weixin"></i>
+          </span>
+
+          <span class="label">WeChat</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
           <div class="post-tags">
               <a href="/tags/%E9%80%9A%E8%AE%AF%E5%8D%8F%E8%AE%AE/" rel="tag"># 通讯协议</a>
           </div>
