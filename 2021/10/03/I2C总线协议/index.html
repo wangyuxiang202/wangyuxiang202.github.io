@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="一、I2C串行总线的组成及工作原理 I2C总线是PHLIPS公司推出的一种串行总线，它只有两根双向信号线。一根是数据线SDA（serial data），另一根是时钟线SCL（serial clock）。可挂多器件，每个器件有唯一地址。通信的方式采用主从方式，主机主动联系从机，从机则被动回应数据。I2C总线通过上拉电阻接正电源。当总线空闲时，两根线均为高电平。总线上的任一器件输出的低电平，都将使总线">
+<meta property="og:type" content="article">
+<meta property="og:title" content="I2C总线协议">
+<meta property="og:url" content="http://example.com/2021/10/03/I2C%E6%80%BB%E7%BA%BF%E5%8D%8F%E8%AE%AE/index.html">
+<meta property="og:site_name" content="wangyuxiang">
+<meta property="og:description" content="一、I2C串行总线的组成及工作原理 I2C总线是PHLIPS公司推出的一种串行总线，它只有两根双向信号线。一根是数据线SDA（serial data），另一根是时钟线SCL（serial clock）。可挂多器件，每个器件有唯一地址。通信的方式采用主从方式，主机主动联系从机，从机则被动回应数据。I2C总线通过上拉电阻接正电源。当总线空闲时，两根线均为高电平。总线上的任一器件输出的低电平，都将使总线">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/20200311221413243.png">
+<meta property="og:image" content="http://example.com/images/20200311221514854.png">
+<meta property="og:image" content="http://example.com/images/20200312115558610.png">
+<meta property="og:image" content="http://example.com/images/20200311221742300.png">
+<meta property="og:image" content="http://example.com/images/20200311180214602.png">
+<meta property="og:image" content="http://example.com/images/20200311184452521.png">
+<meta property="og:image" content="http://example.com/images/20200311185615635.png">
+<meta property="og:image" content="http://example.com/images/20200311203612241.png">
+<meta property="og:image" content="http://example.com/images/20200311204915235.png">
+<meta property="article:published_time" content="2021-10-02T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-10-03T05:38:19.106Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="通讯协议">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/20200311221413243.png">
+
+
+<link rel="canonical" href="http://example.com/2021/10/03/I2C%E6%80%BB%E7%BA%BF%E5%8D%8F%E8%AE%AE/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2021/10/03/I2C%E6%80%BB%E7%BA%BF%E5%8D%8F%E8%AE%AE/","path":"2021/10/03/I2C总线协议/","title":"I2C总线协议"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>I2C总线协议 | wangyuxiang</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">wangyuxiang</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81I2C%E4%B8%B2%E8%A1%8C%E6%80%BB%E7%BA%BF%E7%9A%84%E7%BB%84%E6%88%90%E5%8F%8A%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">一、I2C串行总线的组成及工作原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81I2C%E6%80%BB%E7%BA%BF%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE"><span class="nav-number">2.</span> <span class="nav-text">二、I2C总线传输协议</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E4%BD%8D%E6%9C%89%E6%95%88%E6%80%A7%EF%BC%9A"><span class="nav-number">2.1.</span> <span class="nav-text">数据位有效性：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B5%B7%E5%A7%8B-%E7%BB%88%E6%AD%A2%E6%97%B6%E5%BA%8F%EF%BC%9A"><span class="nav-number">2.2.</span> <span class="nav-text">起始&#x2F;终止时序：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%94%E7%AD%94%E6%97%B6%E5%BA%8F%EF%BC%9A"><span class="nav-number">2.3.</span> <span class="nav-text">应答时序：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%91%E9%80%81%EF%BC%88%E5%86%99%EF%BC%89%E6%97%B6%E5%BA%8F%EF%BC%9A"><span class="nav-number">2.4.</span> <span class="nav-text">发送（写）时序：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A5%E6%94%B6%EF%BC%88%E8%AF%BB%EF%BC%89%E6%97%B6%E5%BA%8F%EF%BC%9A"><span class="nav-number">2.5.</span> <span class="nav-text">接收（读）时序：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6%E6%A8%A1%E6%8B%9FI2C%E9%80%9A%E8%AE%AF%EF%BC%9A"><span class="nav-number">2.6.</span> <span class="nav-text">软件模拟I2C通讯：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%A5%E4%B8%8A-%E5%8F%AF%E7%9F%A5"><span class="nav-number">3.</span> <span class="nav-text">以上 可知</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#I2C%E8%B5%B7%E5%A7%8B%E6%97%B6%E5%BA%8F%E7%A8%8B%E5%BA%8F"><span class="nav-number">3.0.1.</span> <span class="nav-text">I2C起始时序程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#I2C%E7%BB%88%E6%AD%A2%E6%97%B6%E5%BA%8F%E7%A8%8B%E5%BA%8F"><span class="nav-number">3.0.2.</span> <span class="nav-text">I2C终止时序程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E6%9C%BA%E6%A3%80%E6%B5%8B%E4%BB%8E%E6%9C%BA%E5%BA%94%E7%AD%94"><span class="nav-number">3.0.3.</span> <span class="nav-text">主机检测从机应答</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E6%9C%BA%E5%8F%91%E9%80%81%E5%BA%94%E7%AD%94"><span class="nav-number">3.0.4.</span> <span class="nav-text">主机发送应答</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/03/I2C%E6%80%BB%E7%BA%BF%E5%8D%8F%E8%AE%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wangyuxiang">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          I2C总线协议
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2021-10-03 00:00:00 / Modified: 13:38:19" itemprop="dateCreated datePublished" datetime="2021-10-03T00:00:00+08:00">2021-10-03</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="一、I2C串行总线的组成及工作原理"><a href="#一、I2C串行总线的组成及工作原理" class="headerlink" title="一、I2C串行总线的组成及工作原理"></a>一、I2C串行总线的组成及工作原理</h1><p> I2C总线是PHLIPS公司推出的一种串行总线，它只有两根双向信号线。一根是数据线SDA（serial data），另一根是时钟线SCL（serial clock）。可挂多器件，每个器件有唯一地址。通信的方式采用主从方式，主机主动联系从机，从机则被动回应数据。<br><img src="/images/20200311221413243.png" alt="在这里插入图片描述"><br>I2C总线通过上拉电阻接正电源。当总线空闲时，两根线均为高电平。总线上的任一器件输出的低电平，都将使总线的信号变低，即各器件的SDA及SCL都是线“与”关系。<br><img src="/images/20200311221514854.png" alt="在这里插入图片描述"></p>
+<h1 id="二、I2C总线传输协议"><a href="#二、I2C总线传输协议" class="headerlink" title="二、I2C总线传输协议"></a>二、I2C总线传输协议</h1><p>I2C通信一共包含五个时序：起始，终止，应答，发送（写）和接受（读），这五个时序分别由不同的脉冲组合来决定。</p>
+<h2 id="数据位有效性："><a href="#数据位有效性：" class="headerlink" title="数据位有效性："></a>数据位有效性：</h2><p>SCL为高电平期间，SDA必须保持稳定；<br>SCL为低电平期间，SDA状态允许变化。<br><img src="/images/20200312115558610.png" alt="在这里插入图片描述"></p>
+<h2 id="起始-终止时序："><a href="#起始-终止时序：" class="headerlink" title="起始/终止时序："></a>起始/终止时序：</h2><p>SCL高电平，SDA由高向低的变化表示起始信号；<br>SCL高电平，SDA由低向高的变化表示终止信号。<br><img src="/images/20200311221742300.png" alt="在这里插入图片描述"></p>
+<h2 id="应答时序："><a href="#应答时序：" class="headerlink" title="应答时序："></a>应答时序：</h2><p>每个字节8位，先传最高位，后面跟随一位应答位（即一帧9位）<br>应答位：从机空闲发出应答“0”、从机繁忙发出非应答“1”；<br>此时主机应发出终止信号以结束数据的继续传送，主机通过从机发出的应答位来判断从机是否成功接收数据。（*应答位是从机发出的，数据从主机到从机）<br><img src="/images/20200311180214602.png" alt="在这里插入图片描述"></p>
+<h2 id="发送（写）时序："><a href="#发送（写）时序：" class="headerlink" title="发送（写）时序："></a>发送（写）时序：</h2><p>数据线   起始信号+从机地址（7位）+数据传送方向位（R/T=1/0）<br>“0”表示主机发送数据（T），“1”表示主机接收数据（R）。<br><img src="/images/20200311184452521.png" alt="在这里插入图片描述"><br>关于从机地址：这里以AT24C02为例，A0A1A2为地址输入（即I2C可以挂2^3=8个该从机）。<br>当A0=A1=A2=0时，地址为1010 0000=0xa0。</p>
+<p><img src="/images/20200311185615635.png" alt="在这里插入图片描述"></p>
+<h2 id="接收（读）时序："><a href="#接收（读）时序：" class="headerlink" title="接收（读）时序："></a>接收（读）时序：</h2><p>读操作与写操作的启动方式相同。共有三种读取操作：当前地址读取，随机地址读取和顺序读取。<br>数据线   起始信号+从机地址（7位）+数据传送方向位（R/T=1/0）<br>“0”表示主机发送数据（T），“1”表示主机接收数据（R）。<br><img src="/images/20200311203612241.png" alt="在这里插入图片描述"></p>
+<h2 id="软件模拟I2C通讯："><a href="#软件模拟I2C通讯：" class="headerlink" title="软件模拟I2C通讯："></a>软件模拟I2C通讯：</h2><p><img src="/images/20200311204915235.png" alt="在这里插入图片描述"></p>
+<h1 id="以上-可知"><a href="#以上-可知" class="headerlink" title="以上 可知"></a>以上 可知</h1><h3 id="I2C起始时序程序"><a href="#I2C起始时序程序" class="headerlink" title="I2C起始时序程序"></a>I2C起始时序程序</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">I2C_Start</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	SCL = <span class="number">1</span>;</span><br><span class="line">	_nop_(); <span class="comment">//空操作，占一个机器周期1.08506</span></span><br><span class="line">	SDA = <span class="number">1</span>;</span><br><span class="line">	delay_5us();</span><br><span class="line">	SDA = <span class="number">0</span>;</span><br><span class="line">	delay_5us();</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<h3 id="I2C终止时序程序"><a href="#I2C终止时序程序" class="headerlink" title="I2C终止时序程序"></a>I2C终止时序程序</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">I2C_Stop</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	SDA = <span class="number">0</span>;</span><br><span class="line">	_nop_();</span><br><span class="line">	SCL = <span class="number">1</span>;</span><br><span class="line">	delay_5us();</span><br><span class="line">	SDA = <span class="number">1</span>;</span><br><span class="line">	delay_5us();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="主机检测从机应答"><a href="#主机检测从机应答" class="headerlink" title="主机检测从机应答"></a>主机检测从机应答</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">bit <span class="title">Test_ACK</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	SCL =  <span class="number">1</span>;	<span class="comment">//在时钟总线为高电平期间可以读取应答信号</span></span><br><span class="line">	delay_5us();</span><br><span class="line">	<span class="keyword">if</span> (SDA)</span><br><span class="line">	&#123;</span><br><span class="line">		SCL = <span class="number">0</span>;</span><br><span class="line">		I2C_Stop();</span><br><span class="line">		<span class="keyword">return</span>(<span class="number">0</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		SCL = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">return</span>(<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="主机发送应答"><a href="#主机发送应答" class="headerlink" title="主机发送应答"></a>主机发送应答</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Master_ACK</span><span class="params">(bit i)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	SCL = <span class="number">0</span>;</span><br><span class="line">	_nop_();</span><br><span class="line">	<span class="keyword">if</span> (i)</span><br><span class="line">	&#123;</span><br><span class="line">		SDA = <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		SDA = <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	_nop_();</span><br><span class="line">	SCL = <span class="number">1</span>;<span class="comment">//数据保持稳定</span></span><br><span class="line">	_nop_();</span><br><span class="line">	SCL = <span class="number">0</span>;</span><br><span class="line">	_nop_();</span><br><span class="line">	SDA = <span class="number">1</span>;</span><br><span class="line">	_nop_();</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<p>关于<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43063744/article/details/104859153">SPI总线协议</a>有兴趣可以看看。</p>
+<p>参考链接：<br>[1]: I2C总线规格书和用户手册–NXP(<a target="_blank" rel="noopener" href="http://www.nxp.com/docs/en/user-guide/UM10204.pdf">http://www.nxp.com/docs/en/user-guide/UM10204.pdf</a>)<br>[2]:AT24C02_DataSheet(<a target="_blank" rel="noopener" href="https://www.datasheet5.com/datasheet/AT24C02/2667484/ATML">https://www.datasheet5.com/datasheet/AT24C02/2667484/ATML</a>)<br>[3]:清翔电子(<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/av36533025?p=16">https://www.bilibili.com/video/av36533025?p=16</a>)</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E9%80%9A%E8%AE%AF%E5%8D%8F%E8%AE%AE/" rel="tag"># 通讯协议</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/10/03/%E6%96%B0%E5%BB%BA%20MD_AUTO_FILE%20%E6%96%87%E4%BB%B6/" rel="prev" title="串口通讯协议">
+                  <i class="fa fa-chevron-left"></i> 串口通讯协议
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/10/03/I2C%E5%8F%82%E8%80%83%E7%A8%8B%E5%BA%8F/" rel="next" title="I2C参考程序">
+                  I2C参考程序 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

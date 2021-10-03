@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="@[TOC] 一、实现功能下载程序后数码管后4位显示0，四位独立按键控制。按K1保存显示的数据，按K2读取上次保存的数据，按K3显示数据加一，按K4显示数据清零。 二、关于AT24C02AT24C02是Ateml公司的2KB的电可擦除存储芯片，采用两线串行的总线和单片机通讯，电压最低可以到2.5V，额定电流为1mA，静态电流10uA(5.5V)，芯片内的资料可以在断电的情况下保存40年以上，而且采">
+<meta property="og:type" content="article">
+<meta property="og:title" content="I2C参考程序">
+<meta property="og:url" content="http://example.com/2021/10/03/I2C%E5%8F%82%E8%80%83%E7%A8%8B%E5%BA%8F/index.html">
+<meta property="og:site_name" content="wangyuxiang">
+<meta property="og:description" content="@[TOC] 一、实现功能下载程序后数码管后4位显示0，四位独立按键控制。按K1保存显示的数据，按K2读取上次保存的数据，按K3显示数据加一，按K4显示数据清零。 二、关于AT24C02AT24C02是Ateml公司的2KB的电可擦除存储芯片，采用两线串行的总线和单片机通讯，电压最低可以到2.5V，额定电流为1mA，静态电流10uA(5.5V)，芯片内的资料可以在断电的情况下保存40年以上，而且采">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-10-02T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-10-03T05:45:13.330Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="代码">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2021/10/03/I2C%E5%8F%82%E8%80%83%E7%A8%8B%E5%BA%8F/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2021/10/03/I2C%E5%8F%82%E8%80%83%E7%A8%8B%E5%BA%8F/","path":"2021/10/03/I2C参考程序/","title":"I2C参考程序"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>I2C参考程序 | wangyuxiang</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">wangyuxiang</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%AE%9E%E7%8E%B0%E5%8A%9F%E8%83%BD"><span class="nav-number">1.</span> <span class="nav-text">一、实现功能</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%85%B3%E4%BA%8EAT24C02"><span class="nav-number">2.</span> <span class="nav-text">二、关于AT24C02</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E4%BB%A3%E7%A0%81%E5%9D%97"><span class="nav-number">3.</span> <span class="nav-text">三、代码块</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E3%80%81-I2C-H"><span class="nav-number">3.1.</span> <span class="nav-text">1)、 I2C.H</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%EF%BC%89%E3%80%81-I2C-C"><span class="nav-number">3.2.</span> <span class="nav-text">2）、  I2C.C</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%EF%BC%89%E3%80%81-main-c"><span class="nav-number">3.3.</span> <span class="nav-text">3）、 main.c</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/03/I2C%E5%8F%82%E8%80%83%E7%A8%8B%E5%BA%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wangyuxiang">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          I2C参考程序
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2021-10-03 00:00:00 / Modified: 13:45:13" itemprop="dateCreated datePublished" datetime="2021-10-03T00:00:00+08:00">2021-10-03</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>@[TOC]</p>
+<h1 id="一、实现功能"><a href="#一、实现功能" class="headerlink" title="一、实现功能"></a>一、实现功能</h1><p>下载程序后数码管后4位显示0，四位独立按键控制。按K1保存显示的数据，按K2读取上次保存的数据，按K3显示数据加一，按K4显示数据清零。</p>
+<h1 id="二、关于AT24C02"><a href="#二、关于AT24C02" class="headerlink" title="二、关于AT24C02"></a>二、关于AT24C02</h1><p>AT24C02是Ateml公司的2KB的电可擦除存储芯片，采用两线串行的总线和单片机通讯，电压最低可以到2.5V，额定电流为1mA，静态电流10uA(5.5V)，芯片内的资料可以在断电的情况下保存40年以上，而且采用8 脚的DIP 封装，使用方便。简言之，AT24C02是一个在突然掉电的情况下存储数据的芯片，即掉电存储芯片。<br>AT24C为系列号，数字部分为K位容量，例如深圳凯晟生产的就分别有1K、2K、4K、8k、16K、32K、64K、128K、256K、512K等；</p>
+<h1 id="三、代码块"><a href="#三、代码块" class="headerlink" title="三、代码块"></a>三、代码块</h1><h2 id="1-、-I2C-H"><a href="#1-、-I2C-H" class="headerlink" title="1)、 I2C.H"></a>1)、 I2C.H</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">#ifndef __I2C_H_</span><br><span class="line">#define __I2C_H_</span><br><span class="line"></span><br><span class="line">#include &lt;reg52.h&gt;</span><br><span class="line"></span><br><span class="line">sbit SCL=P2^1;</span><br><span class="line">sbit SDA=P2^0;</span><br><span class="line"></span><br><span class="line">void I2cStart();</span><br><span class="line">void I2cStop();</span><br><span class="line">unsigned char I2cSendByte(unsigned char dat);</span><br><span class="line">unsigned char I2cReadByte();</span><br><span class="line">void At24c02Write(unsigned char addr,unsigned char dat);</span><br><span class="line">unsigned char At24c02Read(unsigned char addr);</span><br><span class="line"></span><br><span class="line">#endif</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="2）、-I2C-C"><a href="#2）、-I2C-C" class="headerlink" title="2）、  I2C.C"></a>2）、  I2C.C</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br></pre></td><td class="code"><pre><span class="line">#include&quot;i2c.h&quot;</span><br><span class="line"></span><br><span class="line">/*******************************************************************************</span><br><span class="line">* 函数名         : Delay10us()</span><br><span class="line">* 函数功能		   : 延时10us</span><br><span class="line">* 输入           : 无</span><br><span class="line">* 输出         	 : 无</span><br><span class="line">*******************************************************************************/</span><br><span class="line"></span><br><span class="line">void Delay10us()</span><br><span class="line">&#123;</span><br><span class="line">	unsigned char a,b;</span><br><span class="line">	for(b=1;b&gt;0;b--)</span><br><span class="line">		for(a=2;a&gt;0;a--);</span><br><span class="line">&#125;</span><br><span class="line">/*******************************************************************************</span><br><span class="line">* 函数名         : I2cStart()</span><br><span class="line">* 函数功能		 : 起始信号：在SCL时钟信号在高电平期间SDA信号产生一个下降沿</span><br><span class="line">* 输入           : 无</span><br><span class="line">* 输出         	 : 无</span><br><span class="line">* 备注           : 起始之后SDA和SCL都为0</span><br><span class="line">*******************************************************************************/</span><br><span class="line"></span><br><span class="line">void I2cStart()</span><br><span class="line">&#123;</span><br><span class="line">	SDA=1;</span><br><span class="line">	Delay10us();</span><br><span class="line">	SCL=1;</span><br><span class="line">	Delay10us();//建立时间是SDA保持时间&gt;4.7us</span><br><span class="line">	SDA=0;</span><br><span class="line">	Delay10us();//保持时间是&gt;4us</span><br><span class="line">	SCL=0;			</span><br><span class="line">	Delay10us();		</span><br><span class="line">&#125;</span><br><span class="line">/*******************************************************************************</span><br><span class="line">* 函数名         : I2cStop()</span><br><span class="line">* 函数功能		 : 终止信号：在SCL时钟信号高电平期间SDA信号产生一个上升沿</span><br><span class="line">* 输入           : 无</span><br><span class="line">* 输出         	 : 无</span><br><span class="line">* 备注           : 结束之后保持SDA和SCL都为1；表示总线空闲</span><br><span class="line">*******************************************************************************/</span><br><span class="line"></span><br><span class="line">void I2cStop()</span><br><span class="line">&#123;</span><br><span class="line">	SDA=0;</span><br><span class="line">	Delay10us();</span><br><span class="line">	SCL=1;</span><br><span class="line">	Delay10us();//建立时间大于4.7us</span><br><span class="line">	SDA=1;</span><br><span class="line">	Delay10us();		</span><br><span class="line">&#125;</span><br><span class="line">/*******************************************************************************</span><br><span class="line">* 函数名         : I2cSendByte(unsigned char dat)</span><br><span class="line">* 函数功能		 : 通过I2C发送一个字节。在SCL时钟信号高电平期间，保持发送信号SDA保持稳定</span><br><span class="line">* 输入           : num</span><br><span class="line">* 输出         	 : 0或1。发送成功返回1，发送失败返回0</span><br><span class="line">* 备注           : 发送完一个字节SCL=0,SDA=1</span><br><span class="line">*******************************************************************************/</span><br><span class="line"></span><br><span class="line">unsigned char I2cSendByte(unsigned char dat)</span><br><span class="line">&#123;</span><br><span class="line">	unsigned char a=0,b=0;//最大255，一个机器周期为1us，最大延时255us。		</span><br><span class="line">	for(a=0;a&lt;8;a++)//要发送8位，从最高位开始</span><br><span class="line">	&#123;</span><br><span class="line">		SDA=dat&gt;&gt;7;	 //起始信号之后SCL=0，所以可以直接改变SDA信号</span><br><span class="line">		dat=dat&lt;&lt;1;</span><br><span class="line">		Delay10us();</span><br><span class="line">		SCL=1;</span><br><span class="line">		Delay10us();//建立时间&gt;4.7us</span><br><span class="line">		SCL=0;</span><br><span class="line">		Delay10us();//时间大于4us		</span><br><span class="line">	&#125;</span><br><span class="line">	SDA=1;</span><br><span class="line">	Delay10us();</span><br><span class="line">	SCL=1;</span><br><span class="line">	while(SDA)//等待应答，也就是等待从设备把SDA拉低</span><br><span class="line">	&#123;</span><br><span class="line">		b++;</span><br><span class="line">		if(b&gt;200)	 //如果超过2000us没有应答发送失败，或者为非应答，表示接收结束</span><br><span class="line">		&#123;</span><br><span class="line">			SCL=0;</span><br><span class="line">			Delay10us();</span><br><span class="line">			return 0;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	SCL=0;</span><br><span class="line">	Delay10us();</span><br><span class="line"> 	return 1;		</span><br><span class="line">&#125;</span><br><span class="line">/*******************************************************************************</span><br><span class="line">* 函数名         : I2cReadByte()</span><br><span class="line">* 函数功能		   : 使用I2c读取一个字节</span><br><span class="line">* 输入           : 无</span><br><span class="line">* 输出         	 : dat</span><br><span class="line">* 备注           : 接收完一个字节SCL=0,SDA=1.</span><br><span class="line">*******************************************************************************/</span><br><span class="line"></span><br><span class="line">unsigned char I2cReadByte()</span><br><span class="line">&#123;</span><br><span class="line">	unsigned char a=0,dat=0;</span><br><span class="line">	SDA=1;			//起始和发送一个字节之后SCL都是0</span><br><span class="line">	Delay10us();</span><br><span class="line">	for(a=0;a&lt;8;a++)//接收8个字节</span><br><span class="line">	&#123;</span><br><span class="line">		SCL=1;</span><br><span class="line">		Delay10us();</span><br><span class="line">		dat&lt;&lt;=1;</span><br><span class="line">		dat|=SDA;</span><br><span class="line">		Delay10us();</span><br><span class="line">		SCL=0;</span><br><span class="line">		Delay10us();</span><br><span class="line">	&#125;</span><br><span class="line">	return dat;		</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*******************************************************************************</span><br><span class="line">* 函数名         : void At24c02Write(unsigned char addr,unsigned char dat)</span><br><span class="line">* 函数功能		   : 往24c02的一个地址写入一个数据</span><br><span class="line">* 输入           : 无</span><br><span class="line">* 输出         	 : 无</span><br><span class="line">*******************************************************************************/</span><br><span class="line"></span><br><span class="line">void At24c02Write(unsigned char addr,unsigned char dat)</span><br><span class="line">&#123;</span><br><span class="line">	I2cStart();</span><br><span class="line">	I2cSendByte(0xa0);//发送写器件地址</span><br><span class="line">	I2cSendByte(addr);//发送要写入内存地址</span><br><span class="line">	I2cSendByte(dat);	//发送数据</span><br><span class="line">	I2cStop();</span><br><span class="line">&#125;</span><br><span class="line">/*******************************************************************************</span><br><span class="line">* 函数名         : unsigned char At24c02Read(unsigned char addr)</span><br><span class="line">* 函数功能		   : 读取24c02的一个地址的一个数据</span><br><span class="line">* 输入           : 无</span><br><span class="line">* 输出         	 : 无</span><br><span class="line">*******************************************************************************/</span><br><span class="line"></span><br><span class="line">unsigned char At24c02Read(unsigned char addr)</span><br><span class="line">&#123;</span><br><span class="line">	unsigned char num;</span><br><span class="line">	I2cStart();</span><br><span class="line">	I2cSendByte(0xa0); //发送写器件地址</span><br><span class="line">	I2cSendByte(addr); //发送要读取的地址</span><br><span class="line">	I2cStart();</span><br><span class="line">	I2cSendByte(0xa1); //发送读器件地址</span><br><span class="line">	num=I2cReadByte(); //读取数据</span><br><span class="line">	I2cStop();</span><br><span class="line">	return num;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3）、-main-c"><a href="#3）、-main-c" class="headerlink" title="3）、 main.c"></a>3）、 main.c</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;reg52.h&quot;			 //此文件中定义了单片机的一些特殊功能寄存器</span><br><span class="line">#include &quot;i2c.h&quot;	</span><br><span class="line"></span><br><span class="line">typedef unsigned int u16;	  //对数据类型进行声明定义</span><br><span class="line">typedef unsigned char u8;</span><br><span class="line"></span><br><span class="line">sbit LSA=P2^2;</span><br><span class="line">sbit LSB=P2^3;</span><br><span class="line">sbit LSC=P2^4;</span><br><span class="line"></span><br><span class="line">sbit k1=P3^1;</span><br><span class="line">sbit k2=P3^0;</span><br><span class="line">sbit k3=P3^2;</span><br><span class="line">sbit k4=P3^3;	 //定义按键端口</span><br><span class="line"></span><br><span class="line">char num=0;</span><br><span class="line">u8 disp[4];</span><br><span class="line">u8 code smgduan[10]=&#123;0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,0x7f,0x6f&#125;;</span><br><span class="line"></span><br><span class="line">/*******************************************************************************</span><br><span class="line">* 函 数 名         : delay</span><br><span class="line">* 函数功能		   : 延时函数，i=1时，大约延时10us</span><br><span class="line">*******************************************************************************/</span><br><span class="line">void delay(u16 i)</span><br><span class="line">&#123;</span><br><span class="line">	while(i--);	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*******************************************************************************</span><br><span class="line">* 函数名         :Keypros()</span><br><span class="line">* 函数功能		 :按键处理函数</span><br><span class="line">* 输入           : 无</span><br><span class="line">* 输出         	 : 无</span><br><span class="line">*******************************************************************************/</span><br><span class="line">void Keypros()</span><br><span class="line">&#123;</span><br><span class="line">	if(k1==0)</span><br><span class="line">	&#123;</span><br><span class="line">		delay(1000);  //消抖处理</span><br><span class="line">		if(k1==0)</span><br><span class="line">		&#123;</span><br><span class="line">			At24c02Write(1,num);   //在地址1内写入数据num</span><br><span class="line">		&#125;</span><br><span class="line">		while(!k1);</span><br><span class="line">	&#125;</span><br><span class="line">	if(k2==0)</span><br><span class="line">	&#123;</span><br><span class="line">		delay(1000);  //消抖处理</span><br><span class="line">		if(k2==0)</span><br><span class="line">		&#123;</span><br><span class="line">			num=At24c02Read(1);	  //读取EEPROM地址1内的数据保存在num中</span><br><span class="line">		&#125;</span><br><span class="line">		while(!k2);</span><br><span class="line">	&#125;</span><br><span class="line">	if(k3==0)</span><br><span class="line">	&#123;</span><br><span class="line">		delay(100);  //消抖处理</span><br><span class="line">		if(k3==0)</span><br><span class="line">		&#123;</span><br><span class="line">			num++;	   //数据加1</span><br><span class="line">			if(num&gt;255)num=0;</span><br><span class="line">		&#125;</span><br><span class="line">		while(!k3);</span><br><span class="line">	&#125;</span><br><span class="line">	if(k4==0)</span><br><span class="line">	&#123;</span><br><span class="line">		delay(1000);  //消抖处理</span><br><span class="line">		if(k4==0)</span><br><span class="line">		&#123;</span><br><span class="line">			num=0;		 //数据清零</span><br><span class="line">		&#125;</span><br><span class="line">		while(!k4);</span><br><span class="line">	&#125;		</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*******************************************************************************</span><br><span class="line">* 函数名         :datapros()</span><br><span class="line">* 函数功能		 :数据处理函数</span><br><span class="line">* 输入           : 无</span><br><span class="line">* 输出         	 : 无</span><br><span class="line">*******************************************************************************/</span><br><span class="line">void datapros()</span><br><span class="line">&#123;</span><br><span class="line">	disp[0]=smgduan[num/1000];//千位</span><br><span class="line">	disp[1]=smgduan[num%1000/100];//百位</span><br><span class="line">	disp[2]=smgduan[num%1000%100/10];//个位</span><br><span class="line">	disp[3]=smgduan[num%1000%100%10];		</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*******************************************************************************</span><br><span class="line">* 函数名         :DigDisplay()</span><br><span class="line">* 函数功能		 :数码管显示函数</span><br><span class="line">* 输入           : 无</span><br><span class="line">* 输出         	 : 无</span><br><span class="line">*******************************************************************************/</span><br><span class="line">void DigDisplay()</span><br><span class="line">&#123;</span><br><span class="line">	u8 i;</span><br><span class="line">	for(i=0;i&lt;4;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		switch(i)	 //位选，选择点亮的数码管，</span><br><span class="line">		&#123;</span><br><span class="line">			case(0):</span><br><span class="line">				LSA=1;LSB=1;LSC=0; break;//显示第0位</span><br><span class="line">			case(1):</span><br><span class="line">				LSA=0;LSB=1;LSC=0; break;//显示第1位</span><br><span class="line">			case(2):</span><br><span class="line">				LSA=1;LSB=0;LSC=0; break;//显示第2位</span><br><span class="line">			case(3):</span><br><span class="line">				LSA=0;LSB=0;LSC=0; break;//显示第3位</span><br><span class="line">		&#125;</span><br><span class="line">		P0=disp[i];//发送数据</span><br><span class="line">		delay(100); //间隔一段时间扫描	</span><br><span class="line">		P0=0x00;//消隐</span><br><span class="line">	&#125;		</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*******************************************************************************</span><br><span class="line">* 函 数 名       : main</span><br><span class="line">* 函数功能		 : 主函数</span><br><span class="line">* 输    入       : 无</span><br><span class="line">* 输    出    	 : 无</span><br><span class="line">*******************************************************************************/</span><br><span class="line">void main()</span><br><span class="line">&#123;	</span><br><span class="line">	while(1)</span><br><span class="line">	&#123;</span><br><span class="line">		Keypros();	 //按键处理函数</span><br><span class="line">		datapros();	 //数据处理函数</span><br><span class="line">		DigDisplay();//数码管显示函数		</span><br><span class="line">	&#125;		</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>*程序来源：普中科技</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E4%BB%A3%E7%A0%81/" rel="tag"># 代码</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/10/03/I2C%E6%80%BB%E7%BA%BF%E5%8D%8F%E8%AE%AE/" rel="prev" title="I2C总线协议">
+                  <i class="fa fa-chevron-left"></i> I2C总线协议
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/10/03/DS1302%E6%97%B6%E9%92%9F%E7%A8%8B%E5%BA%8F%E8%A7%A3%E8%AF%BB/" rel="next" title="DS1302时钟程序解读">
+                  DS1302时钟程序解读 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

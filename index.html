@@ -115,9 +115,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">1</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">posts</span>
         </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">tags</span>
       </div>
   </nav>
 </div>
@@ -145,6 +149,77 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/03/SPI%E6%80%BB%E7%BA%BF%E5%8D%8F%E8%AE%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wangyuxiang">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/10/03/SPI%E6%80%BB%E7%BA%BF%E5%8D%8F%E8%AE%AE/" class="post-title-link" itemprop="url">SPI总线协议</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2021-10-03 13:30:01 / Modified: 13:39:34" itemprop="dateCreated datePublished" datetime="2021-10-03T13:30:01+08:00">2021-10-03</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="一、SPI总线的组成及工作原理"><a href="#一、SPI总线的组成及工作原理" class="headerlink" title="一、SPI总线的组成及工作原理"></a>一、SPI总线的组成及工作原理</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>摩托罗拉 （Motorola ）公司推出SPI（Serial Perripheral Interface） 串行外围设备接口, 首先在其MC68HCXX系列处理器上定义。是一种<strong>高速的，全双工，同步串行通信总线</strong>，并且在芯片的管脚上只占用四根线 。SPI协议主要用于短距离的通信系统中，特别是嵌入式系统，比如以下芯片：<br>存储器：RAM，EEPROM，Flash等。<br>数模转换：A／D，D／A转换器等。<br>驱动接口：LED显示驱动器、I／O接口芯片、UART收发器等。<br>从SPI NOR Flash公司兆易创新网站上下载一份GD5F2GQ4xFxxG–datasheet为参考，文末附链接。</p>
+<p>这里再补充一下概念：<br>全双工（Full Duplex）是指在发送数据的同时也能够接收数据。<br>半双工（Half Duplex）是指一个时间段内只有一个动作发生。<br>同步通信：连续字符块传送方式，双方时钟和波特率一致，效率高。<br>异步通讯：一个字符为单位传送，双方各用自己的时钟源，效率低。</p>
+<h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><p>SPI接口可以是3线式（单向传输）或4线式，在此只介绍常用的4线接口。<br>4线SPI器件有四个信号：<br>（1) MOSI – 主机输出从机输入数据线(SDI)；<br>（2) MISO – 主机输入从机输出数据线（SDO）；<br>（3）SCLK – 主设备时钟(spi clock)；<br>（4）CS  – 主设备控制片选；<br>SPI接口只能有一个主机，可以挂多个从机。主机的通过片选信号（CS）选择从机，低电平有效，拉高时SPI总线与从机断开连接。当使用多个从机时，主机需要为每个从机提供单独的片选信号。<br><img src="/images/20200314140227245.png" alt="在这里插入图片描述"></p>
+<h1 id="二、数据传输"><a href="#二、数据传输" class="headerlink" title="二、数据传输"></a>二、数据传输</h1><p>SPI 设备间的数据传输之所以又被称为数据交换, 是因为 SPI 协议规定一个 SPI 设备不能在数据通信过程中仅仅只充当一个 “发送者(Transmitter)” 或者 “接收者(Receiver)”. 在每个 Clock 周期内, SPI 设备都会发送并接收一个 bit 大小的数据。<br>在一个SPI时钟周期内：<br>1)主机通过MOSI线发送1位数据，从机读取这1位数据。<br>2)从机通过MISO线发送1位数据，主机读取这1位数据。<br>这是通过移位寄存器来实现的。主机和从机各有一个移位寄存器，二者连接成环。随着时钟脉冲，数据按照从高位到低位的方式依次移出主机寄存器和从机寄存器，并且依次移入从机寄存器和主机寄存器。<br><img src="/images/20200315095507511.png" alt="在这里插入图片描述"></p>
+<h1 id="三、通讯模式"><a href="#三、通讯模式" class="headerlink" title="三、通讯模式"></a>三、通讯模式</h1><p>SPI接口可由CPOL和CPHA设置4种不同传输格式时序,<br>Mode0：CPOL=0，CPHA=0<br>Mode1：CPOL=0，CPHA=1<br>Mode2：CPOL=1，CPHA=0<br>Mode3：CPOL=1，CPHA=1<br>该模式取决于SCLK电平，有时称为<strong>极性</strong>（CPOL），当传输开始时（CS拉低）和称为<strong>相位</strong>（CPHA）的采样边。请注意，相位是相对于极性的,不是绝对值<br>CPOL时钟极性，表示 SPI 空闲时，时钟信号是高电平还是低电平。CPHA用来配置数据采样在第几个边沿：<br>CPOL=0，表示当SCLK=0时处于空闲态，所以有效状态就是SCLK处于高电平时。<br>CPOL=1，表示当SCLK=1时处于空闲态，所以有效状态就是SCLK处于低电平时。<br>CPHA=0，表示数据采样是在第1个边沿，数据发送在第2个边沿。<br>CPHA=1，表示数据采样是在第2个边沿，数据发送在第1个边沿。<br>例：<br>CPOL=0，CPHA=0：此时空闲态时，SCLK处于低电平，数据采样是在第1个边沿，也就是SCLK由低电平到高电平的跳变，所以数据采样是在上升沿，数据发送是在下降沿。<br><img src="/images/20200315105021779.png" alt="在这里插入图片描述"><br><img src="/images/20200315104207856.png" alt="在这里插入图片描述"><br>需要注意的是，不同的从设备一般在出厂时就配置为某种模式，这是不能改变的；所以我们需要对主设备的SPI模式进行配置，通过配置CPOL和CPHA来控制主设备的通信模式。如图只支持mode0 mode3，都是CLK的上升沿采样数据。<br><img src="/images/2020031418005160.png" alt="在这里插入图片描述"><br>四种SPI模式下通讯示例及多从机配置（常规模式 菊花链模式）见<a target="_blank" rel="noopener" href="https://www.analog.com/cn/analog-dialogue/articles/introduction-to-spi-interface.html">SPI接口简介–ADI</a></p>
+<p>关于<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43063744/article/details/104797819">I2C总线协议</a>有兴趣可以看看。</p>
+<p>参考链接：<br>[1].<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/HfF5vqPd_7YlQ0pNOv-nbQ">跟IC君一起学电路</a><br>[2].<a target="_blank" rel="noopener" href="https://www.analog.com/cn/analog-dialogue/articles/introduction-to-spi-interface.html">SPI接口简介–ADI</a>ADI公司，Piyu Dhaker<br>[3].<a target="_blank" rel="noopener" href="https://www.analog.com/media/cn/technical-documentation/application-notes/AN-1248.pdf">应用笔记AN-1248：SPI接口</a>ADI公司，2015年9月。<br>[4].<a target="_blank" rel="noopener" href="https://www.analog.com/media/cn/technical-documentation/data-sheets/ADuCM3027_3029_cn.pdf">ADuCM3029–datasheet（中文）</a>ADI公司，2017年3月。<br>[5].<a target="_blank" rel="noopener" href="https://blog.csdn.net/swang_shan/article/details/103871014">spi通讯模式</a>「swang_shan」的原创文章]<br>[6].<a target="_blank" rel="noopener" href="https://blog.csdn.net/xiaopangzi313/article/details/9359615">C51 模拟spi协议</a>「xiaopangzi313」的原创文章</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -294,6 +369,387 @@
 <p><strong>测试结果：</strong>不加校验的数据串口不识别，定时清空处理，无数据累加情况。测试ok！</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>没啥写的，强迫症凑一凑。</p>
 
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/03/DS1302%E6%97%B6%E9%92%9F%E7%A8%8B%E5%BA%8F%E8%A7%A3%E8%AF%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wangyuxiang">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/10/03/DS1302%E6%97%B6%E9%92%9F%E7%A8%8B%E5%BA%8F%E8%A7%A3%E8%AF%BB/" class="post-title-link" itemprop="url">DS1302时钟程序解读</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2021-10-03 00:00:00 / Modified: 13:44:45" itemprop="dateCreated datePublished" datetime="2021-10-03T00:00:00+08:00">2021-10-03</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>@[TOC]</p>
+<h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p>DS1302 是美国DALLAS公司推出的一种高性能、低功耗、带RAM的实时时钟电路，它可以对年、月、日、周、时、分、秒进行计时，具有闰年补偿功能，工作电压为2.0V～5.5V。采用三线接口与CPU进行同步通信，并可采用突发方式一次传送多个字节的时钟信号或RAM数据。<br><strong>程序功能：</strong> 系统运行时， 数码管上显示电子时钟， 格式为“XX-XX-XX” 。</p>
+<h1 id="一、DS1302写入和读取时分秒的地址命令"><a href="#一、DS1302写入和读取时分秒的地址命令" class="headerlink" title="一、DS1302写入和读取时分秒的地址命令"></a>一、DS1302写入和读取时分秒的地址命令</h1><p>实时时钟的缩写是RTC(Real_Time Clock)，RTC 是集成电路，通常称为时钟芯片。<br>存储顺序是秒分时日月周年,存储格式是用BCD码。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//---秒分时日月周年 最低位读写位;-------//</span><br><span class="line">uchar code READ_RTC_ADDR[7] = &#123;0x81, 0x83, 0x85, 0x87, 0x89, 0x8b, 0x8d&#125;; </span><br><span class="line">uchar code WRITE_RTC_ADDR[7] = &#123;0x80, 0x82, 0x84, 0x86, 0x88, 0x8a, 0x8c&#125;;</span><br><span class="line">//---DS1302时钟初始化2020年4月2日星期四12点00分00秒。---//</span><br><span class="line">uchar TIME[7] = &#123;0, 0, 0x12, 0x02, 0x04, 0x04, 0x20&#125;;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/20200402090731550.png" alt="在这里插入图片描述"></p>
+<h1 id="二、DS1302读-写命令"><a href="#二、DS1302读-写命令" class="headerlink" title="二、DS1302读/写命令"></a>二、DS1302读/写命令</h1><h2 id="1）、写命令"><a href="#1）、写命令" class="headerlink" title="1）、写命令"></a>1）、写命令</h2><p>CE=RST<br>简要：<br>RST=0<br>SCLK=0<br>RST=1<br>循环传送八位地址命令<br>循环写入八位数据（同上）<br>*数据从低位开始传送（addr &amp; 0x01）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">void Ds1302Write(uchar addr, uchar dat)</span><br><span class="line">&#123;</span><br><span class="line">	uchar n;</span><br><span class="line">	RST = 0;</span><br><span class="line">	_nop_();</span><br><span class="line"></span><br><span class="line">	SCLK = 0;//先将SCLK置低电平。</span><br><span class="line">	_nop_();</span><br><span class="line">	RST = 1; //然后将RST(CE)置高电平。</span><br><span class="line">	_nop_();</span><br><span class="line"></span><br><span class="line">	for (n=0; n&lt;8; n++)//开始传送八位地址命令</span><br><span class="line">	&#123;</span><br><span class="line">		DSIO = addr &amp; 0x01;//数据从低位开始传送</span><br><span class="line">		addr &gt;&gt;= 1;</span><br><span class="line">		SCLK = 1;//数据在上升沿时，DS1302读取数据</span><br><span class="line">		_nop_();</span><br><span class="line">		SCLK = 0;</span><br><span class="line">		_nop_();</span><br><span class="line">	&#125;</span><br><span class="line">	for (n=0; n&lt;8; n++)//写入8位数据</span><br><span class="line">	&#123;</span><br><span class="line">		DSIO = dat &amp; 0x01;</span><br><span class="line">		dat &gt;&gt;= 1;</span><br><span class="line">		SCLK = 1;//数据在上升沿时，DS1302读取数据</span><br><span class="line">		_nop_();</span><br><span class="line">		SCLK = 0;</span><br><span class="line">		_nop_();	</span><br><span class="line">	&#125;	</span><br><span class="line">		 </span><br><span class="line">	RST = 0;//传送数据结束</span><br><span class="line">	_nop_();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2）、读命令"><a href="#2）、读命令" class="headerlink" title="2）、读命令"></a>2）、读命令</h2><p>简要：<br>RST=0<br>SCLK=0<br>RST=1<br>循环传送八位地址命令<br>循环读八位数据（同上）<br>*数据从低位开始传送（addr &amp; 0x01）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">uchar Ds1302Read(uchar addr)</span><br><span class="line">&#123;</span><br><span class="line">	uchar n,dat,dat1;</span><br><span class="line">	RST = 0;</span><br><span class="line">	_nop_();</span><br><span class="line"></span><br><span class="line">	SCLK = 0;//先将SCLK置低电平。</span><br><span class="line">	_nop_();</span><br><span class="line">	RST = 1;//然后将RST(CE)置高电平。</span><br><span class="line">	_nop_();</span><br><span class="line"></span><br><span class="line">	for(n=0; n&lt;8; n++)//开始传送八位地址命令</span><br><span class="line">	&#123;</span><br><span class="line">		DSIO = addr &amp; 0x01;//数据从低位开始传送</span><br><span class="line">		addr &gt;&gt;= 1;</span><br><span class="line">		SCLK = 1;//数据在上升沿时，DS1302读取数据</span><br><span class="line">		_nop_();</span><br><span class="line">		SCLK = 0;//DS1302下降沿时，放置数据</span><br><span class="line">		_nop_();</span><br><span class="line">	&#125;</span><br><span class="line">	_nop_();</span><br><span class="line">	</span><br><span class="line">	for(n=0; n&lt;8; n++)//读取8位数据</span><br><span class="line">	&#123;</span><br><span class="line">		dat1 = DSIO;//从最低位开始接收</span><br><span class="line">		dat = (dat&gt;&gt;1) | (dat1&lt;&lt;7);</span><br><span class="line">		SCLK = 1;</span><br><span class="line">		_nop_();</span><br><span class="line">		SCLK = 0;//DS1302下降沿时，放置数据</span><br><span class="line">		_nop_();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	RST = 0;</span><br><span class="line">	_nop_();	//以下为DS1302复位的稳定时间,必须的。</span><br><span class="line">	SCLK = 1;</span><br><span class="line">	_nop_();</span><br><span class="line">	DSIO = 0;</span><br><span class="line">	_nop_();</span><br><span class="line">	DSIO = 1;</span><br><span class="line">	_nop_();</span><br><span class="line">	return dat;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/20200402094050502.png" alt="在这里插入图片描述"></p>
+<h1 id="三、DS1302初始化"><a href="#三、DS1302初始化" class="headerlink" title="三、DS1302初始化"></a>三、DS1302初始化</h1><p>控制寄存器的位 7是写保护位，前 7位（位 0至位 6）被强制为 0且读取时总是读 0 <strong>在任何对时钟或 RAM的写操作以前，位 7必须为 0</strong> 。当为高时，写保护位<strong>禁止</strong>任何寄存器的写操作. 初始加电状态未定义. 因此，在试图<strong>写器件之前应该清除 WP（write protect）位</strong>。<br>*void Ds1302Write(uchar addr, uchar dat);<br>写保护地址：0x8E（见图一）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">void Ds1302Init()</span><br><span class="line">&#123;</span><br><span class="line">	uchar n;</span><br><span class="line">	Ds1302Write(0x8E,0X00);		 //禁止写保护，就是关闭写保护功能</span><br><span class="line">	for (n=0; n&lt;7; n++)					//写入7个字节的时钟信号：分秒时日月周年</span><br><span class="line">	&#123;</span><br><span class="line">		Ds1302Write(WRITE_RTC_ADDR[n],TIME[n]);	</span><br><span class="line">	&#125;</span><br><span class="line">	Ds1302Write(0x8E,0x80);		 //打开写保护功能</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/20200402102611970.png" alt="在这里插入图片描述"></p>
+<h1 id="四、读取时钟信息"><a href="#四、读取时钟信息" class="headerlink" title="四、读取时钟信息"></a>四、读取时钟信息</h1><p>TIME : 时钟初始化时间为2020年4月2日星期四12点00分00秒<br>READ_RTC_ADDR[n] ：秒分时日月周年相对应的地址</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">void Ds1302ReadTime()</span><br><span class="line">&#123;</span><br><span class="line">	uchar n;</span><br><span class="line">	for (n=0; n&lt;7; n++)//读取7个字节的时钟信号：秒分时日月周年</span><br><span class="line">	&#123;</span><br><span class="line">		TIME[n] = Ds1302Read(READ_RTC_ADDR[n]);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="五、DS1302头文件"><a href="#五、DS1302头文件" class="headerlink" title="五、DS1302头文件"></a>五、DS1302头文件</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">#ifndef __DS1302_H_</span><br><span class="line">#define __DS1302_H_</span><br><span class="line"></span><br><span class="line">//---包含头文件---//</span><br><span class="line">#include&lt;reg52.h&gt;</span><br><span class="line">#include&lt;intrins.h&gt;</span><br><span class="line"></span><br><span class="line">//---重定义关键词---//</span><br><span class="line">#ifndef uchar</span><br><span class="line">#define uchar unsigned char</span><br><span class="line">#endif</span><br><span class="line"></span><br><span class="line">#ifndef uint </span><br><span class="line">#define uint unsigned int</span><br><span class="line">#endif</span><br><span class="line"></span><br><span class="line">//---定义ds1302使用的IO口---//</span><br><span class="line">sbit DSIO=P3^4;</span><br><span class="line">sbit RST=P3^5;</span><br><span class="line">sbit SCLK=P3^6;</span><br><span class="line"></span><br><span class="line">//---定义全局函数---//</span><br><span class="line">void Ds1302Write(uchar addr, uchar dat);</span><br><span class="line">uchar Ds1302Read(uchar addr);</span><br><span class="line">void Ds1302Init();</span><br><span class="line">void Ds1302ReadTime();</span><br><span class="line"></span><br><span class="line">//---加入全局变量--//</span><br><span class="line">extern uchar TIME[7];	//加入全局变量</span><br><span class="line"></span><br><span class="line">#endif</span><br></pre></td></tr></table></figure>
+<h1 id="六、主函数"><a href="#六、主函数" class="headerlink" title="六、主函数"></a>六、主函数</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;reg52.h&quot;			</span><br><span class="line">#include &quot;ds1302.h&quot;	</span><br><span class="line">#include &quot;shumaguan.h&quot;</span><br><span class="line"></span><br><span class="line">void main()</span><br><span class="line">&#123;	</span><br><span class="line">	Ds1302Init();	   //第一次初始化后可以注释该条语句，这样下次重启就不会再次初始化了</span><br><span class="line">	while(1)</span><br><span class="line">	&#123;</span><br><span class="line">		datapros();	 //数据处理函数</span><br><span class="line">		DigDisplay();//数码管显示函数		</span><br><span class="line">	&#125;		</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="附-数码管函数"><a href="#附-数码管函数" class="headerlink" title="附*数码管函数"></a>附*数码管函数</h1><h2 id="1-、shumguan-h"><a href="#1-、shumguan-h" class="headerlink" title="1)、shumguan.h"></a>1)、shumguan.h</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">#ifndef __shumaguan_H_</span><br><span class="line">#define __shumaguan_H_</span><br><span class="line"></span><br><span class="line">#include&lt;reg52.h&gt;</span><br><span class="line"></span><br><span class="line">#ifndef u8</span><br><span class="line">#define u8 unsigned char</span><br><span class="line">#endif</span><br><span class="line"></span><br><span class="line">#ifndef u16 </span><br><span class="line">#define u16 unsigned int</span><br><span class="line">#endif</span><br><span class="line"></span><br><span class="line">sbit LSA=P2^2;</span><br><span class="line">sbit LSB=P2^3;</span><br><span class="line">sbit LSC=P2^4;</span><br><span class="line"></span><br><span class="line">void datapros()    ;</span><br><span class="line">void delay(u16 i)  ;</span><br><span class="line">void DigDisplay()  ;</span><br><span class="line">void Ds1302ReadTime();</span><br><span class="line"></span><br><span class="line">#endif</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-、shumaguan-c"><a href="#2-、shumaguan-c" class="headerlink" title="2)、shumaguan.c"></a>2)、shumaguan.c</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">#include&quot;shumaguan.h&quot;</span><br><span class="line"></span><br><span class="line">char num=0;</span><br><span class="line">u8 DisplayData[8];</span><br><span class="line">u8 code smgduan[10]=&#123;0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,0x7f,0x6f&#125;;</span><br><span class="line">extern u8 TIME[7];</span><br><span class="line"></span><br><span class="line">/*******************************************************************************</span><br><span class="line">* 函 数 名         : delay</span><br><span class="line">* 函数功能		   : 延时函数，i=1时，大约延时10us</span><br><span class="line">*******************************************************************************/</span><br><span class="line">void delay(u16 i)</span><br><span class="line">&#123;</span><br><span class="line">	while(i--);	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*******************************************************************************</span><br><span class="line">* 函 数 名         : datapros()</span><br><span class="line">* 函数功能		   : 时间读取处理转换函数</span><br><span class="line">* 输    入         : 无</span><br><span class="line">* 输    出         : 无</span><br><span class="line">*******************************************************************************/</span><br><span class="line">void datapros() 	 </span><br><span class="line">&#123;</span><br><span class="line">   	Ds1302ReadTime();</span><br><span class="line">	DisplayData[0] = smgduan[TIME[2]/16];				//时</span><br><span class="line">	DisplayData[1] = smgduan[TIME[2]&amp;0x0f];				 </span><br><span class="line">	DisplayData[2] = 0x40;</span><br><span class="line">	DisplayData[3] = smgduan[TIME[1]/16];				//分</span><br><span class="line">	DisplayData[4] = smgduan[TIME[1]&amp;0x0f];	</span><br><span class="line">	DisplayData[5] = 0x40;</span><br><span class="line">	DisplayData[6] = smgduan[TIME[0]/16];				//秒</span><br><span class="line">	DisplayData[7] = smgduan[TIME[0]&amp;0x0f];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*******************************************************************************</span><br><span class="line">* 函数名         :DigDisplay()</span><br><span class="line">* 函数功能		 :数码管显示函数</span><br><span class="line">* 输入           : 无</span><br><span class="line">* 输出         	 : 无</span><br><span class="line">*******************************************************************************/</span><br><span class="line">void DigDisplay()</span><br><span class="line">&#123;</span><br><span class="line">	u8 i;</span><br><span class="line">	for(i=0;i&lt;8;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		switch(i)	 //位选，选择点亮的数码管，</span><br><span class="line">		&#123;</span><br><span class="line">			case(0):</span><br><span class="line">				LSA=1;LSB=1;LSC=1; break;//显示第0位</span><br><span class="line">			case(1):</span><br><span class="line">				LSA=0;LSB=1;LSC=1; break;//显示第1位</span><br><span class="line">			case(2):</span><br><span class="line">				LSA=1;LSB=0;LSC=1; break;//显示第2位</span><br><span class="line">			case(3):</span><br><span class="line">				LSA=0;LSB=0;LSC=1; break;//显示第3位</span><br><span class="line">			case(4):</span><br><span class="line">				LSA=1;LSB=1;LSC=0; break;//显示第4位</span><br><span class="line">			case(5):</span><br><span class="line">				LSA=0;LSB=1;LSC=0; break;//显示第5位</span><br><span class="line">			case(6):</span><br><span class="line">				LSA=1;LSB=0;LSC=0; break;//显示第6位</span><br><span class="line">				case(7):</span><br><span class="line">				LSA=0;LSB=0;LSC=0; break;//显示第7位</span><br><span class="line">		&#125;</span><br><span class="line">		P0=DisplayData[i];//发送数据</span><br><span class="line">		delay(100); //间隔一段时间扫描	</span><br><span class="line">		P0=0x00;//消隐</span><br><span class="line">	&#125;		</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/03/I2C%E5%8F%82%E8%80%83%E7%A8%8B%E5%BA%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wangyuxiang">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/10/03/I2C%E5%8F%82%E8%80%83%E7%A8%8B%E5%BA%8F/" class="post-title-link" itemprop="url">I2C参考程序</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2021-10-03 00:00:00 / Modified: 13:45:13" itemprop="dateCreated datePublished" datetime="2021-10-03T00:00:00+08:00">2021-10-03</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>@[TOC]</p>
+<h1 id="一、实现功能"><a href="#一、实现功能" class="headerlink" title="一、实现功能"></a>一、实现功能</h1><p>下载程序后数码管后4位显示0，四位独立按键控制。按K1保存显示的数据，按K2读取上次保存的数据，按K3显示数据加一，按K4显示数据清零。</p>
+<h1 id="二、关于AT24C02"><a href="#二、关于AT24C02" class="headerlink" title="二、关于AT24C02"></a>二、关于AT24C02</h1><p>AT24C02是Ateml公司的2KB的电可擦除存储芯片，采用两线串行的总线和单片机通讯，电压最低可以到2.5V，额定电流为1mA，静态电流10uA(5.5V)，芯片内的资料可以在断电的情况下保存40年以上，而且采用8 脚的DIP 封装，使用方便。简言之，AT24C02是一个在突然掉电的情况下存储数据的芯片，即掉电存储芯片。<br>AT24C为系列号，数字部分为K位容量，例如深圳凯晟生产的就分别有1K、2K、4K、8k、16K、32K、64K、128K、256K、512K等；</p>
+<h1 id="三、代码块"><a href="#三、代码块" class="headerlink" title="三、代码块"></a>三、代码块</h1><h2 id="1-、-I2C-H"><a href="#1-、-I2C-H" class="headerlink" title="1)、 I2C.H"></a>1)、 I2C.H</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">#ifndef __I2C_H_</span><br><span class="line">#define __I2C_H_</span><br><span class="line"></span><br><span class="line">#include &lt;reg52.h&gt;</span><br><span class="line"></span><br><span class="line">sbit SCL=P2^1;</span><br><span class="line">sbit SDA=P2^0;</span><br><span class="line"></span><br><span class="line">void I2cStart();</span><br><span class="line">void I2cStop();</span><br><span class="line">unsigned char I2cSendByte(unsigned char dat);</span><br><span class="line">unsigned char I2cReadByte();</span><br><span class="line">void At24c02Write(unsigned char addr,unsigned char dat);</span><br><span class="line">unsigned char At24c02Read(unsigned char addr);</span><br><span class="line"></span><br><span class="line">#endif</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="2）、-I2C-C"><a href="#2）、-I2C-C" class="headerlink" title="2）、  I2C.C"></a>2）、  I2C.C</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br></pre></td><td class="code"><pre><span class="line">#include&quot;i2c.h&quot;</span><br><span class="line"></span><br><span class="line">/*******************************************************************************</span><br><span class="line">* 函数名         : Delay10us()</span><br><span class="line">* 函数功能		   : 延时10us</span><br><span class="line">* 输入           : 无</span><br><span class="line">* 输出         	 : 无</span><br><span class="line">*******************************************************************************/</span><br><span class="line"></span><br><span class="line">void Delay10us()</span><br><span class="line">&#123;</span><br><span class="line">	unsigned char a,b;</span><br><span class="line">	for(b=1;b&gt;0;b--)</span><br><span class="line">		for(a=2;a&gt;0;a--);</span><br><span class="line">&#125;</span><br><span class="line">/*******************************************************************************</span><br><span class="line">* 函数名         : I2cStart()</span><br><span class="line">* 函数功能		 : 起始信号：在SCL时钟信号在高电平期间SDA信号产生一个下降沿</span><br><span class="line">* 输入           : 无</span><br><span class="line">* 输出         	 : 无</span><br><span class="line">* 备注           : 起始之后SDA和SCL都为0</span><br><span class="line">*******************************************************************************/</span><br><span class="line"></span><br><span class="line">void I2cStart()</span><br><span class="line">&#123;</span><br><span class="line">	SDA=1;</span><br><span class="line">	Delay10us();</span><br><span class="line">	SCL=1;</span><br><span class="line">	Delay10us();//建立时间是SDA保持时间&gt;4.7us</span><br><span class="line">	SDA=0;</span><br><span class="line">	Delay10us();//保持时间是&gt;4us</span><br><span class="line">	SCL=0;			</span><br><span class="line">	Delay10us();		</span><br><span class="line">&#125;</span><br><span class="line">/*******************************************************************************</span><br><span class="line">* 函数名         : I2cStop()</span><br><span class="line">* 函数功能		 : 终止信号：在SCL时钟信号高电平期间SDA信号产生一个上升沿</span><br><span class="line">* 输入           : 无</span><br><span class="line">* 输出         	 : 无</span><br><span class="line">* 备注           : 结束之后保持SDA和SCL都为1；表示总线空闲</span><br><span class="line">*******************************************************************************/</span><br><span class="line"></span><br><span class="line">void I2cStop()</span><br><span class="line">&#123;</span><br><span class="line">	SDA=0;</span><br><span class="line">	Delay10us();</span><br><span class="line">	SCL=1;</span><br><span class="line">	Delay10us();//建立时间大于4.7us</span><br><span class="line">	SDA=1;</span><br><span class="line">	Delay10us();		</span><br><span class="line">&#125;</span><br><span class="line">/*******************************************************************************</span><br><span class="line">* 函数名         : I2cSendByte(unsigned char dat)</span><br><span class="line">* 函数功能		 : 通过I2C发送一个字节。在SCL时钟信号高电平期间，保持发送信号SDA保持稳定</span><br><span class="line">* 输入           : num</span><br><span class="line">* 输出         	 : 0或1。发送成功返回1，发送失败返回0</span><br><span class="line">* 备注           : 发送完一个字节SCL=0,SDA=1</span><br><span class="line">*******************************************************************************/</span><br><span class="line"></span><br><span class="line">unsigned char I2cSendByte(unsigned char dat)</span><br><span class="line">&#123;</span><br><span class="line">	unsigned char a=0,b=0;//最大255，一个机器周期为1us，最大延时255us。		</span><br><span class="line">	for(a=0;a&lt;8;a++)//要发送8位，从最高位开始</span><br><span class="line">	&#123;</span><br><span class="line">		SDA=dat&gt;&gt;7;	 //起始信号之后SCL=0，所以可以直接改变SDA信号</span><br><span class="line">		dat=dat&lt;&lt;1;</span><br><span class="line">		Delay10us();</span><br><span class="line">		SCL=1;</span><br><span class="line">		Delay10us();//建立时间&gt;4.7us</span><br><span class="line">		SCL=0;</span><br><span class="line">		Delay10us();//时间大于4us		</span><br><span class="line">	&#125;</span><br><span class="line">	SDA=1;</span><br><span class="line">	Delay10us();</span><br><span class="line">	SCL=1;</span><br><span class="line">	while(SDA)//等待应答，也就是等待从设备把SDA拉低</span><br><span class="line">	&#123;</span><br><span class="line">		b++;</span><br><span class="line">		if(b&gt;200)	 //如果超过2000us没有应答发送失败，或者为非应答，表示接收结束</span><br><span class="line">		&#123;</span><br><span class="line">			SCL=0;</span><br><span class="line">			Delay10us();</span><br><span class="line">			return 0;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	SCL=0;</span><br><span class="line">	Delay10us();</span><br><span class="line"> 	return 1;		</span><br><span class="line">&#125;</span><br><span class="line">/*******************************************************************************</span><br><span class="line">* 函数名         : I2cReadByte()</span><br><span class="line">* 函数功能		   : 使用I2c读取一个字节</span><br><span class="line">* 输入           : 无</span><br><span class="line">* 输出         	 : dat</span><br><span class="line">* 备注           : 接收完一个字节SCL=0,SDA=1.</span><br><span class="line">*******************************************************************************/</span><br><span class="line"></span><br><span class="line">unsigned char I2cReadByte()</span><br><span class="line">&#123;</span><br><span class="line">	unsigned char a=0,dat=0;</span><br><span class="line">	SDA=1;			//起始和发送一个字节之后SCL都是0</span><br><span class="line">	Delay10us();</span><br><span class="line">	for(a=0;a&lt;8;a++)//接收8个字节</span><br><span class="line">	&#123;</span><br><span class="line">		SCL=1;</span><br><span class="line">		Delay10us();</span><br><span class="line">		dat&lt;&lt;=1;</span><br><span class="line">		dat|=SDA;</span><br><span class="line">		Delay10us();</span><br><span class="line">		SCL=0;</span><br><span class="line">		Delay10us();</span><br><span class="line">	&#125;</span><br><span class="line">	return dat;		</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*******************************************************************************</span><br><span class="line">* 函数名         : void At24c02Write(unsigned char addr,unsigned char dat)</span><br><span class="line">* 函数功能		   : 往24c02的一个地址写入一个数据</span><br><span class="line">* 输入           : 无</span><br><span class="line">* 输出         	 : 无</span><br><span class="line">*******************************************************************************/</span><br><span class="line"></span><br><span class="line">void At24c02Write(unsigned char addr,unsigned char dat)</span><br><span class="line">&#123;</span><br><span class="line">	I2cStart();</span><br><span class="line">	I2cSendByte(0xa0);//发送写器件地址</span><br><span class="line">	I2cSendByte(addr);//发送要写入内存地址</span><br><span class="line">	I2cSendByte(dat);	//发送数据</span><br><span class="line">	I2cStop();</span><br><span class="line">&#125;</span><br><span class="line">/*******************************************************************************</span><br><span class="line">* 函数名         : unsigned char At24c02Read(unsigned char addr)</span><br><span class="line">* 函数功能		   : 读取24c02的一个地址的一个数据</span><br><span class="line">* 输入           : 无</span><br><span class="line">* 输出         	 : 无</span><br><span class="line">*******************************************************************************/</span><br><span class="line"></span><br><span class="line">unsigned char At24c02Read(unsigned char addr)</span><br><span class="line">&#123;</span><br><span class="line">	unsigned char num;</span><br><span class="line">	I2cStart();</span><br><span class="line">	I2cSendByte(0xa0); //发送写器件地址</span><br><span class="line">	I2cSendByte(addr); //发送要读取的地址</span><br><span class="line">	I2cStart();</span><br><span class="line">	I2cSendByte(0xa1); //发送读器件地址</span><br><span class="line">	num=I2cReadByte(); //读取数据</span><br><span class="line">	I2cStop();</span><br><span class="line">	return num;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3）、-main-c"><a href="#3）、-main-c" class="headerlink" title="3）、 main.c"></a>3）、 main.c</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;reg52.h&quot;			 //此文件中定义了单片机的一些特殊功能寄存器</span><br><span class="line">#include &quot;i2c.h&quot;	</span><br><span class="line"></span><br><span class="line">typedef unsigned int u16;	  //对数据类型进行声明定义</span><br><span class="line">typedef unsigned char u8;</span><br><span class="line"></span><br><span class="line">sbit LSA=P2^2;</span><br><span class="line">sbit LSB=P2^3;</span><br><span class="line">sbit LSC=P2^4;</span><br><span class="line"></span><br><span class="line">sbit k1=P3^1;</span><br><span class="line">sbit k2=P3^0;</span><br><span class="line">sbit k3=P3^2;</span><br><span class="line">sbit k4=P3^3;	 //定义按键端口</span><br><span class="line"></span><br><span class="line">char num=0;</span><br><span class="line">u8 disp[4];</span><br><span class="line">u8 code smgduan[10]=&#123;0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,0x7f,0x6f&#125;;</span><br><span class="line"></span><br><span class="line">/*******************************************************************************</span><br><span class="line">* 函 数 名         : delay</span><br><span class="line">* 函数功能		   : 延时函数，i=1时，大约延时10us</span><br><span class="line">*******************************************************************************/</span><br><span class="line">void delay(u16 i)</span><br><span class="line">&#123;</span><br><span class="line">	while(i--);	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*******************************************************************************</span><br><span class="line">* 函数名         :Keypros()</span><br><span class="line">* 函数功能		 :按键处理函数</span><br><span class="line">* 输入           : 无</span><br><span class="line">* 输出         	 : 无</span><br><span class="line">*******************************************************************************/</span><br><span class="line">void Keypros()</span><br><span class="line">&#123;</span><br><span class="line">	if(k1==0)</span><br><span class="line">	&#123;</span><br><span class="line">		delay(1000);  //消抖处理</span><br><span class="line">		if(k1==0)</span><br><span class="line">		&#123;</span><br><span class="line">			At24c02Write(1,num);   //在地址1内写入数据num</span><br><span class="line">		&#125;</span><br><span class="line">		while(!k1);</span><br><span class="line">	&#125;</span><br><span class="line">	if(k2==0)</span><br><span class="line">	&#123;</span><br><span class="line">		delay(1000);  //消抖处理</span><br><span class="line">		if(k2==0)</span><br><span class="line">		&#123;</span><br><span class="line">			num=At24c02Read(1);	  //读取EEPROM地址1内的数据保存在num中</span><br><span class="line">		&#125;</span><br><span class="line">		while(!k2);</span><br><span class="line">	&#125;</span><br><span class="line">	if(k3==0)</span><br><span class="line">	&#123;</span><br><span class="line">		delay(100);  //消抖处理</span><br><span class="line">		if(k3==0)</span><br><span class="line">		&#123;</span><br><span class="line">			num++;	   //数据加1</span><br><span class="line">			if(num&gt;255)num=0;</span><br><span class="line">		&#125;</span><br><span class="line">		while(!k3);</span><br><span class="line">	&#125;</span><br><span class="line">	if(k4==0)</span><br><span class="line">	&#123;</span><br><span class="line">		delay(1000);  //消抖处理</span><br><span class="line">		if(k4==0)</span><br><span class="line">		&#123;</span><br><span class="line">			num=0;		 //数据清零</span><br><span class="line">		&#125;</span><br><span class="line">		while(!k4);</span><br><span class="line">	&#125;		</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*******************************************************************************</span><br><span class="line">* 函数名         :datapros()</span><br><span class="line">* 函数功能		 :数据处理函数</span><br><span class="line">* 输入           : 无</span><br><span class="line">* 输出         	 : 无</span><br><span class="line">*******************************************************************************/</span><br><span class="line">void datapros()</span><br><span class="line">&#123;</span><br><span class="line">	disp[0]=smgduan[num/1000];//千位</span><br><span class="line">	disp[1]=smgduan[num%1000/100];//百位</span><br><span class="line">	disp[2]=smgduan[num%1000%100/10];//个位</span><br><span class="line">	disp[3]=smgduan[num%1000%100%10];		</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*******************************************************************************</span><br><span class="line">* 函数名         :DigDisplay()</span><br><span class="line">* 函数功能		 :数码管显示函数</span><br><span class="line">* 输入           : 无</span><br><span class="line">* 输出         	 : 无</span><br><span class="line">*******************************************************************************/</span><br><span class="line">void DigDisplay()</span><br><span class="line">&#123;</span><br><span class="line">	u8 i;</span><br><span class="line">	for(i=0;i&lt;4;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		switch(i)	 //位选，选择点亮的数码管，</span><br><span class="line">		&#123;</span><br><span class="line">			case(0):</span><br><span class="line">				LSA=1;LSB=1;LSC=0; break;//显示第0位</span><br><span class="line">			case(1):</span><br><span class="line">				LSA=0;LSB=1;LSC=0; break;//显示第1位</span><br><span class="line">			case(2):</span><br><span class="line">				LSA=1;LSB=0;LSC=0; break;//显示第2位</span><br><span class="line">			case(3):</span><br><span class="line">				LSA=0;LSB=0;LSC=0; break;//显示第3位</span><br><span class="line">		&#125;</span><br><span class="line">		P0=disp[i];//发送数据</span><br><span class="line">		delay(100); //间隔一段时间扫描	</span><br><span class="line">		P0=0x00;//消隐</span><br><span class="line">	&#125;		</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*******************************************************************************</span><br><span class="line">* 函 数 名       : main</span><br><span class="line">* 函数功能		 : 主函数</span><br><span class="line">* 输    入       : 无</span><br><span class="line">* 输    出    	 : 无</span><br><span class="line">*******************************************************************************/</span><br><span class="line">void main()</span><br><span class="line">&#123;	</span><br><span class="line">	while(1)</span><br><span class="line">	&#123;</span><br><span class="line">		Keypros();	 //按键处理函数</span><br><span class="line">		datapros();	 //数据处理函数</span><br><span class="line">		DigDisplay();//数码管显示函数		</span><br><span class="line">	&#125;		</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>*程序来源：普中科技</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/03/I2C%E6%80%BB%E7%BA%BF%E5%8D%8F%E8%AE%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wangyuxiang">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/10/03/I2C%E6%80%BB%E7%BA%BF%E5%8D%8F%E8%AE%AE/" class="post-title-link" itemprop="url">I2C总线协议</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2021-10-03 00:00:00 / Modified: 13:38:19" itemprop="dateCreated datePublished" datetime="2021-10-03T00:00:00+08:00">2021-10-03</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="一、I2C串行总线的组成及工作原理"><a href="#一、I2C串行总线的组成及工作原理" class="headerlink" title="一、I2C串行总线的组成及工作原理"></a>一、I2C串行总线的组成及工作原理</h1><p> I2C总线是PHLIPS公司推出的一种串行总线，它只有两根双向信号线。一根是数据线SDA（serial data），另一根是时钟线SCL（serial clock）。可挂多器件，每个器件有唯一地址。通信的方式采用主从方式，主机主动联系从机，从机则被动回应数据。<br><img src="/images/20200311221413243.png" alt="在这里插入图片描述"><br>I2C总线通过上拉电阻接正电源。当总线空闲时，两根线均为高电平。总线上的任一器件输出的低电平，都将使总线的信号变低，即各器件的SDA及SCL都是线“与”关系。<br><img src="/images/20200311221514854.png" alt="在这里插入图片描述"></p>
+<h1 id="二、I2C总线传输协议"><a href="#二、I2C总线传输协议" class="headerlink" title="二、I2C总线传输协议"></a>二、I2C总线传输协议</h1><p>I2C通信一共包含五个时序：起始，终止，应答，发送（写）和接受（读），这五个时序分别由不同的脉冲组合来决定。</p>
+<h2 id="数据位有效性："><a href="#数据位有效性：" class="headerlink" title="数据位有效性："></a>数据位有效性：</h2><p>SCL为高电平期间，SDA必须保持稳定；<br>SCL为低电平期间，SDA状态允许变化。<br><img src="/images/20200312115558610.png" alt="在这里插入图片描述"></p>
+<h2 id="起始-终止时序："><a href="#起始-终止时序：" class="headerlink" title="起始/终止时序："></a>起始/终止时序：</h2><p>SCL高电平，SDA由高向低的变化表示起始信号；<br>SCL高电平，SDA由低向高的变化表示终止信号。<br><img src="/images/20200311221742300.png" alt="在这里插入图片描述"></p>
+<h2 id="应答时序："><a href="#应答时序：" class="headerlink" title="应答时序："></a>应答时序：</h2><p>每个字节8位，先传最高位，后面跟随一位应答位（即一帧9位）<br>应答位：从机空闲发出应答“0”、从机繁忙发出非应答“1”；<br>此时主机应发出终止信号以结束数据的继续传送，主机通过从机发出的应答位来判断从机是否成功接收数据。（*应答位是从机发出的，数据从主机到从机）<br><img src="/images/20200311180214602.png" alt="在这里插入图片描述"></p>
+<h2 id="发送（写）时序："><a href="#发送（写）时序：" class="headerlink" title="发送（写）时序："></a>发送（写）时序：</h2><p>数据线   起始信号+从机地址（7位）+数据传送方向位（R/T=1/0）<br>“0”表示主机发送数据（T），“1”表示主机接收数据（R）。<br><img src="/images/20200311184452521.png" alt="在这里插入图片描述"><br>关于从机地址：这里以AT24C02为例，A0A1A2为地址输入（即I2C可以挂2^3=8个该从机）。<br>当A0=A1=A2=0时，地址为1010 0000=0xa0。</p>
+<p><img src="/images/20200311185615635.png" alt="在这里插入图片描述"></p>
+<h2 id="接收（读）时序："><a href="#接收（读）时序：" class="headerlink" title="接收（读）时序："></a>接收（读）时序：</h2><p>读操作与写操作的启动方式相同。共有三种读取操作：当前地址读取，随机地址读取和顺序读取。<br>数据线   起始信号+从机地址（7位）+数据传送方向位（R/T=1/0）<br>“0”表示主机发送数据（T），“1”表示主机接收数据（R）。<br><img src="/images/20200311203612241.png" alt="在这里插入图片描述"></p>
+<h2 id="软件模拟I2C通讯："><a href="#软件模拟I2C通讯：" class="headerlink" title="软件模拟I2C通讯："></a>软件模拟I2C通讯：</h2><p><img src="/images/20200311204915235.png" alt="在这里插入图片描述"></p>
+<h1 id="以上-可知"><a href="#以上-可知" class="headerlink" title="以上 可知"></a>以上 可知</h1><h3 id="I2C起始时序程序"><a href="#I2C起始时序程序" class="headerlink" title="I2C起始时序程序"></a>I2C起始时序程序</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">I2C_Start</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	SCL = <span class="number">1</span>;</span><br><span class="line">	_nop_(); <span class="comment">//空操作，占一个机器周期1.08506</span></span><br><span class="line">	SDA = <span class="number">1</span>;</span><br><span class="line">	delay_5us();</span><br><span class="line">	SDA = <span class="number">0</span>;</span><br><span class="line">	delay_5us();</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<h3 id="I2C终止时序程序"><a href="#I2C终止时序程序" class="headerlink" title="I2C终止时序程序"></a>I2C终止时序程序</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">I2C_Stop</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	SDA = <span class="number">0</span>;</span><br><span class="line">	_nop_();</span><br><span class="line">	SCL = <span class="number">1</span>;</span><br><span class="line">	delay_5us();</span><br><span class="line">	SDA = <span class="number">1</span>;</span><br><span class="line">	delay_5us();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="主机检测从机应答"><a href="#主机检测从机应答" class="headerlink" title="主机检测从机应答"></a>主机检测从机应答</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">bit <span class="title">Test_ACK</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	SCL =  <span class="number">1</span>;	<span class="comment">//在时钟总线为高电平期间可以读取应答信号</span></span><br><span class="line">	delay_5us();</span><br><span class="line">	<span class="keyword">if</span> (SDA)</span><br><span class="line">	&#123;</span><br><span class="line">		SCL = <span class="number">0</span>;</span><br><span class="line">		I2C_Stop();</span><br><span class="line">		<span class="keyword">return</span>(<span class="number">0</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		SCL = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">return</span>(<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="主机发送应答"><a href="#主机发送应答" class="headerlink" title="主机发送应答"></a>主机发送应答</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Master_ACK</span><span class="params">(bit i)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	SCL = <span class="number">0</span>;</span><br><span class="line">	_nop_();</span><br><span class="line">	<span class="keyword">if</span> (i)</span><br><span class="line">	&#123;</span><br><span class="line">		SDA = <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		SDA = <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	_nop_();</span><br><span class="line">	SCL = <span class="number">1</span>;<span class="comment">//数据保持稳定</span></span><br><span class="line">	_nop_();</span><br><span class="line">	SCL = <span class="number">0</span>;</span><br><span class="line">	_nop_();</span><br><span class="line">	SDA = <span class="number">1</span>;</span><br><span class="line">	_nop_();</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<p>关于<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43063744/article/details/104859153">SPI总线协议</a>有兴趣可以看看。</p>
+<p>参考链接：<br>[1]: I2C总线规格书和用户手册–NXP(<a target="_blank" rel="noopener" href="http://www.nxp.com/docs/en/user-guide/UM10204.pdf">http://www.nxp.com/docs/en/user-guide/UM10204.pdf</a>)<br>[2]:AT24C02_DataSheet(<a target="_blank" rel="noopener" href="https://www.datasheet5.com/datasheet/AT24C02/2667484/ATML">https://www.datasheet5.com/datasheet/AT24C02/2667484/ATML</a>)<br>[3]:清翔电子(<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/av36533025?p=16">https://www.bilibili.com/video/av36533025?p=16</a>)</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/03/%E6%96%B0%E5%BB%BA%20MD_AUTO_FILE%20%E6%96%87%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wangyuxiang">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/10/03/%E6%96%B0%E5%BB%BA%20MD_AUTO_FILE%20%E6%96%87%E4%BB%B6/" class="post-title-link" itemprop="url">串口通讯协议</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2021-10-03 00:00:00 / Modified: 13:50:21" itemprop="dateCreated datePublished" datetime="2021-10-03T00:00:00+08:00">2021-10-03</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/03/%E4%B8%B2%E5%8F%A3%E9%80%9A%E8%AE%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wangyuxiang">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/10/03/%E4%B8%B2%E5%8F%A3%E9%80%9A%E8%AE%AF/" class="post-title-link" itemprop="url">串口通讯协议</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2021-10-03 00:00:00 / Modified: 13:41:54" itemprop="dateCreated datePublished" datetime="2021-10-03T00:00:00+08:00">2021-10-03</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>@[toc]</p>
+<h1 id="一、概念"><a href="#一、概念" class="headerlink" title="一、概念"></a>一、概念</h1><p>单片机与外部设备交换信息时，通常采用串行通讯和并行通讯。<br><strong>并行通信</strong>通常是将数据字节的各位用多条数据线同时进行传送 。<br>特点：控制简单、传输速度快；由于传输线较多，长距离传送时成本高且接收方的各位同时接收存在困难。<br><img src="/images/20200327213429822.png" alt="在这里插入图片描述"><br><strong>串行通信</strong>是将数据字节分成一位一位的形式在一条传输线上逐个地传送。<br>特点：传输线少，长距离传送时成本低，且可以利用电话网等现成的设备，但数据的传送控制比并行通信复杂 。</p>
+<p><img src="/images/20200327213440164.png" alt="在这里插入图片描述"><br>串行通讯分为同步传送和异步传送<br><strong>1</strong> <strong>、异步通信</strong><br>  发送与接收设备使用各自的时钟控制数据的发送和接收过程。为使双方的收发协调，要求发送和接收设备的时钟尽可能一致。<br><img src="/images/20200327213447230.png" alt="在这里插入图片描述"><br><strong>2</strong> <strong>、同步通信</strong><br>同步通信时要建立发送方时钟对接收方时钟的直接控制，使双方达到完全同步。此时，传输数据的位之间的距离均为“位间隔”的整数倍，同时传送的字符间不留间隙，即保持位同步关系，也保持字符同步关系。发送方对接收方的同步可以通过两种方法实现。<br><img src="/images/20200327213454595.png" alt="在这里插入图片描述"></p>
+<h1 id="二、寄存器"><a href="#二、寄存器" class="headerlink" title="二、寄存器"></a>二、寄存器</h1><p>串行口相关寄存器：<br><img src="/images/20200327213807434.png" alt="在这里插入图片描述"></p>
+<h2 id="1-串行口控制寄存器SCON和PCON"><a href="#1-串行口控制寄存器SCON和PCON" class="headerlink" title="1).串行口控制寄存器SCON和PCON"></a>1).串行口控制寄存器SCON和PCON</h2><h3 id="a-gt-串行控制寄存器-SCON"><a href="#a-gt-串行控制寄存器-SCON" class="headerlink" title="a&gt;.串行控制寄存器 SCON"></a>a&gt;.<strong>串行控制寄存器</strong> <strong>SCON</strong></h3><p><img src="/images/20200327213832926.png" alt="在这里插入图片描述"><br>SMO、SM1确定串行口工作方式：<br><img src="/images/20200327213851154.png" alt="在这里插入图片描述"><br>SM2:允许多机通讯控制位（这里不管）<br>REN：串行接收控制位（1：允许接收，0：禁止接收）<br>TB8/RB8：发送/接收数据第9位（这里不管）<br>TI:发送中断请求标志位（停止位开始发送时内部硬件置位1，软件复位0）<br>RI:接收中断请求标志位（接收到停止位内部硬件置位1，软件复位0）<br>*TI/RI方式0除外，任何工作方式下必须软件清零。</p>
+<h3 id="b-gt-串行控制寄存器-PCON"><a href="#b-gt-串行控制寄存器-PCON" class="headerlink" title="b&gt;.串行控制寄存器 PCON"></a>b&gt;.<strong>串行控制寄存器</strong> <strong>PCON</strong></h3><p><img src="/images/20200327213911237.png" alt="在这里插入图片描述"><br>SMOD：波特率选择位（SMOD=1 方式1、2、3波特率加倍）<br>其它位与串口无关</p>
+<h2 id="2）-串行口数据缓冲寄存器SBUF"><a href="#2）-串行口数据缓冲寄存器SBUF" class="headerlink" title="2）.串行口数据缓冲寄存器SBUF"></a>2）.串行口数据缓冲寄存器SBUF</h2><p>串行口数据缓冲寄存器SBUF地址99H，逻辑上，SBUF只有一个。实际上，是两个缓冲器。1个只读寄存器，1个只写寄存器。如果CPU写SBUF，数据就会被送入发送寄存器准备发送；如果CPU读SBUF，则读入的数据一定来自接收缓冲器。即CPU对SBUF的读写，实际上是分别访问上述两个不同的寄存器。  *区分  a = SBUF; SBUF = a。</p>
+<h2 id="3）-从机地址控制寄存器SADEN-SADDR"><a href="#3）-从机地址控制寄存器SADEN-SADDR" class="headerlink" title="3）.从机地址控制寄存器SADEN/SADDR"></a>3）.从机地址控制寄存器SADEN/SADDR</h2><h2 id="4）-串行口中断相关寄存器IE-IPH-IP"><a href="#4）-串行口中断相关寄存器IE-IPH-IP" class="headerlink" title="4）.串行口中断相关寄存器IE/IPH/IP"></a>4）.串行口中断相关寄存器IE/IPH/IP</h2><p>无关</p>
+<h3 id="a-gt-中断允许寄存器IE"><a href="#a-gt-中断允许寄存器IE" class="headerlink" title="a&gt;.中断允许寄存器IE"></a>a&gt;.中断允许寄存器IE</h3><p><img src="/images/20200327213927958.png" alt="在这里插入图片描述"><br>EA:CPU中断允许（1：允许，0：禁止）<br>ES：串行口中断允许位（1：允许，0：禁止）</p>
+<h3 id="b-gt-IPH-IP中断优先级控制寄存器高-低"><a href="#b-gt-IPH-IP中断优先级控制寄存器高-低" class="headerlink" title="b&gt;.IPH/IP中断优先级控制寄存器高/低"></a>b&gt;.IPH/IP中断优先级控制寄存器高/低</h3><p>过</p>
+<h1 id="三、串行口工作模式1"><a href="#三、串行口工作模式1" class="headerlink" title="三、串行口工作模式1"></a>三、串行口工作模式1</h1><h2 id="1）-计算波特率"><a href="#1）-计算波特率" class="headerlink" title="1）.计算波特率"></a>1）.计算波特率</h2><p>知：<br>$$<br>波特率=\frac{2^{SMOD}}{32}<em>T1溢出率<br>$$<br>$$<br>T1溢出率=\frac{fosc}{12</em>(256-TH1)}<br>$$<br>故：<br>$$<br>波特率=\frac{2^{SMOD}<em>fosc}{32</em>12*(256-T_初)}<br>$$</p>
+<h2 id="2）-相关寄存器配置"><a href="#2）-相关寄存器配置" class="headerlink" title="2）.相关寄存器配置"></a>2）.相关寄存器配置</h2><p>设置T1的工作方式（编程TMOD寄存器）；<br>计算T1的初值，装载TH1、TL1；<br>启动T1（编程TCON中的TR1位）；<br>确定串行口控制（编程SCON寄存器）；<br>如需串行口在中断方式工作时，要进行中断设置编程IE寄存器。</p>
+<h1 id="四、代码块"><a href="#四、代码块" class="headerlink" title="四、代码块"></a>四、代码块</h1><p>串口初始化</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">/*串口初始化*/</span><br><span class="line">void UART_init()</span><br><span class="line">&#123;</span><br><span class="line">	TMOD = 0x20;  	//T1工作模式2  8位自动重装</span><br><span class="line">	TH1 = 0xfd;</span><br><span class="line">	TL1 = 0xfd; 	//比特率9600</span><br><span class="line">//TH1=TL1=256-fosc/12/32/BADU</span><br><span class="line">	TR1 = 1;		//启动T1定时器</span><br><span class="line">	SM0 = 0;</span><br><span class="line">	SM1 = 1; 		//串口工作方式1</span><br><span class="line">	REN = 1;		//串口允许接收</span><br><span class="line">	EA  = 1;		//开总中断</span><br><span class="line">	ES  = 1;		//串口中断打开</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>TI:发送中断请求标志位（停止位开始发送时内部硬件置位1，软件复位0）<br>RI:接收中断请求标志位（接收到停止位内部硬件置位1，软件复位0）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">/*串口中断服务程序*/</span><br><span class="line">void UART() interrupt 4</span><br><span class="line">&#123;</span><br><span class="line">	if(RI)	//检测是否接收完成</span><br><span class="line">	&#123;	</span><br><span class="line">		RI = 0;</span><br><span class="line">		num = SBUF;	  //num 取出接收缓存器的值</span><br><span class="line">		P1 = SBUF;</span><br><span class="line">		num++;</span><br><span class="line">		SBUF = num;	</span><br><span class="line">		while(!TI);  //TI=1则置零</span><br><span class="line">		TI = 0;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 
