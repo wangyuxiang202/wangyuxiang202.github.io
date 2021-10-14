@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
-<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 5.4.0">
 
 
@@ -21,30 +20,30 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
   <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":"ture","version":"8.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":"ture","bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"wangyuxiang202.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":"ture","bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 <meta name="description" content="@[TOC] 写在前面DS1302 是美国DALLAS公司推出的一种高性能、低功耗、带RAM的实时时钟电路，它可以对年、月、日、周、时、分、秒进行计时，具有闰年补偿功能，工作电压为2.0V～5.5V。采用三线接口与CPU进行同步通信，并可采用突发方式一次传送多个字节的时钟信号或RAM数据。程序功能： 系统运行时， 数码管上显示电子时钟， 格式为“XX-XX-XX” 。 一、DS1302写入和读取时">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DS1302时钟程序解读">
-<meta property="og:url" content="http://example.com/2021/10/03/DS1302%E6%97%B6%E9%92%9F%E7%A8%8B%E5%BA%8F%E8%A7%A3%E8%AF%BB/index.html">
+<meta property="og:url" content="http://wangyuxiang202.github.io/2021/10/03/DS1302%E6%97%B6%E9%92%9F%E7%A8%8B%E5%BA%8F%E8%A7%A3%E8%AF%BB/index.html">
 <meta property="og:site_name" content="北 海">
 <meta property="og:description" content="@[TOC] 写在前面DS1302 是美国DALLAS公司推出的一种高性能、低功耗、带RAM的实时时钟电路，它可以对年、月、日、周、时、分、秒进行计时，具有闰年补偿功能，工作电压为2.0V～5.5V。采用三线接口与CPU进行同步通信，并可采用突发方式一次传送多个字节的时钟信号或RAM数据。程序功能： 系统运行时， 数码管上显示电子时钟， 格式为“XX-XX-XX” 。 一、DS1302写入和读取时">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/images/20200402090731550.png">
-<meta property="og:image" content="http://example.com/images/20200402094050502.png">
-<meta property="og:image" content="http://example.com/images/20200402102611970.png">
+<meta property="og:image" content="http://wangyuxiang202.github.io/images/20200402090731550.png">
+<meta property="og:image" content="http://wangyuxiang202.github.io/images/20200402094050502.png">
+<meta property="og:image" content="http://wangyuxiang202.github.io/images/20200402102611970.png">
 <meta property="article:published_time" content="2021-10-02T16:00:00.000Z">
 <meta property="article:modified_time" content="2021-10-03T05:44:45.398Z">
 <meta property="article:author" content="Wang Yuxiang">
 <meta property="article:tag" content="代码">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/images/20200402090731550.png">
+<meta name="twitter:image" content="http://wangyuxiang202.github.io/images/20200402090731550.png">
 
 
-<link rel="canonical" href="http://example.com/2021/10/03/DS1302%E6%97%B6%E9%92%9F%E7%A8%8B%E5%BA%8F%E8%A7%A3%E8%AF%BB/">
+<link rel="canonical" href="http://wangyuxiang202.github.io/2021/10/03/DS1302%E6%97%B6%E9%92%9F%E7%A8%8B%E5%BA%8F%E8%A7%A3%E8%AF%BB/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2021/10/03/DS1302%E6%97%B6%E9%92%9F%E7%A8%8B%E5%BA%8F%E8%A7%A3%E8%AF%BB/","path":"2021/10/03/DS1302时钟程序解读/","title":"DS1302时钟程序解读"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://wangyuxiang202.github.io/2021/10/03/DS1302%E6%97%B6%E9%92%9F%E7%A8%8B%E5%BA%8F%E8%A7%A3%E8%AF%BB/","path":"2021/10/03/DS1302时钟程序解读/","title":"DS1302时钟程序解读"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>DS1302时钟程序解读 | 北 海</title>
@@ -212,7 +211,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/03/DS1302%E6%97%B6%E9%92%9F%E7%A8%8B%E5%BA%8F%E8%A7%A3%E8%AF%BB/">
+    <link itemprop="mainEntityOfPage" href="http://wangyuxiang202.github.io/2021/10/03/DS1302%E6%97%B6%E9%92%9F%E7%A8%8B%E5%BA%8F%E8%A7%A3%E8%AF%BB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/uploads/avatar.jpg">
@@ -298,20 +297,6 @@
     
 
     <footer class="post-footer">
-          <div class="reward-container">
-  <div></div>
-  <button>
-    赞赏
-  </button>
-  <div class="post-reward">
-      <div>
-        <img src="/images/wechatpay.png" alt="Wang Yuxiang 微信">
-        <span>微信</span>
-      </div>
-
-  </div>
-</div>
-
           
 
 <div class="post-copyright">
@@ -321,7 +306,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="http://example.com/2021/10/03/DS1302%E6%97%B6%E9%92%9F%E7%A8%8B%E5%BA%8F%E8%A7%A3%E8%AF%BB/" title="DS1302时钟程序解读">http://example.com/2021/10/03/DS1302时钟程序解读/</a>
+      <a href="http://wangyuxiang202.github.io/2021/10/03/DS1302%E6%97%B6%E9%92%9F%E7%A8%8B%E5%BA%8F%E8%A7%A3%E8%AF%BB/" title="DS1302时钟程序解读">http://wangyuxiang202.github.io/2021/10/03/DS1302时钟程序解读/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
