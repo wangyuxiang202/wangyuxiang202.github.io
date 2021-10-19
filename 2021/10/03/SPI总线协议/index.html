@@ -21,12 +21,12 @@
   <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"wangyuxiang202.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":"ture","bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
-<meta name="description" content="一、SPI总线的组成及工作原理概念摩托罗拉 （Motorola ）公司推出SPI（Serial Perripheral Interface） 串行外围设备接口, 首先在其MC68HCXX系列处理器上定义。是一种高速的，全双工，同步串行通信总线，并且在芯片的管脚上只占用四根线 。SPI协议主要用于短距离的通信系统中，特别是嵌入式系统，比如以下芯片：存储器：RAM，EEPROM，Flash等。数模转换">
+<meta name="description" content="一、SPI总线的组成及工作原理 概念 摩托罗拉 （Motorola ）公司推出SPI（Serial Perripheral Interface） 串行外围设备接口, 首先在其MC68HCXX系列处理器上定义。是一种高速的，全双工，同步串行通信总线，并且在芯片的管脚上只占用四根线 。SPI协议主要用于短距离的通信系统中，特别是嵌入式系统，比如以下芯片： 存储器：RAM，EEPROM，Flash等。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SPI总线协议">
 <meta property="og:url" content="http://wangyuxiang202.github.io/2021/10/03/SPI%E6%80%BB%E7%BA%BF%E5%8D%8F%E8%AE%AE/index.html">
 <meta property="og:site_name" content="北 海">
-<meta property="og:description" content="一、SPI总线的组成及工作原理概念摩托罗拉 （Motorola ）公司推出SPI（Serial Perripheral Interface） 串行外围设备接口, 首先在其MC68HCXX系列处理器上定义。是一种高速的，全双工，同步串行通信总线，并且在芯片的管脚上只占用四根线 。SPI协议主要用于短距离的通信系统中，特别是嵌入式系统，比如以下芯片：存储器：RAM，EEPROM，Flash等。数模转换">
+<meta property="og:description" content="一、SPI总线的组成及工作原理 概念 摩托罗拉 （Motorola ）公司推出SPI（Serial Perripheral Interface） 串行外围设备接口, 首先在其MC68HCXX系列处理器上定义。是一种高速的，全双工，同步串行通信总线，并且在芯片的管脚上只占用四根线 。SPI协议主要用于短距离的通信系统中，特别是嵌入式系统，比如以下芯片： 存储器：RAM，EEPROM，Flash等。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://wangyuxiang202.github.io/images/20200314140227245.png">
 <meta property="og:image" content="http://wangyuxiang202.github.io/images/20200315095507511.png">
@@ -100,9 +100,8 @@
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">4</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a></li>
         <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">9</span></a></li>
-        <li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li>
-        <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
-        <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+        <li class="menu-item menu-item-read"><a href="/read/" rel="section"><i class="fa fa-book fa-fw"></i>read</a></li>
+        <li class="menu-item menu-item-movie"><a href="/movie/" rel="section"><i class="fa fa-movie fa-fw"></i>movie</a></li>
   </ul>
 </nav>
 
@@ -133,7 +132,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81SPI%E6%80%BB%E7%BA%BF%E7%9A%84%E7%BB%84%E6%88%90%E5%8F%8A%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">一、SPI总线的组成及工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3"><span class="nav-number">1.2.</span> <span class="nav-text">接口</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93"><span class="nav-number">2.</span> <span class="nav-text">二、数据传输</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E9%80%9A%E8%AE%AF%E6%A8%A1%E5%BC%8F"><span class="nav-number">3.</span> <span class="nav-text">三、通讯模式</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">一、SPI总线的组成及工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3"><span class="nav-number">1.2.</span> <span class="nav-text">接口</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">二、数据传输</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">三、通讯模式</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -272,13 +271,61 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="一、SPI总线的组成及工作原理"><a href="#一、SPI总线的组成及工作原理" class="headerlink" title="一、SPI总线的组成及工作原理"></a>一、SPI总线的组成及工作原理</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>摩托罗拉 （Motorola ）公司推出SPI（Serial Perripheral Interface） 串行外围设备接口, 首先在其MC68HCXX系列处理器上定义。是一种<strong>高速的，全双工，同步串行通信总线</strong>，并且在芯片的管脚上只占用四根线 。SPI协议主要用于短距离的通信系统中，特别是嵌入式系统，比如以下芯片：<br>存储器：RAM，EEPROM，Flash等。<br>数模转换：A／D，D／A转换器等。<br>驱动接口：LED显示驱动器、I／O接口芯片、UART收发器等。<br>从SPI NOR Flash公司兆易创新网站上下载一份GD5F2GQ4xFxxG–datasheet为参考，文末附链接。</p>
-<p>这里再补充一下概念：<br>全双工（Full Duplex）是指在发送数据的同时也能够接收数据。<br>半双工（Half Duplex）是指一个时间段内只有一个动作发生。<br>同步通信：连续字符块传送方式，双方时钟和波特率一致，效率高。<br>异步通讯：一个字符为单位传送，双方各用自己的时钟源，效率低。</p>
-<h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><p>SPI接口可以是3线式（单向传输）或4线式，在此只介绍常用的4线接口。<br>4线SPI器件有四个信号：<br>（1) MOSI – 主机输出从机输入数据线(SDI)；<br>（2) MISO – 主机输入从机输出数据线（SDO）；<br>（3）SCLK – 主设备时钟(spi clock)；<br>（4）CS  – 主设备控制片选；<br>SPI接口只能有一个主机，可以挂多个从机。主机的通过片选信号（CS）选择从机，低电平有效，拉高时SPI总线与从机断开连接。当使用多个从机时，主机需要为每个从机提供单独的片选信号。<br><img src="/images/20200314140227245.png" alt="在这里插入图片描述"></p>
-<h1 id="二、数据传输"><a href="#二、数据传输" class="headerlink" title="二、数据传输"></a>二、数据传输</h1><p>SPI 设备间的数据传输之所以又被称为数据交换, 是因为 SPI 协议规定一个 SPI 设备不能在数据通信过程中仅仅只充当一个 “发送者(Transmitter)” 或者 “接收者(Receiver)”. 在每个 Clock 周期内, SPI 设备都会发送并接收一个 bit 大小的数据。<br>在一个SPI时钟周期内：<br>1)主机通过MOSI线发送1位数据，从机读取这1位数据。<br>2)从机通过MISO线发送1位数据，主机读取这1位数据。<br>这是通过移位寄存器来实现的。主机和从机各有一个移位寄存器，二者连接成环。随着时钟脉冲，数据按照从高位到低位的方式依次移出主机寄存器和从机寄存器，并且依次移入从机寄存器和主机寄存器。<br><img src="/images/20200315095507511.png" alt="在这里插入图片描述"></p>
-<h1 id="三、通讯模式"><a href="#三、通讯模式" class="headerlink" title="三、通讯模式"></a>三、通讯模式</h1><p>SPI接口可由CPOL和CPHA设置4种不同传输格式时序,<br>Mode0：CPOL=0，CPHA=0<br>Mode1：CPOL=0，CPHA=1<br>Mode2：CPOL=1，CPHA=0<br>Mode3：CPOL=1，CPHA=1<br>该模式取决于SCLK电平，有时称为<strong>极性</strong>（CPOL），当传输开始时（CS拉低）和称为<strong>相位</strong>（CPHA）的采样边。请注意，相位是相对于极性的,不是绝对值<br>CPOL时钟极性，表示 SPI 空闲时，时钟信号是高电平还是低电平。CPHA用来配置数据采样在第几个边沿：<br>CPOL=0，表示当SCLK=0时处于空闲态，所以有效状态就是SCLK处于高电平时。<br>CPOL=1，表示当SCLK=1时处于空闲态，所以有效状态就是SCLK处于低电平时。<br>CPHA=0，表示数据采样是在第1个边沿，数据发送在第2个边沿。<br>CPHA=1，表示数据采样是在第2个边沿，数据发送在第1个边沿。<br>例：<br>CPOL=0，CPHA=0：此时空闲态时，SCLK处于低电平，数据采样是在第1个边沿，也就是SCLK由低电平到高电平的跳变，所以数据采样是在上升沿，数据发送是在下降沿。<br><img src="/images/20200315105021779.png" alt="在这里插入图片描述"><br><img src="/images/20200315104207856.png" alt="在这里插入图片描述"><br>需要注意的是，不同的从设备一般在出厂时就配置为某种模式，这是不能改变的；所以我们需要对主设备的SPI模式进行配置，通过配置CPOL和CPHA来控制主设备的通信模式。如图只支持mode0 mode3，都是CLK的上升沿采样数据。<br><img src="/images/2020031418005160.png" alt="在这里插入图片描述"><br>四种SPI模式下通讯示例及多从机配置（常规模式 菊花链模式）见<a target="_blank" rel="noopener" href="https://www.analog.com/cn/analog-dialogue/articles/introduction-to-spi-interface.html">SPI接口简介–ADI</a></p>
+        <h1>一、SPI总线的组成及工作原理</h1>
+<h2 id="概念">概念</h2>
+<p>摩托罗拉 （Motorola ）公司推出SPI（Serial Perripheral Interface） 串行外围设备接口, 首先在其MC68HCXX系列处理器上定义。是一种<strong>高速的，全双工，同步串行通信总线</strong>，并且在芯片的管脚上只占用四根线 。SPI协议主要用于短距离的通信系统中，特别是嵌入式系统，比如以下芯片：<br>
+存储器：RAM，EEPROM，Flash等。<br>
+数模转换：A／D，D／A转换器等。<br>
+驱动接口：LED显示驱动器、I／O接口芯片、UART收发器等。<br>
+从SPI NOR Flash公司兆易创新网站上下载一份GD5F2GQ4xFxxG–datasheet为参考，文末附链接。</p>
+<p>这里再补充一下概念：<br>
+全双工（Full Duplex）是指在发送数据的同时也能够接收数据。<br>
+半双工（Half Duplex）是指一个时间段内只有一个动作发生。<br>
+同步通信：连续字符块传送方式，双方时钟和波特率一致，效率高。<br>
+异步通讯：一个字符为单位传送，双方各用自己的时钟源，效率低。</p>
+<h2 id="接口">接口</h2>
+<p>SPI接口可以是3线式（单向传输）或4线式，在此只介绍常用的4线接口。<br>
+4线SPI器件有四个信号：<br>
+（1) MOSI – 主机输出从机输入数据线(SDI)；<br>
+（2) MISO – 主机输入从机输出数据线（SDO）；<br>
+（3）SCLK – 主设备时钟(spi clock)；<br>
+（4）CS  – 主设备控制片选；<br>
+SPI接口只能有一个主机，可以挂多个从机。主机的通过片选信号（CS）选择从机，低电平有效，拉高时SPI总线与从机断开连接。当使用多个从机时，主机需要为每个从机提供单独的片选信号。<br>
+<img src="/images/20200314140227245.png" alt="在这里插入图片描述"></p>
+<h1>二、数据传输</h1>
+<p>SPI 设备间的数据传输之所以又被称为数据交换, 是因为 SPI 协议规定一个 SPI 设备不能在数据通信过程中仅仅只充当一个 “发送者(Transmitter)” 或者 “接收者(Receiver)”. 在每个 Clock 周期内, SPI 设备都会发送并接收一个 bit 大小的数据。<br>
+在一个SPI时钟周期内：<br>
+1)主机通过MOSI线发送1位数据，从机读取这1位数据。<br>
+2)从机通过MISO线发送1位数据，主机读取这1位数据。<br>
+这是通过移位寄存器来实现的。主机和从机各有一个移位寄存器，二者连接成环。随着时钟脉冲，数据按照从高位到低位的方式依次移出主机寄存器和从机寄存器，并且依次移入从机寄存器和主机寄存器。<br>
+<img src="/images/20200315095507511.png" alt="在这里插入图片描述"></p>
+<h1>三、通讯模式</h1>
+<p>SPI接口可由CPOL和CPHA设置4种不同传输格式时序,<br>
+Mode0：CPOL=0，CPHA=0<br>
+Mode1：CPOL=0，CPHA=1<br>
+Mode2：CPOL=1，CPHA=0<br>
+Mode3：CPOL=1，CPHA=1<br>
+该模式取决于SCLK电平，有时称为<strong>极性</strong>（CPOL），当传输开始时（CS拉低）和称为<strong>相位</strong>（CPHA）的采样边。请注意，相位是相对于极性的,不是绝对值<br>
+CPOL时钟极性，表示 SPI 空闲时，时钟信号是高电平还是低电平。CPHA用来配置数据采样在第几个边沿：<br>
+CPOL=0，表示当SCLK=0时处于空闲态，所以有效状态就是SCLK处于高电平时。<br>
+CPOL=1，表示当SCLK=1时处于空闲态，所以有效状态就是SCLK处于低电平时。<br>
+CPHA=0，表示数据采样是在第1个边沿，数据发送在第2个边沿。<br>
+CPHA=1，表示数据采样是在第2个边沿，数据发送在第1个边沿。<br>
+例：<br>
+CPOL=0，CPHA=0：此时空闲态时，SCLK处于低电平，数据采样是在第1个边沿，也就是SCLK由低电平到高电平的跳变，所以数据采样是在上升沿，数据发送是在下降沿。<br>
+<img src="/images/20200315105021779.png" alt="在这里插入图片描述"><br>
+<img src="/images/20200315104207856.png" alt="在这里插入图片描述"><br>
+需要注意的是，不同的从设备一般在出厂时就配置为某种模式，这是不能改变的；所以我们需要对主设备的SPI模式进行配置，通过配置CPOL和CPHA来控制主设备的通信模式。如图只支持mode0 mode3，都是CLK的上升沿采样数据。<br>
+<img src="/images/2020031418005160.png" alt="在这里插入图片描述"><br>
+四种SPI模式下通讯示例及多从机配置（常规模式 菊花链模式）见<a target="_blank" rel="noopener" href="https://www.analog.com/cn/analog-dialogue/articles/introduction-to-spi-interface.html">SPI接口简介–ADI</a></p>
 <p>关于<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43063744/article/details/104797819">I2C总线协议</a>有兴趣可以看看。</p>
-<p>参考链接：<br>[1].<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/HfF5vqPd_7YlQ0pNOv-nbQ">跟IC君一起学电路</a><br>[2].<a target="_blank" rel="noopener" href="https://www.analog.com/cn/analog-dialogue/articles/introduction-to-spi-interface.html">SPI接口简介–ADI</a>ADI公司，Piyu Dhaker<br>[3].<a target="_blank" rel="noopener" href="https://www.analog.com/media/cn/technical-documentation/application-notes/AN-1248.pdf">应用笔记AN-1248：SPI接口</a>ADI公司，2015年9月。<br>[4].<a target="_blank" rel="noopener" href="https://www.analog.com/media/cn/technical-documentation/data-sheets/ADuCM3027_3029_cn.pdf">ADuCM3029–datasheet（中文）</a>ADI公司，2017年3月。<br>[5].<a target="_blank" rel="noopener" href="https://blog.csdn.net/swang_shan/article/details/103871014">spi通讯模式</a>「swang_shan」的原创文章]<br>[6].<a target="_blank" rel="noopener" href="https://blog.csdn.net/xiaopangzi313/article/details/9359615">C51 模拟spi协议</a>「xiaopangzi313」的原创文章</p>
+<p>参考链接：<br>
+[1].<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/HfF5vqPd_7YlQ0pNOv-nbQ">跟IC君一起学电路</a><br>
+[2].<a target="_blank" rel="noopener" href="https://www.analog.com/cn/analog-dialogue/articles/introduction-to-spi-interface.html">SPI接口简介–ADI</a>ADI公司，Piyu Dhaker<br>
+[3].<a target="_blank" rel="noopener" href="https://www.analog.com/media/cn/technical-documentation/application-notes/AN-1248.pdf">应用笔记AN-1248：SPI接口</a>ADI公司，2015年9月。<br>
+[4].<a target="_blank" rel="noopener" href="https://www.analog.com/media/cn/technical-documentation/data-sheets/ADuCM3027_3029_cn.pdf">ADuCM3029–datasheet（中文）</a>ADI公司，2017年3月。<br>
+[5].<a target="_blank" rel="noopener" href="https://blog.csdn.net/swang_shan/article/details/103871014">spi通讯模式</a>「swang_shan」的原创文章]<br>
+[6].<a target="_blank" rel="noopener" href="https://blog.csdn.net/xiaopangzi313/article/details/9359615">C51 模拟spi协议</a>「xiaopangzi313」的原创文章</p>
 
     </div>
 

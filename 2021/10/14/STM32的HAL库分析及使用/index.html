@@ -21,12 +21,12 @@
   <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"wangyuxiang202.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":"ture","bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
-<meta name="description" content="STM32的HAL库分析及使用[TOC] 0. 写在前面在使用STM32的时候，总会选择一种开发方式，比如以下3中：  直接配置寄存器 标准库 HAL库  第一种不在解释，不会真的有人用寄存器操作吧？标准库和HAL库目前都有使用过，个人感觉标准库使用起来更加方便，入门首选。HAL库是ST公司目前主力推的开发方式，全称就是 Hardware Abstraction Layer（抽象印象层）。库如其名">
+<meta name="description" content="STM32的HAL库分析及使用 [TOC] 0. 写在前面 在使用STM32的时候，总会选择一种开发方式，比如以下3中：  直接配置寄存器 标准库 HAL库  第一种不在解释，不会真的有人用寄存器操作吧？标准库和HAL库目前都有使用过，个人感觉标准库使用起来更加方便，入门首选。HAL库是ST公司目前主力推的开发方式，全称就是 Hardware Abstraction Layer（抽象印象层）。库如">
 <meta property="og:type" content="article">
 <meta property="og:title" content="STM32的HAL库分析及使用">
 <meta property="og:url" content="http://wangyuxiang202.github.io/2021/10/14/STM32%E7%9A%84HAL%E5%BA%93%E5%88%86%E6%9E%90%E5%8F%8A%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="北 海">
-<meta property="og:description" content="STM32的HAL库分析及使用[TOC] 0. 写在前面在使用STM32的时候，总会选择一种开发方式，比如以下3中：  直接配置寄存器 标准库 HAL库  第一种不在解释，不会真的有人用寄存器操作吧？标准库和HAL库目前都有使用过，个人感觉标准库使用起来更加方便，入门首选。HAL库是ST公司目前主力推的开发方式，全称就是 Hardware Abstraction Layer（抽象印象层）。库如其名">
+<meta property="og:description" content="STM32的HAL库分析及使用 [TOC] 0. 写在前面 在使用STM32的时候，总会选择一种开发方式，比如以下3中：  直接配置寄存器 标准库 HAL库  第一种不在解释，不会真的有人用寄存器操作吧？标准库和HAL库目前都有使用过，个人感觉标准库使用起来更加方便，入门首选。HAL库是ST公司目前主力推的开发方式，全称就是 Hardware Abstraction Layer（抽象印象层）。库如">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://wangyuxiang202.github.io/images/image-20211012155114336.png">
 <meta property="og:image" content="http://wangyuxiang202.github.io/images/image-20211013205848408.png">
@@ -102,9 +102,8 @@
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">4</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a></li>
         <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">9</span></a></li>
-        <li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li>
-        <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
-        <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+        <li class="menu-item menu-item-read"><a href="/read/" rel="section"><i class="fa fa-book fa-fw"></i>read</a></li>
+        <li class="menu-item menu-item-movie"><a href="/movie/" rel="section"><i class="fa fa-movie fa-fw"></i>movie</a></li>
   </ul>
 </nav>
 
@@ -135,7 +134,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#STM32%E7%9A%84HAL%E5%BA%93%E5%88%86%E6%9E%90%E5%8F%8A%E4%BD%BF%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">STM32的HAL库分析及使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2"><span class="nav-number">1.1.</span> <span class="nav-text">0. 写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-HAL%E5%BA%93%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.2.</span> <span class="nav-text">1. HAL库介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-HAL%E5%BA%93%E7%BB%93%E6%9E%84"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.1  HAL库结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E7%9B%B8%E5%85%B3%E6%96%87%E4%BB%B6%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.2.2.</span> <span class="nav-text">1.2 相关文件介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-HAL%E7%89%B9%E7%82%B9"><span class="nav-number">1.2.3.</span> <span class="nav-text">1.2  HAL特点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-1-%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">1.2.1 命名规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-2-%E5%A4%96%E8%AE%BE%E5%8F%A5%E6%9F%84"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">1.2.2 外设句柄</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-3-%E4%B8%89%E7%A7%8D%E7%BC%96%E7%A8%8B%E6%96%B9%E5%BC%8F"><span class="nav-number">1.2.3.3.</span> <span class="nav-text">1.2.3  三种编程方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-4-%E4%B8%89%E5%A4%A7%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0"><span class="nav-number">1.2.3.4.</span> <span class="nav-text">1.2.4  三大回调函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8"><span class="nav-number">1.3.</span> <span class="nav-text">2. 函数使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E6%A0%87%E5%87%86%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.3.1.</span> <span class="nav-text">2.1 标准库的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E5%86%85%E5%AD%98%E5%9C%B0%E5%9D%80"><span class="nav-number">1.3.2.</span> <span class="nav-text">2.2 内存地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-HAL-%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.3.3.</span> <span class="nav-text">2.2 HAL 库的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-1-Handler-%E5%8F%A5%E6%9F%84"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">2.2.1  Handler 句柄</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-2-MSP%E5%87%BD%E6%95%B0"><span class="nav-number">1.3.3.2.</span> <span class="nav-text">2.2.2 MSP函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-3-Callback%E5%87%BD%E6%95%B0"><span class="nav-number">1.3.3.3.</span> <span class="nav-text">2.2.3 Callback函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%80%BB%E7%BB%93"><span class="nav-number">1.4.</span> <span class="nav-text">3. 总结</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">STM32的HAL库分析及使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2"><span class="nav-number">1.1.</span> <span class="nav-text">0. 写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-HAL%E5%BA%93%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.2.</span> <span class="nav-text">1. HAL库介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-HAL%E5%BA%93%E7%BB%93%E6%9E%84"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.1  HAL库结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E7%9B%B8%E5%85%B3%E6%96%87%E4%BB%B6%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.2.2.</span> <span class="nav-text">1.2 相关文件介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-HAL%E7%89%B9%E7%82%B9"><span class="nav-number">1.2.3.</span> <span class="nav-text">1.2  HAL特点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-1-%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">1.2.1 命名规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-2-%E5%A4%96%E8%AE%BE%E5%8F%A5%E6%9F%84"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">1.2.2 外设句柄</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-3-%E4%B8%89%E7%A7%8D%E7%BC%96%E7%A8%8B%E6%96%B9%E5%BC%8F"><span class="nav-number">1.2.3.3.</span> <span class="nav-text">1.2.3  三种编程方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-4-%E4%B8%89%E5%A4%A7%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0"><span class="nav-number">1.2.3.4.</span> <span class="nav-text">1.2.4  三大回调函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8"><span class="nav-number">1.3.</span> <span class="nav-text">2. 函数使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E6%A0%87%E5%87%86%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.3.1.</span> <span class="nav-text">2.1 标准库的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E5%86%85%E5%AD%98%E5%9C%B0%E5%9D%80"><span class="nav-number">1.3.2.</span> <span class="nav-text">2.2 内存地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-HAL-%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.3.3.</span> <span class="nav-text">2.2 HAL 库的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-1-Handler-%E5%8F%A5%E6%9F%84"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">2.2.1  Handler 句柄</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-2-MSP%E5%87%BD%E6%95%B0"><span class="nav-number">1.3.3.2.</span> <span class="nav-text">2.2.2 MSP函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-3-Callback%E5%87%BD%E6%95%B0"><span class="nav-number">1.3.3.3.</span> <span class="nav-text">2.2.3 Callback函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%80%BB%E7%BB%93"><span class="nav-number">1.4.</span> <span class="nav-text">3. 总结</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -286,17 +285,21 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="STM32的HAL库分析及使用"><a href="#STM32的HAL库分析及使用" class="headerlink" title="STM32的HAL库分析及使用"></a>STM32的HAL库分析及使用</h1><p>[TOC]</p>
-<h2 id="0-写在前面"><a href="#0-写在前面" class="headerlink" title="0. 写在前面"></a>0. 写在前面</h2><p>在使用STM32的时候，总会选择一种开发方式，比如以下3中：</p>
+        <h1>STM32的HAL库分析及使用</h1>
+<p>[TOC]</p>
+<h2 id="0-写在前面">0. 写在前面</h2>
+<p>在使用STM32的时候，总会选择一种开发方式，比如以下3中：</p>
 <ol>
 <li>直接配置寄存器</li>
 <li>标准库</li>
 <li>HAL库</li>
 </ol>
 <p>第一种不在解释，不会真的有人用寄存器操作吧？标准库和HAL库目前都有使用过，个人感觉标准库使用起来更加方便，入门首选。HAL库是ST公司目前主力推的开发方式，全称就是 <code>Hardware Abstraction Layer</code>（抽象印象层）。库如其名，很抽象，一眼看上去不太容易知道他的作用是什么，而且代码冗余比较多，执行效率的低下。但是HAL库很好的解决了程序移植的问题，不同型号的stm32芯片它的标准库是不一样的，而使用HAL库，只要使用的是相通的外设，程序基本可以完全复制粘贴。</p>
-<p> ST 官方近些年大力推广 HAL 库，是因为 HAL 的结构更加容易整合 STM32Cube，而 STM32CubeMX 是 ST 这几年极力推荐的图形化程序开发工具（实际上并没怎么用，，，）。所以这几年新出的 STM32 芯片， ST 直接只提供 HAL 库。  </p>
+<p>ST 官方近些年大力推广 HAL 库，是因为 HAL 的结构更加容易整合 STM32Cube，而 STM32CubeMX 是 ST 这几年极力推荐的图形化程序开发工具（实际上并没怎么用，，，）。所以这几年新出的 STM32 芯片， ST 直接只提供 HAL 库。</p>
 <p>总之，最后还是入了 HAL 库的坑。用了一段时间，平时只是调用函数，拿来就用，少有关注其结构。下面随便整理一下HAL库与标准库的区别。</p>
-<h2 id="1-HAL库介绍"><a href="#1-HAL库介绍" class="headerlink" title="1. HAL库介绍"></a>1. HAL库介绍</h2><h3 id="1-1-HAL库结构"><a href="#1-1-HAL库结构" class="headerlink" title="1.1  HAL库结构"></a>1.1  HAL库结构</h3><ul>
+<h2 id="1-HAL库介绍">1. HAL库介绍</h2>
+<h3 id="1-1-HAL库结构">1.1  HAL库结构</h3>
+<ul>
 <li>HAL 库包含结构：</li>
 </ul>
 <p><img src="/images/image-20211012155114336.png" alt="image-20211012155114336"></p>
@@ -306,158 +309,154 @@
 <blockquote>
 <p>从该流程图可以非常清晰的理解整个程序执行流程，这里我们略微讲解一下。启动文件 <code>startup_stm32f103xe.s</code> 中 <code>Reset_Handler</code> 部分会引导先执行 <code>SystemInit</code> 函数，然后再进入main 函数。在 main 函数内部，一般情况下，我们会把 HAL 初始化函数 <code>HAL_Init</code> 放在最开头部分，然后再进行时钟初始化设置。这些设置完成之后，接下来便是调用外设初始化函数 <code>HAL_PPP_Init </code>进行外设参数初始化设置，同时重写回调函数<code>HAL_PPP_MspInit</code> 进行外设 MCU 相关的参数设置。最后编写我们的控制逻辑。</p>
 </blockquote>
-<p>比如 ：HAL库串口初始化的过程为 ：用户函数 <code>usart_init</code> →  <code>HAL_UART_Init</code> → <code>HAL_UART_MspInit </code>  </p>
+<p>比如 ：HAL库串口初始化的过程为 ：用户函数 <code>usart_init</code> →  <code>HAL_UART_Init</code> → <code>HAL_UART_MspInit </code></p>
 <p><img src="/images/image-20211013205848408.png" alt="image-20211013205848408"></p>
-<h3 id="1-2-相关文件介绍"><a href="#1-2-相关文件介绍" class="headerlink" title="1.2 相关文件介绍"></a>1.2 相关文件介绍</h3><p>任何一个 MDK 工程，不管它有多复杂，无非就是一些 .c 源文件和 .h 头文件，还有一些类似.s 的启动文件或者 lib 文件等。每个文件具体包含的内容《STM32F1开发指南-HAL库版本_V1.0》中有详细的介绍，不在啰嗦。</p>
+<h3 id="1-2-相关文件介绍">1.2 相关文件介绍</h3>
+<p>任何一个 MDK 工程，不管它有多复杂，无非就是一些 .c 源文件和 .h 头文件，还有一些类似.s 的启动文件或者 lib 文件等。每个文件具体包含的内容《STM32F1开发指南-HAL库版本_V1.0》中有详细的介绍，不在啰嗦。</p>
 <p><img src="/images/image-20211012155359619.png" alt="image-20211012155359619"></p>
 <p>接下来对于HAL库的源码文件进行一下说明，HAL库文件名均以stm32f1xx_hal开头，后面加上_外设或者模块名（如：stm32f1xx_hal_adc.c）：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">库文件：</span><br><span class="line">   <span class="comment">/* 主要的外设或者模块的驱动源文件，包含了该外设的通用API */</span> </span><br><span class="line">	stm32f1xx_hal_ppp.c/.h		</span><br><span class="line">   <span class="comment">/* 外围设备或模块驱动程序的扩展文件。这组文件中包含特定型号或者系列的芯片的特殊API。以及如果该特定的芯片内部有不同的实现方式，则该文件中的特殊API将覆盖_ppp中的通用API。 */</span> </span><br><span class="line">	stm32f1xx_hal_ppp_ex.c/.h	</span><br><span class="line">   <span class="comment">/* 此文件用于HAL初始化，并且包含DBGMCU、重映射和基于systick的时间延迟等相关的API */</span></span><br><span class="line">	stm32f1xx_hal.c/.h		</span><br><span class="line">   ...其他库文件</span><br><span class="line"></span><br><span class="line">用户级别文件：</span><br><span class="line">    <span class="comment">/* 只有.c没有.h。它包含用户应用程序中使用的外设的MSP初始化和反初始化（主程序和回调函数）。使用者复制到自己目录下使用模板 */</span> </span><br><span class="line">	stm32f1xx_hal_msp_template.c	</span><br><span class="line">    <span class="comment">/* 用户级别的库配置文件模板。使用者复制到自己目录下使用 */</span></span><br><span class="line">	stm32f1xx_hal_conf_template.h	</span><br><span class="line">    <span class="comment">/* 此文件主要包含SystemInit()函数，该函数在刚复位及跳到main之前的启动过程中被调用。 **它不在启动时配置系统时钟（与标准库相反）**。 时钟的配置在用户文件中使用HAL API来完成。 */</span></span><br><span class="line">	system_stm32f1xx.c			</span><br><span class="line">    <span class="comment">/* 芯片启动文件，主要包含堆栈定义，终端向量表等 */</span></span><br><span class="line">	startup_stm32f1xx.s				</span><br><span class="line">    <span class="comment">/* 中断处理函数的相关实现 */</span></span><br><span class="line">	stm32f1xx_it.c/.h			</span><br><span class="line">	main.c/.h						</span><br></pre></td></tr></table></figure>
-
-<h3 id="1-2-HAL特点"><a href="#1-2-HAL特点" class="headerlink" title="1.2  HAL特点"></a>1.2  HAL特点</h3><h4 id="1-2-1-命名规则"><a href="#1-2-1-命名规则" class="headerlink" title="1.2.1 命名规则"></a>1.2.1 命名规则</h4><ul>
+<h3 id="1-2-HAL特点">1.2  HAL特点</h3>
+<h4 id="1-2-1-命名规则">1.2.1 命名规则</h4>
+<ul>
 <li>1.2 根据HAL库的命名规则，其API可以分为以下几类：</li>
 </ul>
 <ol>
 <li>初始化/反初始化函数：</li>
 </ol>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">HAL_PPP_Init();</span><br><span class="line">HAL_PPP_DeInit();</span><br></pre></td></tr></table></figure>
-
 <ol start="2">
 <li>IO 操作函数：</li>
 </ol>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">HAL_PPP_Read();</span><br><span class="line">HAL_PPP_Write();</span><br><span class="line">HAL_PPP_Transmit(); </span><br><span class="line">HAL_PPP_Receive();</span><br></pre></td></tr></table></figure>
-
 <ol start="3">
 <li>控制函数：</li>
 </ol>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">HAL_PPP_Set (), </span><br><span class="line">HAL_PPP_Get ().</span><br></pre></td></tr></table></figure>
-
 <ol start="4">
 <li>状态和错误：</li>
 </ol>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">HAL_PPP_GetState ();</span><br><span class="line">HAL_PPP_GetError ();</span><br></pre></td></tr></table></figure>
-
-<h4 id="1-2-2-外设句柄"><a href="#1-2-2-外设句柄" class="headerlink" title="1.2.2 外设句柄"></a>1.2.2 外设句柄</h4><p>HAL库在结构上，对每个外设抽象成了一个称为<code>ppp_HandleTypeDe</code>f的结构体，其中ppp就是每个外设的名字。所有的函数都是工作在<code>ppp_HandleTypeDef</code>指针之下。</p>
+<h4 id="1-2-2-外设句柄">1.2.2 外设句柄</h4>
+<p>HAL库在结构上，对每个外设抽象成了一个称为<code>ppp_HandleTypeDe</code>f的结构体，其中ppp就是每个外设的名字。所有的函数都是工作在<code>ppp_HandleTypeDef</code>指针之下。</p>
 <p>关于句柄，下面会再提到。</p>
-<h4 id="1-2-3-三种编程方式"><a href="#1-2-3-三种编程方式" class="headerlink" title="1.2.3  三种编程方式"></a>1.2.3  三种编程方式</h4><p>在HAL库中，支持三种编程模式：轮询模式、中断模式、DMA模式（如果外设支持）。</p>
+<h4 id="1-2-3-三种编程方式">1.2.3  三种编程方式</h4>
+<p>在HAL库中，支持三种编程模式：轮询模式、中断模式、DMA模式（如果外设支持）。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">HAL_StatusTypeDef <span class="title">HAL_ADC_Start</span><span class="params">(ADC_HandleTypeDef* hadc)</span></span>;</span><br><span class="line"><span class="function">HAL_StatusTypeDef <span class="title">HAL_ADC_Stop</span><span class="params">(ADC_HandleTypeDef* hadc)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function">HAL_StatusTypeDef <span class="title">HAL_ADC_Start_IT</span><span class="params">(ADC_HandleTypeDef* hadc)</span></span>;</span><br><span class="line"><span class="function">HAL_StatusTypeDef <span class="title">HAL_ADC_Stop_IT</span><span class="params">(ADC_HandleTypeDef* hadc)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function">HAL_StatusTypeDef <span class="title">HAL_ADC_Start_DMA</span><span class="params">(ADC_HandleTypeDef* hadc, <span class="keyword">uint32_t</span>* pData, <span class="keyword">uint32_t</span> Length)</span></span>;</span><br><span class="line"><span class="function">HAL_StatusTypeDef <span class="title">HAL_ADC_Stop_DMA</span><span class="params">(ADC_HandleTypeDef* hadc)</span></span>;</span><br></pre></td></tr></table></figure>
-
-<h4 id="1-2-4-三大回调函数"><a href="#1-2-4-三大回调函数" class="headerlink" title="1.2.4  三大回调函数"></a>1.2.4  三大回调函数</h4><ol>
+<h4 id="1-2-4-三大回调函数">1.2.4  三大回调函数</h4>
+<ol>
 <li>外设系统级初始化/解除初始化回调函数（用户代码的第二大部分：对于MSP的处理）：</li>
 </ol>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 初始化/反初始化函数 */</span></span><br><span class="line">HAL_PPP_Init();</span><br><span class="line">HAL_PPP_DeInit();</span><br></pre></td></tr></table></figure>
-
 <ol start="2">
 <li>处理完成回调函数：</li>
 </ol>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Process指具体某种处理，如UART的Tx */</span></span><br><span class="line">HAL_PPP_ProcessCpltCallback();</span><br></pre></td></tr></table></figure>
-
 <ol start="3">
 <li>错误处理回调函数：</li>
 </ol>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HAL_PPP_ErrorCallback();</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-函数使用"><a href="#2-函数使用" class="headerlink" title="2. 函数使用"></a>2. 函数使用</h2><h3 id="2-1-标准库的使用"><a href="#2-1-标准库的使用" class="headerlink" title="2.1 标准库的使用"></a>2.1 标准库的使用</h3><p>==标准库初始化USART==</p>
+<h2 id="2-函数使用">2. 函数使用</h2>
+<h3 id="2-1-标准库的使用">2.1 标准库的使用</h3>
+<p>==标准库初始化USART==</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">uart_init</span><span class="params">(u32 bound)</span></span></span><br><span class="line"><span class="function"></span>&#123;	</span><br><span class="line">   <span class="comment">/* 把 USART_InitStructure 声明为一个使用 USART_InitTypeDef 结构布局的 结构体类型 变量 */</span></span><br><span class="line">	USART_InitTypeDef USART_InitStructure;</span><br><span class="line"></span><br><span class="line">	USART_InitStructure.USART_BaudRate = bound;<span class="comment">//串口波特率</span></span><br><span class="line">	USART_InitStructure.USART_WordLength = USART_WordLength_8b;<span class="comment">//字长为8位数据格式</span></span><br><span class="line">	USART_InitStructure.USART_StopBits = USART_StopBits_1;<span class="comment">//一个停止位</span></span><br><span class="line">	USART_InitStructure.USART_Parity = USART_Parity_No;<span class="comment">//无奇偶校验位</span></span><br><span class="line">	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;<span class="comment">//无硬件数据流控制</span></span><br><span class="line">	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;	<span class="comment">//收发模式</span></span><br><span class="line"></span><br><span class="line">	USART_Init(USART1, &amp;USART_InitStructure); <span class="comment">//初始化串口1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>可以看出，要初始化一个串口，需要对 <code>USART_InitStructure</code> 结构体中6个变量进行赋值，然后引用 <code>USART_Init</code> 函数即可完成USART的初始化。其中结构变量<code>USART_InitStructure</code> 是函数内部的局部变量（相当于函数内部 int x;中的 x ），函数执行之后，失效。</p>
 <p>其中 <code>USART_InitTypeDef</code> 为定义的结构体类型（如下）； <code>USART_InitStructure</code> 为结构体类型定义的变量。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** </span></span><br><span class="line"><span class="comment">  * @brief  USART Init Structure definition  </span></span><br><span class="line"><span class="comment">  * 用typedef命名结构类型时，可以省略该结构标签 --- typedef &lt;\标签&gt; struct</span></span><br><span class="line"><span class="comment">  * 可使用 USART_InitTypeDef 代替该结构体类型定义变量</span></span><br><span class="line"><span class="comment">  */</span> </span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">uint32_t</span> USART_BaudRate;         </span><br><span class="line">  <span class="keyword">uint16_t</span> USART_WordLength;          </span><br><span class="line">  <span class="keyword">uint16_t</span> USART_StopBits;         </span><br><span class="line">  <span class="keyword">uint16_t</span> USART_Parity;        </span><br><span class="line">  <span class="keyword">uint16_t</span> USART_Mode;              </span><br><span class="line">  <span class="keyword">uint16_t</span> USART_HardwareFlowControl; </span><br><span class="line">&#125; USART_InitTypeDef;     <span class="comment">// 定义结构变量</span></span><br></pre></td></tr></table></figure>
-
 <p>==再来看一下初始化函数中的 <code>USART_Init()</code> 函数，其定义为：==</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">USART_Init</span><span class="params">(USART_TypeDef* USARTx, USART_InitTypeDef* USART_InitStruct)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">...</span><br><span class="line">   <span class="comment">/* Check the parameters */</span></span><br><span class="line">  assert_param(IS_USART_ALL_PERIPH(USARTx));</span><br><span class="line">...</span><br><span class="line">  assert_param(IS_USART_HARDWARE_FLOW_CONTROL(USART_InitStruct-&gt;USART_HardwareFlowControl));   </span><br><span class="line">...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>其中：</p>
 <ol>
 <li>该函数的入口参数为结构体类型：<code>USART_TypeDef</code> （下面会提到） <code>USART_InitTypeDef</code> ；<code>USARTx</code> <code>USART_InitStruct</code> 是声明的结构指针，形式参数。</li>
 <li>实参为：<code>USART1</code> ：地址常量                <code> &amp;USART_InitStructure</code> ：取结构体相关变量的地址（通过 <code>-&gt;</code> 访问结构成员）</li>
 <li>assert_param(IS_USART_ALL_PERIPH(–ppp–));   为断言机制函数，主要用来判断函数参数是否有效，该函数不过多分析。</li>
 </ol>
-<p>通过地址追溯，可算出 <code>USART1 </code>地址为 ：0x40000000  +  0x10000  +  0x3800  =  0x4001_3800  </p>
+<p>通过地址追溯，可算出 <code>USART1 </code>地址为 ：0x40000000  +  0x10000  +  0x3800  =  0x4001_3800</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> USART1              ((USART_TypeDef *) USART1_BASE)   <span class="comment">/* 取USART1_BASE地址 */</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> USART1_BASE           (APB2PERIPH_BASE + 0x3800)      <span class="comment">/* 宏定义USART1_BASE地址 */</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> APB2PERIPH_BASE       (PERIPH_BASE + 0x10000)	     <span class="comment">/* 外围存储器映射地址 */</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PERIPH_BASE           ((uint32_t)0x40000000)         <span class="comment">/* 外设基础地址 */</span></span></span><br></pre></td></tr></table></figure>
-
 <p>查询《STM32中文参考手册_V10》可知<code>USART1</code><strong>寄存器组</strong>地址为：0x4001 3800 - 0x4001 3BFF （地址空间 ：128Byte）。实际上与串口相关的寄存器有7个，每个寄存器占4个字节地址（注意字、半字、字节的区别），共 32位 4Byte。</p>
 <p>寄存器组地址空间 128Byte ；实际寄存器占用 28Byte。由于STM32内部内存地址时分块的，故其余地址空间为保留区。</p>
 <p><img src="/images/image-20211012215757376.png" alt="image-20211012215757376"></p>
 <p>==在 <code>USART_Init()</code> 函数中定义的结构类型 <code>USART_TypeDef</code>为：==</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  __IO <span class="keyword">uint16_t</span> SR;    				  <span class="comment">// 状态寄存器(USART_SR)</span></span><br><span class="line">  <span class="keyword">uint16_t</span>  RESERVED0;</span><br><span class="line">  __IO <span class="keyword">uint16_t</span> DR;    			      <span class="comment">// 数据寄存器(USART_DR)</span></span><br><span class="line">  <span class="keyword">uint16_t</span>  RESERVED1;</span><br><span class="line">  __IO <span class="keyword">uint16_t</span> BRR;    			  <span class="comment">// 波特比率寄存器(USART_BRR)</span></span><br><span class="line">  <span class="keyword">uint16_t</span>  RESERVED2;</span><br><span class="line">  __IO <span class="keyword">uint16_t</span> CR1;    			  <span class="comment">// 控制寄存器 1(USART_CR1)</span></span><br><span class="line">  <span class="keyword">uint16_t</span>  RESERVED3;</span><br><span class="line">  __IO <span class="keyword">uint16_t</span> CR2;    			  <span class="comment">// 控制寄存器 2(USART_CR2)</span></span><br><span class="line">  <span class="keyword">uint16_t</span>  RESERVED4;</span><br><span class="line">  __IO <span class="keyword">uint16_t</span> CR3;    			  <span class="comment">// 控制寄存器 3(USART_CR3)</span></span><br><span class="line">  <span class="keyword">uint16_t</span>  RESERVED5;</span><br><span class="line">  __IO <span class="keyword">uint16_t</span> GTPR;    			  <span class="comment">// 保护时间和预分频寄存器(USART_GTPR)</span></span><br><span class="line">  <span class="keyword">uint16_t</span>  RESERVED6;</span><br><span class="line">&#125; USART_TypeDef;</span><br></pre></td></tr></table></figure>
-
 <ul>
-<li>关于 <code>__IO</code> </li>
+<li>关于 <code>__IO</code></li>
 </ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span>     __IO    volatile                  <span class="comment">/*!&lt; defines &#x27;read / write&#x27; permissions   */</span></span></span><br></pre></td></tr></table></figure>
-
 <ol>
-<li>volatile变量可变允许除了程序之外的比如硬件来修改他的内容 </li>
+<li>volatile变量可变允许除了程序之外的比如硬件来修改他的内容</li>
 <li>访问该数据任何时候都会直接访问该地址处内容，即通过cache提高访问速度的优化被取消</li>
 </ol>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43234066/article/details/89465972">程序中”__IO uint32_t” 中的__IO 表达的意思</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43234066/article/details/89465972">程序中&quot;__IO uint32_t&quot; 中的__IO 表达的意思</a></p>
 <ul>
 <li>关于 <code>uint16_t  RESERVED0;</code></li>
 </ul>
 <p>定义保留字是和硬件有关系的，因为STM32是32位单片机，所以寄存器的实际物理地址都是32位。</p>
 <p><img src="/images/image-20211012215145821.png" alt="image-20211012215145821"></p>
-<h3 id="2-2-内存地址"><a href="#2-2-内存地址" class="headerlink" title="2.2 内存地址"></a>2.2 内存地址</h3><p>既然扯到地址上来了，那就顺带提一下吧！</p>
-<p> CM3的程序存储器、数据存储器、寄存器和输入输出端口被组织在同一个4GB的线性地址空间内。数据字节以小端格式存放在存储器中。 程序可以在代码区，内部 SRAM 区以及外部 RAM 区中执行。但是因为指令总线与数据总线是分开的， 最理想的是把程序放到代码区， 从而使取值和数据访问各自使用自己的总线，并行不悖。  </p>
+<h3 id="2-2-内存地址">2.2 内存地址</h3>
+<p>既然扯到地址上来了，那就顺带提一下吧！</p>
+<p>CM3的程序存储器、数据存储器、寄存器和输入输出端口被组织在同一个4GB的线性地址空间内。数据字节以小端格式存放在存储器中。 程序可以在代码区，内部 SRAM 区以及外部 RAM 区中执行。但是因为指令总线与数据总线是分开的， 最理想的是把程序放到代码区， 从而使取值和数据访问各自使用自己的总线，并行不悖。</p>
 <p>值得注意的是，STM32可访问的存储器空间被分成8个主要块，每个块为512MB。8个主要块下面又分为好几个内存块，每个内存块（我愿称之为‘小块’）有不同的寄存器。如上图，每个小块分配到 128Byte 的地址空间。实际上每个外设根本用不到这么大的空间，其余空间做保留区处理。（不知道这是一种浪费，还是自己理解有误）</p>
-<p>地址空间分为 8 个 512MB 等份：  </p>
+<p>地址空间分为 8 个 512MB 等份：</p>
 <table>
 <thead>
 <tr>
-<th align="center">序号</th>
-<th align="center">内存块</th>
-<th align="center">地址范围</th>
-<th align="center">地址空间</th>
+<th style="text-align:center">序号</th>
+<th style="text-align:center">内存块</th>
+<th style="text-align:center">地址范围</th>
+<th style="text-align:center">地址空间</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">1</td>
-<td align="center">代码区</td>
-<td align="center">0x0000_0000 – 0x1FFF_FFFF</td>
-<td align="center">0.5GB（512MB）</td>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">代码区</td>
+<td style="text-align:center">0x0000_0000 – 0x1FFF_FFFF</td>
+<td style="text-align:center">0.5GB（512MB）</td>
 </tr>
 <tr>
-<td align="center">2</td>
-<td align="center">片内 SRAM 区</td>
-<td align="center">0x2000_0000 – 0x3FFF_FFFF</td>
-<td align="center">0.5GB（512MB）</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">片内 SRAM 区</td>
+<td style="text-align:center">0x2000_0000 – 0x3FFF_FFFF</td>
+<td style="text-align:center">0.5GB（512MB）</td>
 </tr>
 <tr>
-<td align="center">3</td>
-<td align="center">片上外设区</td>
-<td align="center">0x4000_0000 – 0x5FFF_FFFF</td>
-<td align="center">0.5GB（512MB）</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">片上外设区</td>
+<td style="text-align:center">0x4000_0000 – 0x5FFF_FFFF</td>
+<td style="text-align:center">0.5GB（512MB）</td>
 </tr>
 <tr>
-<td align="center">4</td>
-<td align="center">外部 RAM 区的前半段</td>
-<td align="center">0x6000_0000 ‐ 0x7FFF_FFFF</td>
-<td align="center">0.5GB（512MB）</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">外部 RAM 区的前半段</td>
+<td style="text-align:center">0x6000_0000 ‐ 0x7FFF_FFFF</td>
+<td style="text-align:center">0.5GB（512MB）</td>
 </tr>
 <tr>
-<td align="center">5</td>
-<td align="center">外部 RAM 区的后半段</td>
-<td align="center">0x8000_0000 –0x9FFF_FFFF</td>
-<td align="center">0.5GB（512MB）</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">外部 RAM 区的后半段</td>
+<td style="text-align:center">0x8000_0000 –0x9FFF_FFFF</td>
+<td style="text-align:center">0.5GB（512MB）</td>
 </tr>
 <tr>
-<td align="center">6</td>
-<td align="center">外部外设区的前半段</td>
-<td align="center">0xA000_0000 – 0xBFFF_FFFF</td>
-<td align="center">0.5GB（512MB）</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">外部外设区的前半段</td>
+<td style="text-align:center">0xA000_0000 – 0xBFFF_FFFF</td>
+<td style="text-align:center">0.5GB（512MB）</td>
 </tr>
 <tr>
-<td align="center">7</td>
-<td align="center">外部外设区的后半段</td>
-<td align="center">0xC000_0000 – 0xDFFF_FFFF</td>
-<td align="center">0.5GB（512MB）</td>
+<td style="text-align:center">7</td>
+<td style="text-align:center">外部外设区的后半段</td>
+<td style="text-align:center">0xC000_0000 – 0xDFFF_FFFF</td>
+<td style="text-align:center">0.5GB（512MB）</td>
 </tr>
 <tr>
-<td align="center">8</td>
-<td align="center">系统区</td>
-<td align="center">0xE000_0000 – 0xFFFF_FFFF</td>
-<td align="center">0.5GB（512MB）</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">系统区</td>
+<td style="text-align:center">0xE000_0000 – 0xFFFF_FFFF</td>
+<td style="text-align:center">0.5GB（512MB）</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>Cortex‐M3 预定义的存储器映射  参考图示如下：（只截取部分）</p>
 <p><img src="/images/image-20211013095541798.png" alt="image-20211013095541798"></p>
 <p>补充两个概念：</p>
@@ -471,65 +470,56 @@
 <p>给具有特殊功能的内存块（存放寄存器的‘小块’）的首地址取一个具有特殊意义名称的过程就叫做寄存器映射。</p>
 <p>寄存器映射可以通过指针实现，根据小学二年级的知识可以知道可以利用指针获得地址。在上面的分析中提到过<code>USART_SR</code>寄存器，其地址偏移为<code>00h</code>而USART内存块的首地址为 0x4001 3800，故<code>USART_SR</code>的寄存器地址为  0x4001 3800 + 0x00 =  0x4001 3800。但是编译器并不知道这串数字是地址，所以需要利用指针转换成地址。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> USART1              ((USART_TypeDef *) USART1_BASE)   <span class="comment">//这就是寄存器映射，这里的 USART1_BASE 是 0x------</span></span></span><br></pre></td></tr></table></figure>
-
-<h3 id="2-2-HAL-库的使用"><a href="#2-2-HAL-库的使用" class="headerlink" title="2.2 HAL 库的使用"></a>2.2 HAL 库的使用</h3><p>==HAL库初始化USART==</p>
-<p>HAL库串口初始化的过程为 ：用户函数 <code>usart_init</code> →  <code>HAL_UART_Init</code> → <code>HAL_UART_MspInit </code>  </p>
+<h3 id="2-2-HAL-库的使用">2.2 HAL 库的使用</h3>
+<p>==HAL库初始化USART==</p>
+<p>HAL库串口初始化的过程为 ：用户函数 <code>usart_init</code> →  <code>HAL_UART_Init</code> → <code>HAL_UART_MspInit </code></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">uart_init</span><span class="params">(u32 bound)</span></span></span><br><span class="line"><span class="function"></span>&#123;	</span><br><span class="line">	<span class="comment">/* UART 初始化设置 */</span></span><br><span class="line">	UART1_Handler.Instance=USART1;					    <span class="comment">//USART1</span></span><br><span class="line">	UART1_Handler.Init.BaudRate=bound;				    <span class="comment">//波特率</span></span><br><span class="line">	UART1_Handler.Init.WordLength=UART_WORDLENGTH_8B;   <span class="comment">//字长为8位数据格式</span></span><br><span class="line">	UART1_Handler.Init.StopBits=UART_STOPBITS_1;	    <span class="comment">//一个停止位</span></span><br><span class="line">	UART1_Handler.Init.Parity=UART_PARITY_NONE;		    <span class="comment">//无奇偶校验位</span></span><br><span class="line">	UART1_Handler.Init.HwFlowCtl=UART_HWCONTROL_NONE;   <span class="comment">//无硬件流控</span></span><br><span class="line">	UART1_Handler.Init.Mode=UART_MODE_TX_RX;		    <span class="comment">//收发模式</span></span><br><span class="line">	HAL_UART_Init(&amp;UART1_Handler);					    <span class="comment">//HAL_UART_Init()会使能UART1</span></span><br><span class="line">	<span class="comment">/* 该函数会开启接收中断：标志位UART_IT_RXNE，并且设置接收缓冲以及接收缓冲接收最大数据量 */</span></span><br><span class="line">	HAL_UART_Receive_IT(&amp;UART1_Handler, (u8 *)aRxBuffer, RXBUFFERSIZE);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="2-2-1-Handler-句柄"><a href="#2-2-1-Handler-句柄" class="headerlink" title="2.2.1  Handler 句柄"></a>2.2.1  Handler 句柄</h4><p>在库函数中，<code>USART_InitStructure</code> 是函数内部的局部变量，初始化完成之后，就失去了作用。而在HAL库中，同样是<code>USART</code> 初始化结构体变量，我们要定义为全局变量。</p>
+<h4 id="2-2-1-Handler-句柄">2.2.1  Handler 句柄</h4>
+<p>在库函数中，<code>USART_InitStructure</code> 是函数内部的局部变量，初始化完成之后，就失去了作用。而在HAL库中，同样是<code>USART</code> 初始化结构体变量，我们要定义为全局变量。</p>
 <figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UART_HandleTypeDef UART1_Handler<span class="comment">; </span></span><br></pre></td></tr></table></figure>
-
 <p>查看<code>UART_HandleTypeDef</code> 可以看出：该结构不仅包含了标准库中的与串口配置相关的6个变量（UART_InitTypeDef 中），还包含了过采样、（发送或接收的）数据缓存、数据指针、串口 DMA 相关的变量、各种标志位等等要在整个项目流程中都要设置的各个成员。结构体嵌套结构体，该有的都有。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	  USART_TypeDef                 *Instance;        <span class="comment">/*!&lt; UART registers base address        */</span></span><br><span class="line">	  UART_InitTypeDef              Init;             <span class="comment">/*!&lt; UART communication parameters      */</span></span><br><span class="line">	  <span class="keyword">uint8_t</span>                       *pTxBuffPtr;      <span class="comment">/*!&lt; Pointer to UART Tx transfer Buffer */</span></span><br><span class="line">	  <span class="keyword">uint16_t</span>                      TxXferSize;       <span class="comment">/*!&lt; UART Tx Transfer size              */</span></span><br><span class="line">	  <span class="keyword">uint16_t</span>                      TxXferCount;      <span class="comment">/*!&lt; UART Tx Transfer Counter           */</span></span><br><span class="line">	  <span class="keyword">uint8_t</span>                       *pRxBuffPtr;      <span class="comment">/*!&lt; Pointer to UART Rx transfer Buffer */</span></span><br><span class="line">	  <span class="keyword">uint16_t</span>                      RxXferSize;       <span class="comment">/*!&lt; UART Rx Transfer size              */</span></span><br><span class="line">	  <span class="keyword">uint16_t</span>                      RxXferCount;      <span class="comment">/*!&lt; UART Rx Transfer Counter           */</span>  </span><br><span class="line">	  DMA_HandleTypeDef             *hdmatx;          <span class="comment">/*!&lt; UART Tx DMA Handle parameters      */</span> </span><br><span class="line">	  DMA_HandleTypeDef             *hdmarx;          <span class="comment">/*!&lt; UART Rx DMA Handle parameters      */</span></span><br><span class="line">	  HAL_LockTypeDef               Lock;             <span class="comment">/*!&lt; Locking object                     */</span></span><br><span class="line">	  __IO HAL_UART_StateTypeDef    State;            <span class="comment">/*!&lt; UART communication state           */</span></span><br><span class="line">	  __IO <span class="keyword">uint32_t</span>                 ErrorCode;        <span class="comment">/*!&lt; UART Error code                    */</span></span><br><span class="line">&#125;UART_HandleTypeDef;</span><br></pre></td></tr></table></figure>
-
 <p>该 <strong>UART1_Handler</strong> 就被称为串口的<strong>句柄</strong>，贯穿整个USART收发的流程。</p>
 <p>比如开启中断：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HAL_UART_Receive_IT(&amp;UART1_Handler, (u8 *)aRxBuffer, RXBUFFERSIZE);</span><br></pre></td></tr></table></figure>
-
 <p>比如MSP与Callback回调函数：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">HAL_UART_MspInit</span><span class="params">(UART_HandleTypeDef *huart)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">HAL_UART_RxCpltCallback</span><span class="params">(UART_HandleTypeDef *huart)</span></span>;</span><br></pre></td></tr></table></figure>
-
 <p>在这些函数中，只需要调用初始化时定义的句柄UART1_Handler就好。比如：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">HAL_UART_MspInit</span><span class="params">(UART_HandleTypeDef *huart)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">/* GPIO端口设置 */</span></span><br><span class="line">	GPIO_InitTypeDef GPIO_Initure;</span><br><span class="line">    <span class="comment">/* 如果是串口1，进行串口1 MSP初始化 */</span></span><br><span class="line">	<span class="keyword">if</span>(huart-&gt;Instance==USART1)    <span class="comment">/* 传递结构地址 */</span> </span><br><span class="line">	&#123;...&#125;</span><br><span class="line">...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="2-2-2-MSP函数"><a href="#2-2-2-MSP函数" class="headerlink" title="2.2.2 MSP函数"></a>2.2.2 MSP函数</h4><p>MSP，全称为 MCU support package (MCU支持包)，MSP函数中主要修改与硬件相关的设置（比如引脚初始化…），以下截图来自《STM32F1开发指南-HAL库版本_V1.0》 P86。</p>
+<h4 id="2-2-2-MSP函数">2.2.2 MSP函数</h4>
+<p>MSP，全称为 MCU support package (MCU支持包)，MSP函数中主要修改与硬件相关的设置（比如引脚初始化…），以下截图来自《STM32F1开发指南-HAL库版本_V1.0》 P86。</p>
 <p><img src="/images/image-20211013165100681.png" alt="image-20211013165100681"></p>
 <p>直接看一下函数内容，更加直白。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">HAL_UART_MspInit</span><span class="params">(UART_HandleTypeDef *huart)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//GPIO端口设置</span></span><br><span class="line">	GPIO_InitTypeDef GPIO_Initure;	</span><br><span class="line">	<span class="keyword">if</span>(huart-&gt;Instance==USART1)<span class="comment">//如果是串口1，进行串口1 MSP初始化</span></span><br><span class="line">	&#123;</span><br><span class="line">		__HAL_RCC_GPIOA_CLK_ENABLE();			<span class="comment">//使能GPIOA时钟</span></span><br><span class="line">		__HAL_RCC_USART1_CLK_ENABLE();			<span class="comment">//使能USART1时钟</span></span><br><span class="line">		__HAL_RCC_AFIO_CLK_ENABLE();</span><br><span class="line">	</span><br><span class="line">		GPIO_Initure.Pin=GPIO_PIN_9;			<span class="comment">//PA9</span></span><br><span class="line">		GPIO_Initure.Mode=GPIO_MODE_AF_PP;		<span class="comment">//复用推挽输出</span></span><br><span class="line">		GPIO_Initure.Pull=GPIO_PULLUP;			<span class="comment">//上拉</span></span><br><span class="line">		GPIO_Initure.Speed=GPIO_SPEED_FREQ_HIGH;<span class="comment">//高速</span></span><br><span class="line">		HAL_GPIO_Init(GPIOA,&amp;GPIO_Initure);	   	<span class="comment">//初始化PA9</span></span><br><span class="line"></span><br><span class="line">		GPIO_Initure.Pin=GPIO_PIN_10;			<span class="comment">//PA10</span></span><br><span class="line">		GPIO_Initure.Mode=GPIO_MODE_AF_INPUT;	<span class="comment">//模式要设置为复用输入模式！	</span></span><br><span class="line">		HAL_GPIO_Init(GPIOA,&amp;GPIO_Initure);	   	<span class="comment">//初始化PA10</span></span><br><span class="line">		</span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> EN_USART1_RX</span></span><br><span class="line">		HAL_NVIC_EnableIRQ(USART1_IRQn);				<span class="comment">//使能USART1中断通道</span></span><br><span class="line">		HAL_NVIC_SetPriority(USART1_IRQn,<span class="number">3</span>,<span class="number">3</span>);			<span class="comment">//抢占优先级3，子优先级3</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span>	</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="2-2-3-Callback函数"><a href="#2-2-3-Callback函数" class="headerlink" title="2.2.3 Callback函数"></a>2.2.3 Callback函数</h4><p>Callback函数主要帮助用户应用层的代码编写,还是以USART为例.</p>
+<h4 id="2-2-3-Callback函数">2.2.3 Callback函数</h4>
+<p>Callback函数主要帮助用户应用层的代码编写,还是以USART为例.</p>
 <p>在标准库中，串口中断了以后，我们要先在中断中判断是否是接收中断，然后读出数据，顺便清除中断标志位，然后再是对数据的处理，这样如果我们在一个中断函数中写这么多代码，就会显得很混乱：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">USART1_IRQHandler</span><span class="params">(<span class="keyword">void</span>)</span>                	<span class="comment">//串口1中断服务程序</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	u8 Res;</span><br><span class="line">...</span><br><span class="line">	<span class="keyword">if</span>(USART_GetITStatus(USART1, USART_IT_RXNE) != RESET)  <span class="comment">//接收中断(接收到的数据必须是0x0d 0x0a结尾)</span></span><br><span class="line">		&#123;</span><br><span class="line">		Res =USART_ReceiveData(USART1);	<span class="comment">//读取接收到的数据</span></span><br><span class="line">         ...<span class="comment">/*数据处理区*/</span>...</span><br><span class="line">		&#125;   		 </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
-
 <p>而在 HAL 库中，进入串口中断后，直接由HAL库中断函数进行托管：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">USART1_IRQHandler</span><span class="params">(<span class="keyword">void</span>)</span>                 </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line"> HAL_UART_IRQHandler(&amp;UART1_Handler); <span class="comment">/* 调用HAL库中断处理公用函数 */</span></span><br><span class="line"> <span class="comment">/***************省略无关代码****************/</span> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p><code>HAL_UART_IRQHandler(); </code> 这个函数完成了判断是哪个中断（接收？发送？或者其他？），然后读出数据，保存至缓存区，顺便清除中断标志位等等操作。HAL库中断处理公用函数原型为：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">HAL_UART_IRQHandler</span><span class="params">(UART_HandleTypeDef *huart)</span>   <span class="comment">/* 传递结构地址 */</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>举个栗子</li>
 </ul>
 <p>设置串口缓冲为 5 个Byte，串口每接收五个字节，我就要对这五个字节进行处理。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* HAL库使用的串口接收缓冲 */</span></span><br><span class="line">u8 aRxBuffer[RXBUFFERSIZE]; <span class="comment">/* RXBUFFERSIZE = 5 */</span></span><br></pre></td></tr></table></figure>
-
 <p>在初始化中，我在句柄里设置好了缓存区的地址，缓存大小（五个字节）</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 该代码在HAL_UART_Receive_IT函数中，初始化时会引用 */</span></span><br><span class="line">    huart-&gt;pRxBuffPtr = pData;   <span class="comment">//aRxBuffer</span></span><br><span class="line">    huart-&gt;RxXferSize = Size;    <span class="comment">//RXBUFFERSIZE</span></span><br><span class="line">    huart-&gt;RxXferCount = Size;   <span class="comment">//RXBUFFERSIZE</span></span><br></pre></td></tr></table></figure>
-
 <p>则在接收数据中，每接收完五个字节，HAL_UART_IRQHandler才会执行一次Callback函数：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">HAL_UART_RxCpltCallback</span><span class="params">(UART_HandleTypeDef *huart)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>在这个Callback回调函数中，我们只需要对这接收到的五个字节（保存在aRxBuffer[]中）进行处理就好了，完全不用再去手动清除标志位等操作。</p>
 <p>综上，可以看出HAL库的可移植性之强大，并且用户可以完全不去理会底层各个寄存器的操作，代码也更有逻辑性。但与此带来的是复杂的代码量，极慢的编译速度，略微低下的效率。</p>
-<h2 id="3-总结"><a href="#3-总结" class="headerlink" title="3. 总结"></a>3. 总结</h2><p>终于结束！没啥总结的，凑个字数。</p>
+<h2 id="3-总结">3. 总结</h2>
+<p>终于结束！没啥总结的，凑个字数。</p>
 <p>原来真的可以加表情 :open_mouth:  ,  妙呀 ！</p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42395140/article/details/111642339">Typora中的emoji表情</a></p>
 <p><strong>【参考资料】</strong></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zcshoucsdn/article/details/55213616">STM32 之二 HAL库详解 及 手动移植_itexp-CSDN博客</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43186792/article/details/88759321">HAL库与标准库的区别_浅谈句柄、MSP函数、Callback函数</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/fantastikman/article/details/73481021">STM32F1(Cortex M3内核)存储器映射</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/sgy2782308186/p/9568350.html">STM32——寄存器映射和存储器映射</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43234066/article/details/89465972">程序中”__IO uint32_t” 中的__IO 表达的意思</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/sgy2782308186/p/9568350.html">STM32------寄存器映射和存储器映射</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43234066/article/details/89465972">程序中&quot;__IO uint32_t&quot; 中的__IO 表达的意思</a></p>
 <p>《STM32F1开发指南-HAL库版本_V1.0》</p>
 <p>《Cortex-M3权威指南(中文)》</p>
 <p>《STM32中文参考手册_V10》</p>

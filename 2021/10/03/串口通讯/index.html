@@ -21,12 +21,12 @@
   <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"wangyuxiang202.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":"ture","bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
-<meta name="description" content="@[toc] 一、概念单片机与外部设备交换信息时，通常采用串行通讯和并行通讯。并行通信通常是将数据字节的各位用多条数据线同时进行传送 。特点：控制简单、传输速度快；由于传输线较多，长距离传送时成本高且接收方的各位同时接收存在困难。串行通信是将数据字节分成一位一位的形式在一条传输线上逐个地传送。特点：传输线少，长距离传送时成本低，且可以利用电话网等现成的设备，但数据的传送控制比并行通信复杂 。 串行">
+<meta name="description" content="@[toc] 一、概念 单片机与外部设备交换信息时，通常采用串行通讯和并行通讯。 并行通信通常是将数据字节的各位用多条数据线同时进行传送 。 特点：控制简单、传输速度快；由于传输线较多，长距离传送时成本高且接收方的各位同时接收存在困难。  串行通信是将数据字节分成一位一位的形式在一条传输线上逐个地传送。 特点：传输线少，长距离传送时成本低，且可以利用电话网等现成的设备，但数据的传送控制比并行通信复">
 <meta property="og:type" content="article">
 <meta property="og:title" content="串口通讯协议">
 <meta property="og:url" content="http://wangyuxiang202.github.io/2021/10/03/%E4%B8%B2%E5%8F%A3%E9%80%9A%E8%AE%AF/index.html">
 <meta property="og:site_name" content="北 海">
-<meta property="og:description" content="@[toc] 一、概念单片机与外部设备交换信息时，通常采用串行通讯和并行通讯。并行通信通常是将数据字节的各位用多条数据线同时进行传送 。特点：控制简单、传输速度快；由于传输线较多，长距离传送时成本高且接收方的各位同时接收存在困难。串行通信是将数据字节分成一位一位的形式在一条传输线上逐个地传送。特点：传输线少，长距离传送时成本低，且可以利用电话网等现成的设备，但数据的传送控制比并行通信复杂 。 串行">
+<meta property="og:description" content="@[toc] 一、概念 单片机与外部设备交换信息时，通常采用串行通讯和并行通讯。 并行通信通常是将数据字节的各位用多条数据线同时进行传送 。 特点：控制简单、传输速度快；由于传输线较多，长距离传送时成本高且接收方的各位同时接收存在困难。  串行通信是将数据字节分成一位一位的形式在一条传输线上逐个地传送。 特点：传输线少，长距离传送时成本低，且可以利用电话网等现成的设备，但数据的传送控制比并行通信复">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://wangyuxiang202.github.io/images/20200327213429822.png">
 <meta property="og:image" content="http://wangyuxiang202.github.io/images/20200327213440164.png">
@@ -104,9 +104,8 @@
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">4</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a></li>
         <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">9</span></a></li>
-        <li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li>
-        <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
-        <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+        <li class="menu-item menu-item-read"><a href="/read/" rel="section"><i class="fa fa-book fa-fw"></i>read</a></li>
+        <li class="menu-item menu-item-movie"><a href="/movie/" rel="section"><i class="fa fa-movie fa-fw"></i>movie</a></li>
   </ul>
 </nav>
 
@@ -137,7 +136,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">一、概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%AF%84%E5%AD%98%E5%99%A8"><span class="nav-number">2.</span> <span class="nav-text">二、寄存器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%B8%B2%E8%A1%8C%E5%8F%A3%E6%8E%A7%E5%88%B6%E5%AF%84%E5%AD%98%E5%99%A8SCON%E5%92%8CPCON"><span class="nav-number">2.1.</span> <span class="nav-text">1).串行口控制寄存器SCON和PCON</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#a-gt-%E4%B8%B2%E8%A1%8C%E6%8E%A7%E5%88%B6%E5%AF%84%E5%AD%98%E5%99%A8-SCON"><span class="nav-number">2.1.1.</span> <span class="nav-text">a&gt;.串行控制寄存器 SCON</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#b-gt-%E4%B8%B2%E8%A1%8C%E6%8E%A7%E5%88%B6%E5%AF%84%E5%AD%98%E5%99%A8-PCON"><span class="nav-number">2.1.2.</span> <span class="nav-text">b&gt;.串行控制寄存器 PCON</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%EF%BC%89-%E4%B8%B2%E8%A1%8C%E5%8F%A3%E6%95%B0%E6%8D%AE%E7%BC%93%E5%86%B2%E5%AF%84%E5%AD%98%E5%99%A8SBUF"><span class="nav-number">2.2.</span> <span class="nav-text">2）.串行口数据缓冲寄存器SBUF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%EF%BC%89-%E4%BB%8E%E6%9C%BA%E5%9C%B0%E5%9D%80%E6%8E%A7%E5%88%B6%E5%AF%84%E5%AD%98%E5%99%A8SADEN-SADDR"><span class="nav-number">2.3.</span> <span class="nav-text">3）.从机地址控制寄存器SADEN&#x2F;SADDR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%EF%BC%89-%E4%B8%B2%E8%A1%8C%E5%8F%A3%E4%B8%AD%E6%96%AD%E7%9B%B8%E5%85%B3%E5%AF%84%E5%AD%98%E5%99%A8IE-IPH-IP"><span class="nav-number">2.4.</span> <span class="nav-text">4）.串行口中断相关寄存器IE&#x2F;IPH&#x2F;IP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#a-gt-%E4%B8%AD%E6%96%AD%E5%85%81%E8%AE%B8%E5%AF%84%E5%AD%98%E5%99%A8IE"><span class="nav-number">2.4.1.</span> <span class="nav-text">a&gt;.中断允许寄存器IE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#b-gt-IPH-IP%E4%B8%AD%E6%96%AD%E4%BC%98%E5%85%88%E7%BA%A7%E6%8E%A7%E5%88%B6%E5%AF%84%E5%AD%98%E5%99%A8%E9%AB%98-%E4%BD%8E"><span class="nav-number">2.4.2.</span> <span class="nav-text">b&gt;.IPH&#x2F;IP中断优先级控制寄存器高&#x2F;低</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E4%B8%B2%E8%A1%8C%E5%8F%A3%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F1"><span class="nav-number">3.</span> <span class="nav-text">三、串行口工作模式1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%EF%BC%89-%E8%AE%A1%E7%AE%97%E6%B3%A2%E7%89%B9%E7%8E%87"><span class="nav-number">3.1.</span> <span class="nav-text">1）.计算波特率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%EF%BC%89-%E7%9B%B8%E5%85%B3%E5%AF%84%E5%AD%98%E5%99%A8%E9%85%8D%E7%BD%AE"><span class="nav-number">3.2.</span> <span class="nav-text">2）.相关寄存器配置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E4%BB%A3%E7%A0%81%E5%9D%97"><span class="nav-number">4.</span> <span class="nav-text">四、代码块</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">一、概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">二、寄存器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%B8%B2%E8%A1%8C%E5%8F%A3%E6%8E%A7%E5%88%B6%E5%AF%84%E5%AD%98%E5%99%A8SCON%E5%92%8CPCON"><span class="nav-number">2.1.</span> <span class="nav-text">1).串行口控制寄存器SCON和PCON</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#a-%E4%B8%B2%E8%A1%8C%E6%8E%A7%E5%88%B6%E5%AF%84%E5%AD%98%E5%99%A8-SCON"><span class="nav-number">2.1.1.</span> <span class="nav-text">a&gt;.串行控制寄存器 SCON</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#b-%E4%B8%B2%E8%A1%8C%E6%8E%A7%E5%88%B6%E5%AF%84%E5%AD%98%E5%99%A8-PCON"><span class="nav-number">2.1.2.</span> <span class="nav-text">b&gt;.串行控制寄存器 PCON</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%EF%BC%89-%E4%B8%B2%E8%A1%8C%E5%8F%A3%E6%95%B0%E6%8D%AE%E7%BC%93%E5%86%B2%E5%AF%84%E5%AD%98%E5%99%A8SBUF"><span class="nav-number">2.2.</span> <span class="nav-text">2）.串行口数据缓冲寄存器SBUF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%EF%BC%89-%E4%BB%8E%E6%9C%BA%E5%9C%B0%E5%9D%80%E6%8E%A7%E5%88%B6%E5%AF%84%E5%AD%98%E5%99%A8SADEN-SADDR"><span class="nav-number">2.3.</span> <span class="nav-text">3）.从机地址控制寄存器SADEN&#x2F;SADDR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%EF%BC%89-%E4%B8%B2%E8%A1%8C%E5%8F%A3%E4%B8%AD%E6%96%AD%E7%9B%B8%E5%85%B3%E5%AF%84%E5%AD%98%E5%99%A8IE-IPH-IP"><span class="nav-number">2.4.</span> <span class="nav-text">4）.串行口中断相关寄存器IE&#x2F;IPH&#x2F;IP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#a-%E4%B8%AD%E6%96%AD%E5%85%81%E8%AE%B8%E5%AF%84%E5%AD%98%E5%99%A8IE"><span class="nav-number">2.4.1.</span> <span class="nav-text">a&gt;.中断允许寄存器IE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#b-IPH-IP%E4%B8%AD%E6%96%AD%E4%BC%98%E5%85%88%E7%BA%A7%E6%8E%A7%E5%88%B6%E5%AF%84%E5%AD%98%E5%99%A8%E9%AB%98-%E4%BD%8E"><span class="nav-number">2.4.2.</span> <span class="nav-text">b&gt;.IPH&#x2F;IP中断优先级控制寄存器高&#x2F;低</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">三、串行口工作模式1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%EF%BC%89-%E8%AE%A1%E7%AE%97%E6%B3%A2%E7%89%B9%E7%8E%87"><span class="nav-number">3.1.</span> <span class="nav-text">1）.计算波特率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%EF%BC%89-%E7%9B%B8%E5%85%B3%E5%AF%84%E5%AD%98%E5%99%A8%E9%85%8D%E7%BD%AE"><span class="nav-number">3.2.</span> <span class="nav-text">2）.相关寄存器配置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">四、代码块</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -277,20 +276,74 @@
     
     <div class="post-body" itemprop="articleBody">
         <p>@[toc]</p>
-<h1 id="一、概念"><a href="#一、概念" class="headerlink" title="一、概念"></a>一、概念</h1><p>单片机与外部设备交换信息时，通常采用串行通讯和并行通讯。<br><strong>并行通信</strong>通常是将数据字节的各位用多条数据线同时进行传送 。<br>特点：控制简单、传输速度快；由于传输线较多，长距离传送时成本高且接收方的各位同时接收存在困难。<br><img src="/images/20200327213429822.png" alt="在这里插入图片描述"><br><strong>串行通信</strong>是将数据字节分成一位一位的形式在一条传输线上逐个地传送。<br>特点：传输线少，长距离传送时成本低，且可以利用电话网等现成的设备，但数据的传送控制比并行通信复杂 。</p>
-<p><img src="/images/20200327213440164.png" alt="在这里插入图片描述"><br>串行通讯分为同步传送和异步传送<br><strong>1</strong> <strong>、异步通信</strong><br>  发送与接收设备使用各自的时钟控制数据的发送和接收过程。为使双方的收发协调，要求发送和接收设备的时钟尽可能一致。<br><img src="/images/20200327213447230.png" alt="在这里插入图片描述"><br><strong>2</strong> <strong>、同步通信</strong><br>同步通信时要建立发送方时钟对接收方时钟的直接控制，使双方达到完全同步。此时，传输数据的位之间的距离均为“位间隔”的整数倍，同时传送的字符间不留间隙，即保持位同步关系，也保持字符同步关系。发送方对接收方的同步可以通过两种方法实现。<br><img src="/images/20200327213454595.png" alt="在这里插入图片描述"></p>
-<h1 id="二、寄存器"><a href="#二、寄存器" class="headerlink" title="二、寄存器"></a>二、寄存器</h1><p>串行口相关寄存器：<br><img src="/images/20200327213807434.png" alt="在这里插入图片描述"></p>
-<h2 id="1-串行口控制寄存器SCON和PCON"><a href="#1-串行口控制寄存器SCON和PCON" class="headerlink" title="1).串行口控制寄存器SCON和PCON"></a>1).串行口控制寄存器SCON和PCON</h2><h3 id="a-gt-串行控制寄存器-SCON"><a href="#a-gt-串行控制寄存器-SCON" class="headerlink" title="a&gt;.串行控制寄存器 SCON"></a>a&gt;.<strong>串行控制寄存器</strong> <strong>SCON</strong></h3><p><img src="/images/20200327213832926.png" alt="在这里插入图片描述"><br>SMO、SM1确定串行口工作方式：<br><img src="/images/20200327213851154.png" alt="在这里插入图片描述"><br>SM2:允许多机通讯控制位（这里不管）<br>REN：串行接收控制位（1：允许接收，0：禁止接收）<br>TB8/RB8：发送/接收数据第9位（这里不管）<br>TI:发送中断请求标志位（停止位开始发送时内部硬件置位1，软件复位0）<br>RI:接收中断请求标志位（接收到停止位内部硬件置位1，软件复位0）<br>*TI/RI方式0除外，任何工作方式下必须软件清零。</p>
-<h3 id="b-gt-串行控制寄存器-PCON"><a href="#b-gt-串行控制寄存器-PCON" class="headerlink" title="b&gt;.串行控制寄存器 PCON"></a>b&gt;.<strong>串行控制寄存器</strong> <strong>PCON</strong></h3><p><img src="/images/20200327213911237.png" alt="在这里插入图片描述"><br>SMOD：波特率选择位（SMOD=1 方式1、2、3波特率加倍）<br>其它位与串口无关</p>
-<h2 id="2）-串行口数据缓冲寄存器SBUF"><a href="#2）-串行口数据缓冲寄存器SBUF" class="headerlink" title="2）.串行口数据缓冲寄存器SBUF"></a>2）.串行口数据缓冲寄存器SBUF</h2><p>串行口数据缓冲寄存器SBUF地址99H，逻辑上，SBUF只有一个。实际上，是两个缓冲器。1个只读寄存器，1个只写寄存器。如果CPU写SBUF，数据就会被送入发送寄存器准备发送；如果CPU读SBUF，则读入的数据一定来自接收缓冲器。即CPU对SBUF的读写，实际上是分别访问上述两个不同的寄存器。  *区分  a = SBUF; SBUF = a。</p>
-<h2 id="3）-从机地址控制寄存器SADEN-SADDR"><a href="#3）-从机地址控制寄存器SADEN-SADDR" class="headerlink" title="3）.从机地址控制寄存器SADEN/SADDR"></a>3）.从机地址控制寄存器SADEN/SADDR</h2><h2 id="4）-串行口中断相关寄存器IE-IPH-IP"><a href="#4）-串行口中断相关寄存器IE-IPH-IP" class="headerlink" title="4）.串行口中断相关寄存器IE/IPH/IP"></a>4）.串行口中断相关寄存器IE/IPH/IP</h2><p>无关</p>
-<h3 id="a-gt-中断允许寄存器IE"><a href="#a-gt-中断允许寄存器IE" class="headerlink" title="a&gt;.中断允许寄存器IE"></a>a&gt;.中断允许寄存器IE</h3><p><img src="/images/20200327213927958.png" alt="在这里插入图片描述"><br>EA:CPU中断允许（1：允许，0：禁止）<br>ES：串行口中断允许位（1：允许，0：禁止）</p>
-<h3 id="b-gt-IPH-IP中断优先级控制寄存器高-低"><a href="#b-gt-IPH-IP中断优先级控制寄存器高-低" class="headerlink" title="b&gt;.IPH/IP中断优先级控制寄存器高/低"></a>b&gt;.IPH/IP中断优先级控制寄存器高/低</h3><p>过</p>
-<h1 id="三、串行口工作模式1"><a href="#三、串行口工作模式1" class="headerlink" title="三、串行口工作模式1"></a>三、串行口工作模式1</h1><h2 id="1）-计算波特率"><a href="#1）-计算波特率" class="headerlink" title="1）.计算波特率"></a>1）.计算波特率</h2><p>知：<br>$$<br>波特率=\frac{2^{SMOD}}{32}<em>T1溢出率<br>$$<br>$$<br>T1溢出率=\frac{fosc}{12</em>(256-TH1)}<br>$$<br>故：<br>$$<br>波特率=\frac{2^{SMOD}<em>fosc}{32</em>12*(256-T_初)}<br>$$</p>
-<h2 id="2）-相关寄存器配置"><a href="#2）-相关寄存器配置" class="headerlink" title="2）.相关寄存器配置"></a>2）.相关寄存器配置</h2><p>设置T1的工作方式（编程TMOD寄存器）；<br>计算T1的初值，装载TH1、TL1；<br>启动T1（编程TCON中的TR1位）；<br>确定串行口控制（编程SCON寄存器）；<br>如需串行口在中断方式工作时，要进行中断设置编程IE寄存器。</p>
-<h1 id="四、代码块"><a href="#四、代码块" class="headerlink" title="四、代码块"></a>四、代码块</h1><p>串口初始化</p>
+<h1>一、概念</h1>
+<p>单片机与外部设备交换信息时，通常采用串行通讯和并行通讯。<br>
+<strong>并行通信</strong>通常是将数据字节的各位用多条数据线同时进行传送 。<br>
+特点：控制简单、传输速度快；由于传输线较多，长距离传送时成本高且接收方的各位同时接收存在困难。<br>
+<img src="/images/20200327213429822.png" alt="在这里插入图片描述"><br>
+<strong>串行通信</strong>是将数据字节分成一位一位的形式在一条传输线上逐个地传送。<br>
+特点：传输线少，长距离传送时成本低，且可以利用电话网等现成的设备，但数据的传送控制比并行通信复杂 。</p>
+<p><img src="/images/20200327213440164.png" alt="在这里插入图片描述"><br>
+串行通讯分为同步传送和异步传送<br>
+<strong>1</strong> <strong>、异步通信</strong><br>
+发送与接收设备使用各自的时钟控制数据的发送和接收过程。为使双方的收发协调，要求发送和接收设备的时钟尽可能一致。<br>
+<img src="/images/20200327213447230.png" alt="在这里插入图片描述"><br>
+<strong>2</strong> <strong>、同步通信</strong><br>
+同步通信时要建立发送方时钟对接收方时钟的直接控制，使双方达到完全同步。此时，传输数据的位之间的距离均为“位间隔”的整数倍，同时传送的字符间不留间隙，即保持位同步关系，也保持字符同步关系。发送方对接收方的同步可以通过两种方法实现。<br>
+<img src="/images/20200327213454595.png" alt="在这里插入图片描述"></p>
+<h1>二、寄存器</h1>
+<p>串行口相关寄存器：<br>
+<img src="/images/20200327213807434.png" alt="在这里插入图片描述"></p>
+<h2 id="1-串行口控制寄存器SCON和PCON">1).串行口控制寄存器SCON和PCON</h2>
+<h3 id="a-串行控制寄存器-SCON">a&gt;.<strong>串行控制寄存器</strong> <strong>SCON</strong></h3>
+<p><img src="/images/20200327213832926.png" alt="在这里插入图片描述"><br>
+SMO、SM1确定串行口工作方式：<br>
+<img src="/images/20200327213851154.png" alt="在这里插入图片描述"><br>
+SM2:允许多机通讯控制位（这里不管）<br>
+REN：串行接收控制位（1：允许接收，0：禁止接收）<br>
+TB8/RB8：发送/接收数据第9位（这里不管）<br>
+TI:发送中断请求标志位（停止位开始发送时内部硬件置位1，软件复位0）<br>
+RI:接收中断请求标志位（接收到停止位内部硬件置位1，软件复位0）<br>
+*TI/RI方式0除外，任何工作方式下必须软件清零。</p>
+<h3 id="b-串行控制寄存器-PCON">b&gt;.<strong>串行控制寄存器</strong> <strong>PCON</strong></h3>
+<p><img src="/images/20200327213911237.png" alt="在这里插入图片描述"><br>
+SMOD：波特率选择位（SMOD=1 方式1、2、3波特率加倍）<br>
+其它位与串口无关</p>
+<h2 id="2）-串行口数据缓冲寄存器SBUF">2）.串行口数据缓冲寄存器SBUF</h2>
+<p>串行口数据缓冲寄存器SBUF地址99H，逻辑上，SBUF只有一个。实际上，是两个缓冲器。1个只读寄存器，1个只写寄存器。如果CPU写SBUF，数据就会被送入发送寄存器准备发送；如果CPU读SBUF，则读入的数据一定来自接收缓冲器。即CPU对SBUF的读写，实际上是分别访问上述两个不同的寄存器。  *区分  a = SBUF; SBUF = a。</p>
+<h2 id="3）-从机地址控制寄存器SADEN-SADDR">3）.从机地址控制寄存器SADEN/SADDR</h2>
+<h2 id="4）-串行口中断相关寄存器IE-IPH-IP">4）.串行口中断相关寄存器IE/IPH/IP</h2>
+<p>无关</p>
+<h3 id="a-中断允许寄存器IE">a&gt;.中断允许寄存器IE</h3>
+<p><img src="/images/20200327213927958.png" alt="在这里插入图片描述"><br>
+EA:CPU中断允许（1：允许，0：禁止）<br>
+ES：串行口中断允许位（1：允许，0：禁止）</p>
+<h3 id="b-IPH-IP中断优先级控制寄存器高-低">b&gt;.IPH/IP中断优先级控制寄存器高/低</h3>
+<p>过</p>
+<h1>三、串行口工作模式1</h1>
+<h2 id="1）-计算波特率">1）.计算波特率</h2>
+<p>知：<br>
+$$<br>
+波特率=\frac{2^{SMOD}}{32}<em>T1溢出率<br>
+$$<br>
+$$<br>
+T1溢出率=\frac{fosc}{12</em>(256-TH1)}<br>
+$$<br>
+故：<br>
+$$<br>
+波特率=\frac{2^{SMOD}<em>fosc}{32</em>12*(256-T_初)}<br>
+$$</p>
+<h2 id="2）-相关寄存器配置">2）.相关寄存器配置</h2>
+<p>设置T1的工作方式（编程TMOD寄存器）；<br>
+计算T1的初值，装载TH1、TL1；<br>
+启动T1（编程TCON中的TR1位）；<br>
+确定串行口控制（编程SCON寄存器）；<br>
+如需串行口在中断方式工作时，要进行中断设置编程IE寄存器。</p>
+<h1>四、代码块</h1>
+<p>串口初始化</p>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/*串口初始化*/</span></span><br><span class="line">void UART_init()</span><br><span class="line">&#123;</span><br><span class="line">	TMOD = <span class="number">0</span>x20;  	<span class="regexp">//</span>T1工作模式<span class="number">2</span>  <span class="number">8</span>位自动重装</span><br><span class="line">	TH1 = <span class="number">0</span>xfd;</span><br><span class="line">	TL1 = <span class="number">0</span>xfd; 	<span class="regexp">//</span>比特率<span class="number">9600</span></span><br><span class="line"><span class="regexp">//</span>TH1=TL1=<span class="number">256</span>-fosc<span class="regexp">/12/</span><span class="number">32</span>/BADU</span><br><span class="line">	TR1 = <span class="number">1</span>;		<span class="regexp">//</span>启动T1定时器</span><br><span class="line">	SM0 = <span class="number">0</span>;</span><br><span class="line">	SM1 = <span class="number">1</span>; 		<span class="regexp">//</span>串口工作方式<span class="number">1</span></span><br><span class="line">	REN = <span class="number">1</span>;		<span class="regexp">//</span>串口允许接收</span><br><span class="line">	EA  = <span class="number">1</span>;		<span class="regexp">//</span>开总中断</span><br><span class="line">	ES  = <span class="number">1</span>;		<span class="regexp">//</span>串口中断打开</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>TI:发送中断请求标志位（停止位开始发送时内部硬件置位1，软件复位0）<br>RI:接收中断请求标志位（接收到停止位内部硬件置位1，软件复位0）</p>
+<p>TI:发送中断请求标志位（停止位开始发送时内部硬件置位1，软件复位0）<br>
+RI:接收中断请求标志位（接收到停止位内部硬件置位1，软件复位0）</p>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/*串口中断服务程序*/</span></span><br><span class="line">void UART() interrupt <span class="number">4</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span>(RI)	<span class="regexp">//</span>检测是否接收完成</span><br><span class="line">	&#123;	</span><br><span class="line">		RI = <span class="number">0</span>;</span><br><span class="line">		num = SBUF;	  <span class="regexp">//</span>num 取出接收缓存器的值</span><br><span class="line">		P1 = SBUF;</span><br><span class="line">		num++;</span><br><span class="line">		SBUF = num;	</span><br><span class="line">		<span class="keyword">while</span>(!TI);  <span class="regexp">//</span>TI=<span class="number">1</span>则置零</span><br><span class="line">		TI = <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
     </div>
 
@@ -373,8 +426,8 @@
             <div class="post-nav-item">
             </div>
             <div class="post-nav-item">
-                <a href="/2021/10/03/I2C%E5%8F%82%E8%80%83%E7%A8%8B%E5%BA%8F/" rel="next" title="I2C参考程序">
-                  I2C参考程序 <i class="fa fa-chevron-right"></i>
+                <a href="/2021/10/03/I2C%E6%80%BB%E7%BA%BF%E5%8D%8F%E8%AE%AE/" rel="next" title="I2C总线协议">
+                  I2C总线协议 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
