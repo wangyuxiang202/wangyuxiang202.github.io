@@ -21,12 +21,12 @@
   <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"wangyuxiang202.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":"ture","bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
-<meta name="description" content="[toc] 写在前面 最近使用STM32做串口数据收发，遇到了一些问题。折腾了一番，在此记录一下。 需求   云平台通过“发布消息”，下行指令。   4G模块接收平台下行指令并转发到单片机，单片机通过串口（UART3）做数据接收与分析。 总的来说，比较简单。单片机和4G通过串口通信，当4G与平台连接之后，在保证数据在平台与4G模块之间能正常流转的情况下，可视为单片机使用串口直接与平台进行通信。而原">
+<meta name="description" content="[toc] ¶写在前面 最近使用STM32做串口数据收发，遇到了一些问题。折腾了一番，在此记录一下。 ¶需求   云平台通过“发布消息”，下行指令。   4G模块接收平台下行指令并转发到单片机，单片机通过串口（UART3）做数据接收与分析。 总的来说，比较简单。单片机和4G通过串口通信，当4G与平台连接之后，在保证数据在平台与4G模块之间能正常流转的情况下，可视为单片机使用串口直接与平台进行通信。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="STM32串口自定义数据接收协议">
 <meta property="og:url" content="http://wangyuxiang202.github.io/2021/10/03/%E6%AD%A3%E7%82%B9%E5%8E%9F%E5%AD%90STM32%E4%B8%B2%E5%8F%A3%E8%87%AA%E5%AE%9A%E6%95%B0%E6%8D%AE%E6%8E%A5%E6%94%B6%E5%8D%8F%E8%AE%AE/index.html">
 <meta property="og:site_name" content="北 海">
-<meta property="og:description" content="[toc] 写在前面 最近使用STM32做串口数据收发，遇到了一些问题。折腾了一番，在此记录一下。 需求   云平台通过“发布消息”，下行指令。   4G模块接收平台下行指令并转发到单片机，单片机通过串口（UART3）做数据接收与分析。 总的来说，比较简单。单片机和4G通过串口通信，当4G与平台连接之后，在保证数据在平台与4G模块之间能正常流转的情况下，可视为单片机使用串口直接与平台进行通信。而原">
+<meta property="og:description" content="[toc] ¶写在前面 最近使用STM32做串口数据收发，遇到了一些问题。折腾了一番，在此记录一下。 ¶需求   云平台通过“发布消息”，下行指令。   4G模块接收平台下行指令并转发到单片机，单片机通过串口（UART3）做数据接收与分析。 总的来说，比较简单。单片机和4G通过串口通信，当4G与平台连接之后，在保证数据在平台与4G模块之间能正常流转的情况下，可视为单片机使用串口直接与平台进行通信。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://wangyuxiang202.github.io/images/image-20210908192223153.png">
 <meta property="og:image" content="http://wangyuxiang202.github.io/images/image-20210908094840132.png">
@@ -71,8 +71,12 @@
   </noscript>
 </head>
 
+
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
 <body itemscope itemtype="http://schema.org/WebPage">
   <div class="headband"></div>
+  <a target="_blank" rel="noopener" href="https://github.com/wangyuxiang202/wangyuxiang202.github.io" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
 
   <main class="main">
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -108,8 +112,8 @@
         <li class="menu-item menu-item-home"><a href="/home/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">4</span></a></li>
-        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">9</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">6</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">12</span></a></li>
         <li class="menu-item menu-item-read"><a href="/read/" rel="section"><i class="fa fa-book fa-fw"></i>read</a></li>
         <li class="menu-item menu-item-movie"><a href="/movie/" rel="section"><i class="fa fa-movie fa-fw"></i>movie</a></li>
   </ul>
@@ -157,13 +161,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-count">12</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -288,9 +292,9 @@
     
     <div class="post-body" itemprop="articleBody">
         <p>[toc]</p>
-<h2 id="写在前面">写在前面</h2>
+<h2 id="写在前面"><a class="header-anchor" href="#写在前面">¶</a>写在前面</h2>
 <p>最近使用STM32做串口数据收发，遇到了一些问题。折腾了一番，在此记录一下。</p>
-<h2 id="需求">需求</h2>
+<h2 id="需求"><a class="header-anchor" href="#需求">¶</a>需求</h2>
 <ol>
 <li>
 <p>云平台通过“发布消息”，下行指令。</p>
@@ -300,29 +304,29 @@
 <p>总的来说，比较简单。单片机和4G通过串口通信，当4G与平台连接之后，在保证数据在平台与4G模块之间能正常流转的情况下，可视为单片机使用串口直接与平台进行通信。而原子亦给出了串口通信的相关例程，其中包含串口收发实验，可做参考。</p>
 </li>
 </ol>
-<h2 id="问题产生">问题产生</h2>
+<h2 id="问题产生"><a class="header-anchor" href="#问题产生">¶</a>问题产生</h2>
 <p>为了实现需求，先进行两个小实验</p>
 <ol>
 <li>模块+上位机实验 : 验证4G模块与平台之间数据收发正常。</li>
 <li>电路板串口数据接收实验 ：排除电路板硬件异常问题。</li>
 </ol>
-<h3 id="模块-上位机实验">模块+上位机实验</h3>
+<h3 id="模块-上位机实验"><a class="header-anchor" href="#模块-上位机实验">¶</a>模块+上位机实验</h3>
 <p>平台发布消息，模块TX引脚输出。通过CH340与串口调试助手相连，接收并显示数据。验证模块能否正常收发数据。</p>
 <img src="/images/image-20210908192223153.png" alt="image-20210908192223153" style="zoom:50%;" />
 <p><strong>可以正常收发数据，排除模块问题。</strong></p>
 <p>[ASCII码对照表](<a target="_blank" rel="noopener" href="http://ascii.911cha.com/">ASCII编码对照表_911查询 (911cha.com)</a>)</p>
-<h3 id="电路板串口数据接收实验">电路板串口数据接收实验</h3>
+<h3 id="电路板串口数据接收实验"><a class="header-anchor" href="#电路板串口数据接收实验">¶</a>电路板串口数据接收实验</h3>
 <p>实验硬件：UART1(COM3) , UART3(COM1)实验。</p>
 <p>实验现象：UART1 接收到的消息通过UART1打印到串口；UART3 接收到的消息亦通过UART1打印到串口。（UART1做串口调试使用）</p>
 <p>实验结论： 排除电路板硬件异常原因，UART1 &amp; UART3 可以正常收发数据。</p>
 <p><strong>示例代码：</strong></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">&#123;</span><br><span class="line">		</span><br><span class="line">   <span class="keyword">if</span>(USART_RX_STA&amp;<span class="number">0x8000</span>)</span><br><span class="line">	&#123;		</span><br><span class="line">		LED0 = <span class="number">0</span>;			 <span class="comment">//点亮LED显示接收到消息	</span></span><br><span class="line">		len=USART_RX_STA&amp;<span class="number">0x3fff</span>;<span class="comment">//得到此次接收到的数据长度</span></span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;\r\nUART1发送的消息为:\r\n&quot;</span>);</span><br><span class="line">		HAL_UART_Transmit(&amp;UART1_Handler,(<span class="keyword">uint8_t</span>*)USART_RX_BUF,len,<span class="number">1000</span>);	<span class="comment">//发送接收到的数据</span></span><br><span class="line">		<span class="keyword">while</span>(__HAL_UART_GET_FLAG(&amp;UART1_Handler,UART_FLAG_TC)!=SET);		<span class="comment">//等待发送结束</span></span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;\r\n\r\n&quot;</span>);<span class="comment">//插入换行</span></span><br><span class="line">		USART_RX_STA=<span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(USART3_RX_STA&amp;<span class="number">0x8000</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		LED0 = <span class="number">1</span>;			 <span class="comment">//熄灭LED显示接收到消息	</span></span><br><span class="line">		len=USART3_RX_STA&amp;<span class="number">0x3fff</span>;<span class="comment">//得到此次接收到的数据长度</span></span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;\r\nUART3发送的消息为:\r\n&quot;</span>);</span><br><span class="line">		HAL_UART_Transmit(&amp;UART1_Handler,(<span class="keyword">uint8_t</span>*)USART3_RX_BUF,len,<span class="number">1000</span>);	<span class="comment">//发送接收到的数据</span></span><br><span class="line">		<span class="keyword">while</span>(__HAL_UART_GET_FLAG(&amp;UART1_Handler,UART_FLAG_TC)!=SET);		<span class="comment">//等待发送结束</span></span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;\r\n\r\n&quot;</span>);<span class="comment">//插入换行</span></span><br><span class="line">		USART3_RX_STA=<span class="number">0</span>;</span><br><span class="line">	&#125; </span><br><span class="line">&#125;	</span><br></pre></td></tr></table></figure>
 <p><img src="/images/image-20210908094840132.png" alt="image-20210908094840132"></p>
-<h3 id="问题来了！">问题来了！</h3>
+<h3 id="问题来了！"><a class="header-anchor" href="#问题来了！">¶</a>问题来了！</h3>
 <p>当以上两个小测试完成时，可以确定整个系统软件与硬件无误。也就是说，当电路板上插上4G模块时，即可实现单片机与平台通信的功能！</p>
 <p>然而，当平台发布数据时，单片机未能接收到数据。通过软件调试等操作发现，UART3并未进入到接收到数据中断。用示波器测量模块TX引脚，平台发布消息时确实有信号输出！迷惑行为，，，，，，</p>
-<h2 id="开始分析">开始分析</h2>
-<h3 id="串口数据格式">串口数据格式</h3>
+<h2 id="开始分析"><a class="header-anchor" href="#开始分析">¶</a>开始分析</h2>
+<h3 id="串口数据格式"><a class="header-anchor" href="#串口数据格式">¶</a>串口数据格式</h3>
 <p>如下图，可以看出</p>
 <ol>
 <li>无数据时，电平始终为‘1’</li>
@@ -332,7 +336,7 @@
 <p>串口助手配置为：</p>
 <p>bound ：115200 ；停止位 ：1 ；数据位 ：8 ； 检验位 ： None</p>
 <p><img src="/images/image-20210908203717523.png" alt="image-20210908203717523"></p>
-<h3 id="测一波波形">测一波波形</h3>
+<h3 id="测一波波形"><a class="header-anchor" href="#测一波波形">¶</a>测一波波形</h3>
 <p>以上两个小测试确实可以验证软件与硬件无误。那么为什么单片机可以接收上位机传来的数据，而不能接收4G模块转发来的数据呢？二者数据有何区别？</p>
 <p>验证方法 ： 上位机和平台同时发送信息，测其输出信号。测试数据 11（0011_0001 0011_0001）</p>
 <ul>
@@ -354,14 +358,14 @@
 <p>测波形时遇到一个现象，在这记录一下。</p>
 <p>当直接接CH340输出时，图形在上。可以看到高电平只有1.5V左右，电压驱动并不强；当CH340与单片机相连时，发送波形测得的波形如下。当时怀疑过是高电平的问题，在单片机上接了个上拉电阻，波形是好看了，但依旧没有解决问题。因为串口低电平有效，并不要求严格的高电平。</p>
 <p><img src="/images/TEK00007.PNG" alt="TEK00007"></p>
-<h2 id="代码分析">代码分析</h2>
+<h2 id="代码分析"><a class="header-anchor" href="#代码分析">¶</a>代码分析</h2>
 <p>关于串口接收的代码如下，一眼就可看到关于0x0a，0x0d的判断，确认是结尾校验无误了。若要修改为 ‘**’ 校验，改为0x2a,0x2a即可。修改后测试成功，没图。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(huart-&gt;Instance==USART3)<span class="comment">//如果是串口1</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span>((USART3_RX_STA&amp;<span class="number">0x8000</span>)==<span class="number">0</span>)<span class="comment">//接收未完成</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(USART3_RX_STA&amp;<span class="number">0x4000</span>)<span class="comment">//接收到了0x0d</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(aRx3Buffer[<span class="number">0</span>]!=<span class="number">0x0a</span>)USART3_RX_STA=<span class="number">0</span>;<span class="comment">//接收错误,重新开始</span></span><br><span class="line">			<span class="keyword">else</span> USART3_RX_STA|=<span class="number">0x8000</span>;	<span class="comment">//接收完成了 </span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="comment">//还没收到0X0D</span></span><br><span class="line">		&#123;	</span><br><span class="line">			<span class="keyword">if</span>(aRx3Buffer[<span class="number">0</span>]==<span class="number">0x0d</span>)USART3_RX_STA|=<span class="number">0x4000</span>;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">				USART3_RX_BUF[USART3_RX_STA&amp;<span class="number">0X3FFF</span>]=aRx3Buffer[<span class="number">0</span>] ;</span><br><span class="line">				USART3_RX_STA++;</span><br><span class="line">				<span class="keyword">if</span>(USART3_RX_STA&gt;(USART_REC_LEN<span class="number">-1</span>))USART3_RX_STA=<span class="number">0</span>;<span class="comment">//接收数据错误,重新开始接收	  </span></span><br><span class="line">			&#125;		 </span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>注 ：关于0x0a，0x0d 网上也有不少资料参考。原子的串口助手也有提示正确格式。由于很少使用16进制发送，一致没有注意到！</li>
 </ul>
 <p><img src="/images/image-20210908210152731.png" alt="image-20210908210152731"></p>
-<h2 id="新的问题：串口数据累加">新的问题：串口数据累加</h2>
+<h2 id="新的问题：串口数据累加"><a class="header-anchor" href="#新的问题：串口数据累加">¶</a>新的问题：串口数据累加</h2>
 <p>新的问题收测试时出现寄存器数据累加情况，具体表现为:</p>
 <ol>
 <li>当串口UART3接收到的数据未加结束校验“**”，单片机未能判断数据接收完毕。</li>
@@ -397,7 +401,7 @@
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 间隔一定时间清空串口缓冲BUF USART3_RX_BUF */</span></span><br><span class="line">	<span class="keyword">if</span> (time_10_ms)		 <span class="comment">//定时器 10ms</span></span><br><span class="line">	&#123; </span><br><span class="line">		time_10_ms = <span class="number">0</span> ;</span><br><span class="line">		<span class="built_in">memset</span>(USART3_RX_BUF, <span class="number">0</span>, <span class="keyword">sizeof</span> USART3_RX_BUF);  </span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
 <p><img src="/images/image-20210909190542032.png" alt="image-20210909190542032"></p>
 <p>**测试结果：**不加校验的数据串口不识别，定时清空处理，无数据累加情况。测试ok！</p>
-<h2 id="总结">总结</h2>
+<h2 id="总结"><a class="header-anchor" href="#总结">¶</a>总结</h2>
 <p>没啥写的，强迫症凑一凑。</p>
 
     </div>
@@ -476,8 +480,8 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2021/10/03/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89------%E6%B5%81%E6%B0%B4%E7%81%AF/" rel="prev" title="FPGA学习笔记（一）------流水灯">
-                  <i class="fa fa-chevron-left"></i> FPGA学习笔记（一）------流水灯
+                <a href="/2021/10/03/DS1302%E6%97%B6%E9%92%9F%E7%A8%8B%E5%BA%8F%E8%A7%A3%E8%AF%BB/" rel="prev" title="DS1302时钟程序解读">
+                  <i class="fa fa-chevron-left"></i> DS1302时钟程序解读
                 </a>
             </div>
             <div class="post-nav-item">
@@ -543,6 +547,8 @@
 
   
 
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdn.jsdelivr.net/npm/pdfobject@2.2.6/pdfobject.min.js","integrity":"sha256-77geM50MfxCD17eqyJR+Dag1svjJOLN+BJ2F/DMqMEY="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
 
 
 
@@ -557,5 +563,5 @@
 <script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"Wang","count":true,"i18n":{"disqus":"disqus"}}</script>
 <script src="/js/third-party/comments/disqus.js"></script>
 
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-wanko"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
 </html>

@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"wangyuxiang202.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":"ture","bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="[TOC] 0  写在前面 关于定时器和中断，本是很基础的东西。然而每次都是拿来就用，很少关注不同定时器之间的区别，及优先级的使用。在用到的相关资源很少时，选择一个自己常用的资源是一个不错的选择，因为不会产生所谓的冲突，但是当需要使用的资源越来越多时，了解一些总能少走些弯路。 1  定时器介绍 STM32F103ZET6一共有8个定时器（看门狗定时器2个，SysTick 定时器1个咱不讨论），其中">
+<meta property="og:type" content="article">
+<meta property="og:title" content="STM32定时器与中断">
+<meta property="og:url" content="http://wangyuxiang202.github.io/2021/10/16/STM32%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%8E%E4%B8%AD%E6%96%AD/index.html">
+<meta property="og:site_name" content="北 海">
+<meta property="og:description" content="[TOC] 0  写在前面 关于定时器和中断，本是很基础的东西。然而每次都是拿来就用，很少关注不同定时器之间的区别，及优先级的使用。在用到的相关资源很少时，选择一个自己常用的资源是一个不错的选择，因为不会产生所谓的冲突，但是当需要使用的资源越来越多时，了解一些总能少走些弯路。 1  定时器介绍 STM32F103ZET6一共有8个定时器（看门狗定时器2个，SysTick 定时器1个咱不讨论），其中">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-10-15T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-10-20T16:00:00.000Z">
+<meta property="article:author" content="Wang Yuxiang">
+<meta property="article:tag" content="STM32">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://wangyuxiang202.github.io/2021/10/16/STM32%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%8E%E4%B8%AD%E6%96%AD/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://wangyuxiang202.github.io/2021/10/16/STM32%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%8E%E4%B8%AD%E6%96%AD/","path":"2021/10/16/STM32定时器与中断/","title":"STM32定时器与中断"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>STM32定时器与中断 | 北 海</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?f59f1daad8f58b1f5d45c47ac1541838"></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+  <a target="_blank" rel="noopener" href="https://github.com/wangyuxiang202/wangyuxiang202.github.io" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">北 海</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Welcome to Beihai's blog！</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/home/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">4</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">6</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">12</span></a></li>
+        <li class="menu-item menu-item-read"><a href="/read/" rel="section"><i class="fa fa-book fa-fw"></i>read</a></li>
+        <li class="menu-item menu-item-movie"><a href="/movie/" rel="section"><i class="fa fa-movie fa-fw"></i>movie</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">0  写在前面</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">1  定时器介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">2  通用定时器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E8%AE%A1%E6%95%B0%E5%99%A8%E6%A8%A1%E5%BC%8F"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 计数器模式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">3 中断系统</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E4%B8%AD%E6%96%AD%E4%BB%8B%E7%BB%8D"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 中断介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%AD%E6%96%AD%E4%BD%BF%E7%94%A8"><span class="nav-number">4.2.</span> <span class="nav-text">中断使用</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Wang Yuxiang"
+      src="/uploads/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Wang Yuxiang</p>
+  <div class="site-description" itemprop="description">心之所向，素履以往</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/wangyuxiang202" title="My GitHub → https:&#x2F;&#x2F;github.com&#x2F;wangyuxiang202" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>My GitHub</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.csdn.net/qq_43063744" title="https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_43063744" rel="noopener" target="_blank">My CSDN</a>
+        </li>
+    </ul>
+  </div>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://wangyuxiang202.github.io/2021/10/16/STM32%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%8E%E4%B8%AD%E6%96%AD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Wang Yuxiang">
+      <meta itemprop="description" content="心之所向，素履以往">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="北 海">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          STM32定时器与中断
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-10-16 00:00:00" itemprop="dateCreated datePublished" datetime="2021-10-16T00:00:00+08:00">2021-10-16</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-10-21 00:00:00" itemprop="dateModified" datetime="2021-10-21T00:00:00+08:00">2021-10-21</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/STM32/" itemprop="url" rel="index"><span itemprop="name">STM32</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/STM32/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2021/10/16/STM32%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%8E%E4%B8%AD%E6%96%AD/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/10/16/STM32定时器与中断/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>[TOC]</p>
+<h1>0  写在前面</h1>
+<p>关于定时器和中断，本是很基础的东西。然而每次都是拿来就用，很少关注不同定时器之间的区别，及优先级的使用。在用到的相关资源很少时，选择一个自己常用的资源是一个不错的选择，因为不会产生所谓的冲突，但是当需要使用的资源越来越多时，了解一些总能少走些弯路。</p>
+<h1>1  定时器介绍</h1>
+<p>STM32F103ZET6一共有8个定时器（看门狗定时器2个，SysTick 定时器1个咱不讨论），其中分别为：</p>
+<ol>
+<li>高级定时器（TIM1、TIM8）；</li>
+<li>通用定时器（TIM2、TIM3、TIM4、TIM5）；</li>
+<li>基本定时器（TIM6、TIM7）；</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>定时器种类</th>
+<th>DMA请求</th>
+<th>通道</th>
+<th>应用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>高级定时器（TIM1 &amp; 8）</td>
+<td>可</td>
+<td>4</td>
+<td>…互补输出，刹车信号</td>
+</tr>
+<tr>
+<td>通用定时器（TIM2 - 5）</td>
+<td>可</td>
+<td>4</td>
+<td>定时；输入捕获；输出比较；产生PWM</td>
+</tr>
+<tr>
+<td>基本定时器（TIM6 - 7）</td>
+<td>可</td>
+<td>0</td>
+<td>定时</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>计数器模式：16位向上、向下、向上/下自动装载计数器</p>
+<blockquote>
+<p><strong>高级定时器：</strong></p>
+<p>高级控制定时器(TIM1和TIM8)由一个16位的自动装载计数器组成，它由一个可编程的预分频器<br>
+驱动。它适合多种用途，包含测量输入信号的脉冲宽度(输入捕获)，或者产生输出波形(输出比较、<br>
+PWM、嵌入死区时间的互补PWM等)。使用定时器预分频器和RCC时钟控制预分频器，可以实现脉冲宽度和波形周期从几个微秒到几个毫秒的调节。<br>
+高级控制定时器(TIM1和TIM8)和通用定时器( TIMx )是完全独立的，它们不共享任何资源。</p>
+</blockquote>
+<blockquote>
+<p><strong>通用定时器：</strong></p>
+<p>通用定时器是一个通过可编程预分频器驱动的16位自动装载计数器构成。它适用于多种场合，包括测量输入信号的脉冲长度(输入捕获)或者产生输出波形(输出比较和PWM)。使用定时器预分频器和RCC时钟控制器预分频器，脉冲长度和波形周期可以在几个微秒到几个毫秒间调整。</p>
+<p>每个定时器都是完全独立的，没有互相共享任何资源。</p>
+</blockquote>
+<blockquote>
+<p><strong>基本定时器：</strong></p>
+<p>基本定时器TIM6和TIM7各包含一个16位自动装载计数器，由各自的可编程预分频器驱动。<br>
+它们可以作为通用定时器提供时间基准，特别地可以为数模转换器(DAC)提供时钟。实际上，它<br>
+们在芯片内部直接连接到DAC并通过触发输出直接驱动DAC。<br>
+这2个定时器是互相独立的，不共享任何资源。</p>
+</blockquote>
+<ul>
+<li>补充 DMA</li>
+</ul>
+<p>直接存储器存取(DMA)用来提供在外设和存储器之间或者存储器和存储器之间的高速数据传输。无须CPU干预，数据可以通过DMA快速地移动，这就节省了CPU的资源来做其他操作。两个DMA控制器有12个通道(DMA1有7个通道， DMA2有5个通道)，每个通道专门用来管理来自于一个或多个外设对存储器访问的请求。还有一个仲裁器来协调各个DMA请求的优先权。</p>
+<h1>2  通用定时器</h1>
+<h2 id="2-1-计数器模式"><a class="header-anchor" href="#2-1-计数器模式">¶</a>2.1 计数器模式</h2>
+<p>向上计数模式：</p>
+<p>在向上计数模式中，计数器从0计数到自动加载值(TIMx_ARR计数器的内容)，然后重新从0开始计数并且产生一个计数器溢出事件。</p>
+<p>向下计数模式：</p>
+<p>在向下模式中，计数器从自动装入的值(TIMx_ARR计数器的值)开始向下计数到0，然后从自动装入的值重新开始并且产生一个计数器向下溢出事件。</p>
+<p>中央对齐模式(向上/向下计数)：</p>
+<p>在中央对齐模式，计数器从0开始计数到自动加载的值(TIMx_ARR寄存器)-1，产生一个计数器溢出事件，然后向下计数到1并且产生一个计数器下溢事件；然后再从0开始重新计数。</p>
+<p>定时器的各个通道是独立的吗？</p>
+<h1>3 中断系统</h1>
+<h2 id="3-1-中断介绍"><a class="header-anchor" href="#3-1-中断介绍">¶</a>3.1 中断介绍</h2>
+<p>ARM cortex_m3  内核支持 256 个中断，其中包含了 16 个内核中断和 240 个外部中断，并且具有 256级的可编程中断设置。但 STM32 并没有使用 CM3 内核的全部东西，而是只用了它的一部分。STM32 有 84 个中断，包括 16 个内核中断和 68 个可屏蔽中断，具有 16 级可编程的中断优先级。而我们常用的就是这 68 个可屏蔽中断， 但是 STM32 的 68 个可屏蔽中断，在 STM32F103 系列上面，又只有 60 个（在 107 系列才有 68 个）。因为我们开发板选择的芯片是 STM32F103 系列的所以我们就只针对 STM32F103 系列这 60 个可屏蔽中断进行介绍。</p>
+<p>256(16+240)  -&gt;  84(16+68) -&gt; 76(16+60)</p>
+<p>在 MDK 内，与 NVIC 相关的寄存器， MDK 为其定义了如下的结构体：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  \brief  Structure type to access the Nested Vectored Interrupt Controller (NVIC).</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  __IOM <span class="keyword">uint32_t</span> ISER[<span class="number">8U</span>];      <span class="comment">/*!&lt; Offset: 0x000 (R/W)  Interrupt Set Enable Register */</span></span><br><span class="line">        <span class="keyword">uint32_t</span> RESERVED0[<span class="number">24U</span>];</span><br><span class="line">  __IOM <span class="keyword">uint32_t</span> ICER[<span class="number">8U</span>];     <span class="comment">/*!&lt; Offset: 0x080 (R/W)  Interrupt Clear Enable Register */</span></span><br><span class="line">        <span class="keyword">uint32_t</span> RSERVED1[<span class="number">24U</span>];</span><br><span class="line">  __IOM <span class="keyword">uint32_t</span> ISPR[<span class="number">8U</span>];     <span class="comment">/*!&lt; Offset: 0x100 (R/W)  Interrupt Set Pending Register */</span></span><br><span class="line">        <span class="keyword">uint32_t</span> RESERVED2[<span class="number">24U</span>];</span><br><span class="line">  __IOM <span class="keyword">uint32_t</span> ICPR[<span class="number">8U</span>];    <span class="comment">/*!&lt; Offset: 0x180 (R/W)  Interrupt Clear Pending Register */</span></span><br><span class="line">        <span class="keyword">uint32_t</span> RESERVED3[<span class="number">24U</span>];</span><br><span class="line">  __IOM <span class="keyword">uint32_t</span> IABR[<span class="number">8U</span>];      <span class="comment">/*!&lt; Offset: 0x200 (R/W)  Interrupt Active bit Register */</span></span><br><span class="line">        <span class="keyword">uint32_t</span> RESERVED4[<span class="number">56U</span>];</span><br><span class="line">  __IOM <span class="keyword">uint8_t</span>  IP[<span class="number">240U</span>]; <span class="comment">/*!&lt;Offset: 0x300 (R/W)Interrupt Priority Register (8Bit wide)*/</span></span><br><span class="line">        <span class="keyword">uint32_t</span> RESERVED5[<span class="number">644U</span>];</span><br><span class="line">  __OM  <span class="keyword">uint32_t</span> STIR;  <span class="comment">/*!&lt; Offset: 0xE00 ( /W)  Software Trigger Interrupt Register */</span></span><br><span class="line">&#125;  NVIC_Type;</span><br></pre></td></tr></table></figure>
+<p>结构体中定义了几组寄存器</p>
+<ol>
+<li>ISER[8]： 全称是： <code>Interrupt Set-Enable Registers</code>，中断使能寄存器组。</li>
+<li>ICER[8]：全称是： <code>Interrupt Clear-Enable Registers</code>，中断除能寄存器组。</li>
+<li>ISPR[8]：全称是： <code>Interrupt Set-Pending Registers</code>，中断挂起控制寄存器组。</li>
+<li>ICPR[8]：全称是：<code> Interrupt Clear-Pending Registers</code>，中断解挂控制寄存器组。</li>
+<li>IABR[8]：全称是：<code> Interrupt Active Bit Registers</code>，中断激活标志位寄存器组。</li>
+<li>IP[240]：全称是： <code>Interrupt Priority Registers</code>，中断优先级控制的寄存器组。</li>
+</ol>
+<p>太多了，只看一下最后一个跟优先级相关的寄存器，其他查看相关手册即可。</p>
+<p>IP 寄存器组由 240 个 8bit 的寄存器组成，每个可屏蔽中断占用 8bit，这样总共可以表示 240 个可屏蔽中断。 而 STM32 只用到了其中的前 60 个。==IP[59]~IP[0]== 分别对应中断 59~0。 而每个可屏蔽中断占用的 8bit 并没有全部使用，而是 只用了==高 4 位==。这 4 位，又分为抢占优先级和子优先级。抢占优先级在前，子优先级在后。而这两个优先级各占几个位又要根据 <code>SCB-&gt;AIRCR</code> 中的中断分组设置来决定。</p>
+<p>STM32 将中断分为 5 个组。组的设置是由 SCB-&gt;AIRCR 寄存器的 bit10~8 来定义的。具体的分配关系如表所示：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">组</th>
+<th style="text-align:center">AIRCR[10： 8]</th>
+<th style="text-align:center">bit[7 : 4]分配情况</th>
+<th style="text-align:center">分配结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">111</td>
+<td style="text-align:center">0： 4</td>
+<td style="text-align:center">0 位抢占优先级， 4 位响应优先级</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">110</td>
+<td style="text-align:center">1： 3</td>
+<td style="text-align:center">1 位抢占优先级， 3 位响应优先级</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">101</td>
+<td style="text-align:center">2： 2</td>
+<td style="text-align:center">2 位抢占优先级， 2 位响应优先级</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">100</td>
+<td style="text-align:center">3： 1</td>
+<td style="text-align:center">3 位抢占优先级， 1 位响应优先级</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center">011</td>
+<td style="text-align:center">4： 0</td>
+<td style="text-align:center">4 位抢占优先级， 0 位响应优先级</td>
+</tr>
+</tbody>
+</table>
+<p>在一个系统中，通常只使用上面 5 种分配情况的一种，具体采用哪一种，需要在初始化时写入到一个 32 位寄存器AIRC（Application Interrupt and Reset Control Register）的第[10：8]这 3 个位中。这 3 个 bit 位有专门的称呼：<code>PRIGROUP</code>（具体写操作后面介绍）。</p>
+<p>如果AIRCR[10： 8]  = 101，（2 位抢占优先级， 2 位响应优先级），注意：是2位，不是2个！2位是 $2^2 = 4$ 个。即在该配置下，有4 个（00 01 10 11）抢先式优先级（优先级级别0-3），相同的抢先式优先级下还可以有 4 个（00 01 10 11）不同级别的子优先级（优先级级别0-3）。（说白了就是排列组合）</p>
+<ul>
+<li><strong>注 ：关于优先级需要注意的地方</strong></li>
+</ul>
+<ol>
+<li>数值越小所代表的优先级就越高（这里的数值是优先级级别，比如上面的 0-3）；</li>
+<li>如果两个中断的抢占优先级和响应优先级都是一样的话，则先发生中断的先执行；</li>
+<li>高优先级的抢占优先级可以打断正在进行的低抢占优先级中断；<br>
+抢占优先级相同的中断，高优先级的响应优先级不可以打断低响应优先级的中断。</li>
+</ol>
+<h2 id="中断使用"><a class="header-anchor" href="#中断使用">¶</a>中断使用</h2>
+<p>NVIC 中断管理相关函数主要在 HAL 库关键文件 stm32f1xx_hal_cortex.c 中定义。首先要讲解的是中断优先级分组函数 HAL_NVIC_SetPriorityGrouping，其函数申明如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">HAL_NVIC_SetPriorityGrouping</span><span class="params">(<span class="keyword">uint32_t</span> PriorityGroup)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>这个函数的作用是对中断的优先级进行分组，这个函数在系统中只需要被调用一次，一旦分组确定就最好不要更改，否则容易造成程序分组混乱。</p>
+<p>比如我们设置整个系统的中断优先级分组值为 2，那么方法是：</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HAL_NVIC_SetPriorityGrouping (NVIC_PriorityGroup_2)<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<p>这样就确定了中断优先级分组为 2，也就是 2 位抢占优先级， 2 位响应优先级，抢占优先级和响应优先级的值的范围均为 0-3。</p>
+<p><strong>【参考链接】</strong></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44026026/article/details/113485955">STM32入门（五）定时器与中断</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39792063/article/details/120594279">STM32-通用定时器-定时器中断</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Wang Yuxiang
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://wangyuxiang202.github.io/2021/10/16/STM32%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%8E%E4%B8%AD%E6%96%AD/" title="STM32定时器与中断">http://wangyuxiang202.github.io/2021/10/16/STM32定时器与中断/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://twitter.com/username">
+          <span class="icon">
+            <i class="fab fa-twitter"></i>
+          </span>
+
+          <span class="label">Twitter</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://t.me/channel_name">
+          <span class="icon">
+            <i class="fab fa-telegram"></i>
+          </span>
+
+          <span class="label">Telegram</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/images/wechat_channel.jpg">
+          <span class="icon">
+            <i class="fab fa-weixin"></i>
+          </span>
+
+          <span class="label">WeChat</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/STM32/" rel="tag"># STM32</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/10/14/STM32%E7%9A%84HAL%E5%BA%93%E5%88%86%E6%9E%90%E5%8F%8A%E4%BD%BF%E7%94%A8/" rel="prev" title="STM32的HAL库分析及使用">
+                  <i class="fa fa-chevron-left"></i> STM32的HAL库分析及使用
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/10/19/DesktopEarth/" rel="next" title="DesktopEarth">
+                  DesktopEarth <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wang Yuxiang</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdn.jsdelivr.net/npm/pdfobject@2.2.6/pdfobject.min.js","integrity":"sha256-77geM50MfxCD17eqyJR+Dag1svjJOLN+BJ2F/DMqMEY="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"Wang","count":true,"i18n":{"disqus":"disqus"}}</script>
+<script src="/js/third-party/comments/disqus.js"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-wanko"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
+</html>
