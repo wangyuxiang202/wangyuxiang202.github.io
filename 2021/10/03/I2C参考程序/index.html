@@ -21,17 +21,17 @@
   <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"wangyuxiang202.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":"ture","bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
-<meta name="description" content="@[TOC] 一、实现功能 下载程序后数码管后4位显示0，四位独立按键控制。按K1保存显示的数据，按K2读取上次保存的数据，按K3显示数据加一，按K4显示数据清零。 二、关于AT24C02 AT24C02是Ateml公司的2KB的电可擦除存储芯片，采用两线串行的总线和单片机通讯，电压最低可以到2.5V，额定电流为1mA，静态电流10uA(5.5V)，芯片内的资料可以在断电的情况下保存40年以上，而">
+<meta name="description" content="一、实现功能 下载程序后数码管后4位显示0，四位独立按键控制。按K1保存显示的数据，按K2读取上次保存的数据，按K3显示数据加一，按K4显示数据清零。 二、关于AT24C02 AT24C02是Ateml公司的2KB的电可擦除存储芯片，采用两线串行的总线和单片机通讯，电压最低可以到2.5V，额定电流为1mA，静态电流10uA(5.5V)，芯片内的资料可以在断电的情况下保存40年以上，而且采用8 脚的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="I2C参考程序">
 <meta property="og:url" content="http://wangyuxiang202.github.io/2021/10/03/I2C%E5%8F%82%E8%80%83%E7%A8%8B%E5%BA%8F/index.html">
 <meta property="og:site_name" content="北 海">
-<meta property="og:description" content="@[TOC] 一、实现功能 下载程序后数码管后4位显示0，四位独立按键控制。按K1保存显示的数据，按K2读取上次保存的数据，按K3显示数据加一，按K4显示数据清零。 二、关于AT24C02 AT24C02是Ateml公司的2KB的电可擦除存储芯片，采用两线串行的总线和单片机通讯，电压最低可以到2.5V，额定电流为1mA，静态电流10uA(5.5V)，芯片内的资料可以在断电的情况下保存40年以上，而">
+<meta property="og:description" content="一、实现功能 下载程序后数码管后4位显示0，四位独立按键控制。按K1保存显示的数据，按K2读取上次保存的数据，按K3显示数据加一，按K4显示数据清零。 二、关于AT24C02 AT24C02是Ateml公司的2KB的电可擦除存储芯片，采用两线串行的总线和单片机通讯，电压最低可以到2.5V，额定电流为1mA，静态电流10uA(5.5V)，芯片内的资料可以在断电的情况下保存40年以上，而且采用8 脚的">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-10-02T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-10-03T05:45:13.330Z">
+<meta property="article:modified_time" content="2021-10-02T16:00:00.000Z">
 <meta property="article:author" content="Wang Yuxiang">
-<meta property="article:tag" content="代码">
+<meta property="article:tag" content="STM32">
 <meta name="twitter:card" content="summary">
 
 
@@ -94,12 +94,14 @@
 <nav class="site-nav">
   <ul class="main-menu menu">
         <li class="menu-item menu-item-home"><a href="/home/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">5</span></a></li>
-        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">8</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">14</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">6</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">15</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">26</span></a></li>
         <li class="menu-item menu-item-book"><a href="/book/" rel="section"><i class="fa fa-book fa-fw"></i>book</a></li>
         <li class="menu-item menu-item-movie"><a href="/movie/" rel="section"><i class="fa fa-film fa-fw"></i>movie</a></li>
         <li class="menu-item menu-item-source"><a href="/source/" rel="section"><i class="fa fa-file-pdf fa-fw"></i>source</a></li>
+        <li class="menu-item menu-item-share"><a href="/share/" rel="section"><i class="fa fa-share-square fa-fw"></i>share</a></li>
+        <li class="menu-item menu-item-collection"><a href="/Collection/" rel="section"><i class="fa fa-star fa-fw"></i>Collection</a></li>
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
   </ul>
 </nav>
@@ -146,18 +148,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -234,9 +236,21 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-10-03 00:00:00 / 修改时间：13:45:13" itemprop="dateCreated datePublished" datetime="2021-10-03T00:00:00+08:00">2021-10-03</time>
+      <time title="创建时间：2021-10-03 00:00:00" itemprop="dateCreated datePublished" datetime="2021-10-03T00:00:00+08:00">2021-10-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/STM32/" itemprop="url" rel="index"><span itemprop="name">STM32</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/STM32/%E4%BB%A3%E7%A0%81/" itemprop="url" rel="index"><span itemprop="name">代码</span></a>
+        </span>
     </span>
 
   
@@ -270,8 +284,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>@[TOC]</p>
-<h1>一、实现功能</h1>
+        <h1>一、实现功能</h1>
 <p>下载程序后数码管后4位显示0，四位独立按键控制。按K1保存显示的数据，按K2读取上次保存的数据，按K3显示数据加一，按K4显示数据清零。</p>
 <h1>二、关于AT24C02</h1>
 <p>AT24C02是Ateml公司的2KB的电可擦除存储芯片，采用两线串行的总线和单片机通讯，电压最低可以到2.5V，额定电流为1mA，静态电流10uA(5.5V)，芯片内的资料可以在断电的情况下保存40年以上，而且采用8 脚的DIP 封装，使用方便。简言之，AT24C02是一个在突然掉电的情况下存储数据的芯片，即掉电存储芯片。<br>
@@ -357,7 +370,7 @@ AT24C为系列号，数字部分为K位容量，例如深圳凯晟生产的就�
 </div>
 
           <div class="post-tags">
-              <a href="/tags/%E4%BB%A3%E7%A0%81/" rel="tag"># 代码</a>
+              <a href="/tags/STM32/" rel="tag"># STM32</a>
           </div>
 
         
