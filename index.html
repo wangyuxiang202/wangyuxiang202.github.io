@@ -2253,6 +2253,216 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://wangyuxiang202.github.io/2021/12/01/ADI%E5%85%83%E5%99%A8%E4%BB%B6%E5%B0%81%E8%A3%85%E4%B8%8B%E8%BD%BD%E5%8F%8A%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Wang Yuxiang">
+      <meta itemprop="description" content="心之所向，素履以往">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="北 海">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/12/01/ADI%E5%85%83%E5%99%A8%E4%BB%B6%E5%B0%81%E8%A3%85%E4%B8%8B%E8%BD%BD%E5%8F%8A%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">ADI元器件封装下载及使用</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-12-01 00:00:00" itemprop="dateCreated datePublished" datetime="2021-12-01T00:00:00+08:00">2021-12-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E8%B7%AF/" itemprop="url" rel="index"><span itemprop="name">硬件电路</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E8%B7%AF/Altium-Designer/" itemprop="url" rel="index"><span itemprop="name">Altium Designer</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2021/12/01/ADI%E5%85%83%E5%99%A8%E4%BB%B6%E5%B0%81%E8%A3%85%E4%B8%8B%E8%BD%BD%E5%8F%8A%E4%BD%BF%E7%94%A8/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/12/01/ADI元器件封装下载及使用/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1>ADI元器件封装下载及使用</h1>
+<h2 id="第一步：找到对应芯片的原理图符号及封装"><a class="header-anchor" href="#第一步：找到对应芯片的原理图符号及封装">¶</a>第一步：找到对应芯片的原理图符号及封装</h2>
+<p><img src="/images/20210401103424214.png" alt="在这里插入图片描述"></p>
+<h2 id="第二步：下载对应的BXL文件"><a class="header-anchor" href="#第二步：下载对应的BXL文件">¶</a>第二步：下载对应的BXL文件</h2>
+<p><img src="/images/20210401103659343.png" alt="在这里插入图片描述"></p>
+<h2 id="第三步：下载Ultra-Librarian-Reader-安装后重启电脑生效"><a class="header-anchor" href="#第三步：下载Ultra-Librarian-Reader-安装后重启电脑生效">¶</a>第三步：下载Ultra Librarian Reader    安装后重启电脑生效</h2>
+<p><img src="/images/20210401103854465.png" alt="在这里插入图片描述"></p>
+<h2 id="第四步：导入BXL文件-如图"><a class="header-anchor" href="#第四步：导入BXL文件-如图">¶</a>第四步：导入BXL文件,如图</h2>
+<p><img src="/images/20210401104300437.png" alt="在这里插入图片描述"><br>
+step 3后会生成一个 .txt文件。显示转换文件存放路径<br>
+<img src="/images/20210401104553266.png" alt="在这里插入图片描述"></p>
+<h2 id="第五步：将文件路径下的-UL-Import-PrjScr-文件导入AD的脚本中运行"><a class="header-anchor" href="#第五步：将文件路径下的-UL-Import-PrjScr-文件导入AD的脚本中运行">¶</a>第五步：将文件路径下的 UL_Import.PrjScr 文件导入AD的脚本中运行</h2>
+<p><img src="/images/20210401105241211.png" alt="在这里插入图片描述"></p>
+<h2 id="第六步：选择-pas文件运行-然后稍等片刻"><a class="header-anchor" href="#第六步：选择-pas文件运行-然后稍等片刻">¶</a>第六步：选择 .pas文件运行  然后稍等片刻</h2>
+<p><img src="/images/20210401105623594.png" alt="在这里插入图片描述"><br>
+<img src="/images/20210401105830598.png" alt="在这里插入图片描述"><br>
+<img src="/images/20210401110721199.png" alt="在这里插入图片描述"></p>
+<h2 id="第七步：添加step文件"><a class="header-anchor" href="#第七步：添加step文件">¶</a>第七步：添加step文件</h2>
+<p>用AD打开封装看看，并没有3D效果。   点击【Place】-&gt;【3D Body】，按下Tab键，在Properties里选中Generic，Embed Model里点击【Choose】选择文件夹下的step文件。</p>
+<table>
+    <tr>
+        <td ><center><img src="https://img-blog.csdnimg.cn/2021040111163295.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_QOelpeeOieaxql9DU0RO,size_16,color_FFFFFF,t_70" >PCB封装 </center></td>
+        <td ><center><img src="https://img-blog.csdnimg.cn/20210401112457648.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_QOelpeeOieaxql9DU0RO,size_16,color_FFFFFF,t_70"  >导入STEP</center></td>
+    </tr>
+</table>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://wangyuxiang202.github.io/2021/12/01/16%E8%BF%9B%E5%88%B6%E4%B8%8EASCII%E4%BA%92%E7%9B%B8%E8%BD%AC%E6%8D%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Wang Yuxiang">
+      <meta itemprop="description" content="心之所向，素履以往">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="北 海">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/12/01/16%E8%BF%9B%E5%88%B6%E4%B8%8EASCII%E4%BA%92%E7%9B%B8%E8%BD%AC%E6%8D%A2/" class="post-title-link" itemprop="url">16进制与ASCII互相转换</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-12-01 00:00:00" itemprop="dateCreated datePublished" datetime="2021-12-01T00:00:00+08:00">2021-12-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/C%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">C语言</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/C%E8%AF%AD%E8%A8%80/%E4%BB%A3%E7%A0%81/" itemprop="url" rel="index"><span itemprop="name">代码</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2021/12/01/16%E8%BF%9B%E5%88%B6%E4%B8%8EASCII%E4%BA%92%E7%9B%B8%E8%BD%AC%E6%8D%A2/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/12/01/16进制与ASCII互相转换/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="代码示例"><a class="header-anchor" href="#代码示例">¶</a>代码示例</h2>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*---------如何将16进制数转换为字符串?---------</span></span><br><span class="line"><span class="comment">-----------如何将字符串转换为数据？------------*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdint.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SIZE 7</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> *c1 = <span class="string">&quot;ABCD123400001111&quot;</span>;				<span class="comment">//待测试字符串 高位在前</span></span><br><span class="line"><span class="keyword">uint16_t</span> <span class="built_in">array</span>[SIZE] = &#123;<span class="number">0xABC</span>,<span class="number">0x123</span>,<span class="number">0xFFF</span>,<span class="number">4095</span>,<span class="number">100</span>,<span class="number">8</span>,<span class="number">6</span>&#125;;		<span class="comment">//待测试16进制数组</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i, len;</span><br><span class="line">	<span class="keyword">uint32_t</span> temp[<span class="number">30</span>] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">	<span class="keyword">char</span> temp1[<span class="number">50</span>] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*函数声明*/</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">HexToAscii</span><span class="params">(<span class="keyword">uint8_t</span> *src, <span class="keyword">char</span> *dest, <span class="keyword">int</span> len)</span></span>;	  <span class="comment">//16进制数转换为字符串</span></span><br><span class="line">	<span class="function"><span class="keyword">char</span> <span class="title">lowtocap</span><span class="params">(<span class="keyword">char</span> c)</span></span>;							      <span class="comment">//小写字母转大写字母</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">AsciiToHex</span><span class="params">(<span class="keyword">char</span> *src, <span class="keyword">uint32_t</span> *dest, <span class="keyword">int</span> len)</span></span>;   <span class="comment">//字符串转16进制数</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">	* @brief  字符串长度判断处理</span></span><br><span class="line"><span class="comment">	* @note   字符串两个一组，不足两个当一组处理</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line">	AsciiToHex(c1, temp, <span class="built_in">strlen</span>(c1));   <span class="comment">//字符串 c1 转16进制数</span></span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">strlen</span>(c1) % <span class="number">4</span> &gt; <span class="number">0</span>)				  <span class="comment">//字符串长度为奇数，进1</span></span><br><span class="line">	&#123;</span><br><span class="line">		len = <span class="built_in">strlen</span>(c1) / <span class="number">4</span> + <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span>								  <span class="comment">//字符串长度为偶数					</span></span><br><span class="line">	&#123;</span><br><span class="line">		len = <span class="built_in">strlen</span>(c1) / <span class="number">4</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; len; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot; AsciiToHex int[%d] is %X,%d \n&quot;</span>, i + <span class="number">1</span>, temp[i], temp[i]);  <span class="comment">//％x十六进制 ％d十进制</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	HexToAscii(<span class="built_in">array</span>, temp1, SIZE); <span class="comment">//16进制数组 s 转换为字符串</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;\n HexToAscii temp1 is %s \n\n&quot;</span>, temp1);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * @brief  Hex transform to ascii string</span></span><br><span class="line"><span class="comment">  * @note   16进制数转换为字符串</span></span><br><span class="line"><span class="comment">  * @param  *src  : 字符串指针</span></span><br><span class="line"><span class="comment">  * @param  *dest : 数组指针</span></span><br><span class="line"><span class="comment">  * @param  len   : 字符串长度  strlen(c1)不包括结束字符（即 null 字符）</span></span><br><span class="line"><span class="comment">  * @retval void</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">HexToAscii</span><span class="params">(<span class="keyword">uint16_t</span> *src, <span class="keyword">char</span> *dest, <span class="keyword">int</span> len)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">char</span> dh1, dl2, dl3;  <span class="comment">//字符串的高位和低位</span></span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">if</span> (src == <span class="literal">NULL</span> || dest == <span class="literal">NULL</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;src or dest is NULL\n&quot;</span>);</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (len &lt; <span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;length is NULL\n&quot;</span>);</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; len; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//printf(&quot;i = %d , %x\n&quot;,i, src[i]);</span></span><br><span class="line">		dh1 = <span class="string">&#x27;0&#x27;</span> + src[i] / <span class="number">256</span>;</span><br><span class="line">		dl2 = <span class="string">&#x27;0&#x27;</span> + src[i] % <span class="number">256</span> / <span class="number">16</span>;		<span class="comment">//以0为基准 dh=&#x27;0&#x27;+AB/16=48+10=58 </span></span><br><span class="line">		dl3 = <span class="string">&#x27;0&#x27;</span> + src[i] % <span class="number">16</span>;		<span class="comment">//dl=&#x27;0&#x27;+AB%16=48+11=59</span></span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (dh1 &gt; <span class="string">&#x27;9&#x27;</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			dh1 = dh1 - <span class="string">&#x27;9&#x27;</span> - <span class="number">1</span> + <span class="string">&#x27;A&#x27;</span>; <span class="comment">// 或者 dh1= dh1+ 7;  dh1=65(A)</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (dl2 &gt; <span class="string">&#x27;9&#x27;</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			dl2 = dl2 - <span class="string">&#x27;9&#x27;</span> - <span class="number">1</span> + <span class="string">&#x27;A&#x27;</span>; <span class="comment">// 或者 dl2= dl2 + 7;  dl2=66(B)</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (dl3 &gt; <span class="string">&#x27;9&#x27;</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			dl3 = dl3 - <span class="string">&#x27;9&#x27;</span> - <span class="number">1</span> + <span class="string">&#x27;A&#x27;</span>; <span class="comment">// 或者dl3 = dl3 + 7; dl3=67(C)</span></span><br><span class="line">		&#125;</span><br><span class="line">		dest[<span class="number">3</span> * i] = dh1;</span><br><span class="line">		dest[<span class="number">3</span> * i + <span class="number">1</span>] = dl2;</span><br><span class="line">		dest[<span class="number">3</span> * i + <span class="number">2</span>] = dl3;</span><br><span class="line">	&#125;</span><br><span class="line">	dest[<span class="number">3</span> * i] = <span class="string">&#x27;\0&#x27;</span>;   <span class="comment">//字符串结尾</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * @brief  ascii string transform to 16 jinzhi Hex.</span></span><br><span class="line"><span class="comment">  * @note   字符串转16进制数</span></span><br><span class="line"><span class="comment">  * @param  *src  : 字符串指针</span></span><br><span class="line"><span class="comment">  * @param  *dest : 数组指针</span></span><br><span class="line"><span class="comment">  * @param  len   : 字符串长度  strlen(c1)不包括结束字符（即 null 字符）</span></span><br><span class="line"><span class="comment">  * @retval void</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">AsciiToHex</span><span class="params">(<span class="keyword">char</span> *src, <span class="keyword">uint32_t</span> *dest, <span class="keyword">int</span> len)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span>  dh1 , dh2 , dl1 , dl2;							<span class="comment">// 16进制的高4位和低4位</span></span><br><span class="line">	<span class="keyword">char</span> ch1 , ch2 , cl1 , cl2;							<span class="comment">//字符串的高位和低位</span></span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">if</span> (src == <span class="literal">NULL</span> || dest == <span class="literal">NULL</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;src or dest is NULL\n&quot;</span>);</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (len &lt; <span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;length is NULL\n&quot;</span>);</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; len; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		ch1 = src[<span class="number">4</span> * i];					<span class="comment">//字符串高位</span></span><br><span class="line">		ch2 = src[<span class="number">4</span> * i + <span class="number">1</span>];				<span class="comment">//字符串高位</span></span><br><span class="line">		cl1 = src[<span class="number">4</span> * i + <span class="number">2</span>];				<span class="comment">//字符串低位</span></span><br><span class="line">		cl2 = src[<span class="number">4</span> * i + <span class="number">3</span>];				<span class="comment">//字符串低位</span></span><br><span class="line">		dh1 = lowtocap(ch1) - <span class="string">&#x27;0&#x27;</span>;			<span class="comment">//dh1 = &#x27;A&#x27;- &#x27;0&#x27; = 17 (ASCII)  16进制高四位  </span></span><br><span class="line">		<span class="keyword">if</span> (dh1 &gt; <span class="number">9</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">/*lowtocap可以用库函数toupper*/</span></span><br><span class="line">			dh1 = lowtocap(ch1) - <span class="string">&#x27;A&#x27;</span> + <span class="number">10</span>;   <span class="comment">//dh1 = &#x27;A&#x27;- &#x27;A&#x27; + 10 = 10 (ASCII)</span></span><br><span class="line">		&#125;</span><br><span class="line">		dh2 = lowtocap(ch2) - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">		<span class="keyword">if</span> (dh2 &gt; <span class="number">9</span>)						  <span class="comment">//dh2 = &#x27;B&#x27;- &#x27;0&#x27; = 18 (ASCII)</span></span><br><span class="line">		&#123;</span><br><span class="line">			dh2 = lowtocap(ch2) - <span class="string">&#x27;A&#x27;</span> + <span class="number">10</span>;   <span class="comment">//dh2 = &#x27;B&#x27;- &#x27;A&#x27; + 10 = 11 (ASCII)</span></span><br><span class="line">		&#125;</span><br><span class="line">		dl1 = lowtocap(cl1) - <span class="string">&#x27;0&#x27;</span>;			  <span class="comment">//dl1 = &#x27;C&#x27;- &#x27;0&#x27; = 19 (ASCII)</span></span><br><span class="line">		<span class="keyword">if</span> (dl1 &gt; <span class="number">9</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			dl1 = lowtocap(cl1) - <span class="string">&#x27;A&#x27;</span> + <span class="number">10</span>;   <span class="comment">//dl = &#x27;C&#x27;- &#x27;A&#x27; + 10 = 12 (ASCII)</span></span><br><span class="line">		&#125;</span><br><span class="line">		dl2 = lowtocap(cl2) - <span class="string">&#x27;0&#x27;</span>;			  <span class="comment">//dl = &#x27;D&#x27;- &#x27;0&#x27; = 20 (ASCII)</span></span><br><span class="line">		<span class="keyword">if</span> (dl2 &gt; <span class="number">9</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			dl2 = lowtocap(cl2) - <span class="string">&#x27;A&#x27;</span> + <span class="number">10</span>;   <span class="comment">//dl = &#x27;D&#x27;- &#x27;A&#x27; + 10 = 13  (ASCII)</span></span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		dest[i] = dh1 * <span class="number">4096</span> + dh2 * <span class="number">256</span> + dl1 * <span class="number">16</span> + dl2;	<span class="comment">//数组赋值 dest[0] = 10*4096 + 11*256 + 12*16 + 13 = 43981</span></span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (len % <span class="number">4</span> &gt; <span class="number">0</span>)						<span class="comment">//字符串个数为奇数 len = 11</span></span><br><span class="line">	&#123;</span><br><span class="line">		dest[len / <span class="number">4</span>] = src[len - <span class="number">1</span>] - <span class="string">&#x27;0&#x27;</span>;  <span class="comment">//落单字符单独成组  数组从0开始计数</span></span><br><span class="line">		<span class="keyword">if</span> (dest[len / <span class="number">4</span>] &gt; <span class="number">9</span>)				<span class="comment">// &gt;9 使用字母表示，以A为基准 &lt;9 直接数字表示</span></span><br><span class="line">		&#123;</span><br><span class="line">			dest[len / <span class="number">4</span>] = lowtocap(src[len - <span class="number">1</span>]) - <span class="string">&#x27;A&#x27;</span> + <span class="number">10</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * @brief  lowercase letters transform to capital letter</span></span><br><span class="line"><span class="comment">  * @note   小写字母转大写字母</span></span><br><span class="line"><span class="comment">  * @param  c  : 入口参数 char字符</span></span><br><span class="line"><span class="comment">  * @retval char</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="function"><span class="keyword">char</span> <span class="title">lowtocap</span><span class="params">(<span class="keyword">char</span> c)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> ((c &gt;= <span class="string">&#x27;a&#x27;</span>) &amp;&amp; (c &lt;= <span class="string">&#x27;z&#x27;</span>))</span><br><span class="line">	&#123;</span><br><span class="line">		c = c - <span class="number">32</span>;       <span class="comment">// 或者c = c + (&#x27;a&#x27; - &#x27;A&#x27;);</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> c;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="运行结果"><a class="header-anchor" href="#运行结果">¶</a>运行结果</h2>
+<p><img src="/images/d740ef66de9a4ad39189541e5faaae69.png" alt="在这里插入图片描述"></p>
+<p>【参考链接】</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/kkconan/article/details/102745195">16进制与字符串相互转换（C语言）</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://wangyuxiang202.github.io/2021/12/01/Hexo%20%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2911,7 +3121,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://wangyuxiang202.github.io/2021/12/01/hexo%E7%9A%84next%E4%B8%BB%E9%A2%98%E4%B8%AA%E6%80%A7%E5%8C%96/">
+    <link itemprop="mainEntityOfPage" href="http://wangyuxiang202.github.io/2021/12/01/LTspice%20XVII%EF%BC%88%E4%B8%80%EF%BC%89------RC%E6%97%B6%E9%97%B4%E5%B8%B8%E6%95%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/uploads/avatar.jpg">
@@ -2924,7 +3134,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/12/01/hexo%E7%9A%84next%E4%B8%BB%E9%A2%98%E4%B8%AA%E6%80%A7%E5%8C%96/" class="post-title-link" itemprop="url">Hexo-Next主题个性化</a>
+          <a href="/2021/12/01/LTspice%20XVII%EF%BC%88%E4%B8%80%EF%BC%89------RC%E6%97%B6%E9%97%B4%E5%B8%B8%E6%95%B0/" class="post-title-link" itemprop="url">LTspice XVII（一）------RC时间常数</a>
         </h2>
 
         <div class="post-meta-container">
@@ -2943,11 +3153,11 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+          <a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E8%B7%AF/" itemprop="url" rel="index"><span itemprop="name">硬件电路</span></a>
         </span>
           ，
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Web/%E5%8D%9A%E5%AE%A2/" itemprop="url" rel="index"><span itemprop="name">博客</span></a>
+          <a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E8%B7%AF/%E4%BB%BF%E7%9C%9F/" itemprop="url" rel="index"><span itemprop="name">仿真</span></a>
         </span>
     </span>
 
@@ -2960,8 +3170,8 @@
       </span>
       <span class="post-meta-item-text">Disqus：</span>
     
-    <a title="disqus" href="/2021/12/01/hexo%E7%9A%84next%E4%B8%BB%E9%A2%98%E4%B8%AA%E6%80%A7%E5%8C%96/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/12/01/hexo的next主题个性化/" itemprop="commentCount"></span>
+    <a title="disqus" href="/2021/12/01/LTspice%20XVII%EF%BC%88%E4%B8%80%EF%BC%89------RC%E6%97%B6%E9%97%B4%E5%B8%B8%E6%95%B0/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/12/01/LTspice XVII（一）------RC时间常数/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -2975,65 +3185,27 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="1-fork-me-on-github标签"><a class="header-anchor" href="#1-fork-me-on-github标签">¶</a>1. fork me on github标签</h2>
-<p>修改代码：</p>
-<p>路径：D:\Blog1\themes\hexo-theme-next-master\layout\layout.njk</p>
-<p>添加喜欢样式的代码,连接如下。</p>
-<p><a target="_blank" rel="noopener" href="https://tholman.com/github-corners/">GitHub Corners</a></p>
-<p><a target="_blank" rel="noopener" href="https://github.blog/2008-12-19-github-ribbons/">这个也行</a></p>
-<p><img src="/images/image-20211024134934324.png" alt="image-20211024134934324"></p>
-<p>效果：</p>
-<p><img src="/images/image-20211024134759947.png" alt="image-20211024134759947"></p>
-<h2 id="2-自定义页面"><a class="header-anchor" href="#2-自定义页面">¶</a>2. 自定义页面</h2>
-<p>站点配置文件下</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># Directory 目录</span><br><span class="line">source_dir: source</span><br><span class="line">public_dir: public</span><br><span class="line">tag_dir: tags</span><br><span class="line">archive_dir: archives</span><br><span class="line">category_dir: categories</span><br><span class="line"># home_dir: home   # 自己加的</span><br><span class="line">code_dir: downloads/code</span><br><span class="line">i18n_dir: lang</span><br><span class="line">skip_render: home/*.html		# 跳过渲染</span><br></pre></td></tr></table></figure>
-<p>路径：</p>
-<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">skip_render: home/*<span class="string">.html</span>		<span class="comment"># 跳过渲染</span></span><br></pre></td></tr></table></figure>
-<p>注意：只对<code>source</code>文件夹有效，如果跳过了<code>home</code>文件夹。hexo将不再对该文件夹进行渲染，此时可以放入<code>.html</code>文件，可直接显示。</p>
-<p>一个好的方法是：为了使整体风格一致，可用HEXO渲染的<code>html</code>文件修改。</p>
-<p>【参考链接】</p>
-<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/76220131c7e9">hexo设置skip_render, 指定不进行渲染的文件或文件夹</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42554305/article/details/104290637">Hexo博客插入自定义不渲染页面</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45428737/article/details/105768010?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_title~default-0.no_search_link&amp;spm=1001.2101.3001.4242.1">hexo博客自定义一个不受主题渲染的独立页面</a></p>
-<h2 id="3-文件调用"><a class="header-anchor" href="#3-文件调用">¶</a>3. 文件调用</h2>
-<p>为了清楚文件时如何调用的，现在复制<code>publish</code>文件夹下的<code>tags</code>出来研究。把<code>tags</code>文件夹下的文件放入<code>home</code>中（图1），<code>home</code>是跳过渲染的文件夹，所以此时<code>home</code>(首页)标签页下的内容与<code>tags</code>一致（图2）。</p>
-<p><img src="/images/image-20211030145231199.png" alt="image-20211030145231199"></p>
-<p><img src="/images/image-20211030145535678.png" alt="image-20211030145535678"></p>
-<p>文件夹结构如下：</p>
-<p>每一个文件夹下对应一个<code>html</code>文件，另外还有一个单独的<code>html</code>文件（称为顶层吧）。可以看出，单独的<code>html</code>显示的就是上面的截图，而文件夹下的文件对应的是链接里面的文件。</p>
-<p><img src="/images/image-20211030145842129.png" alt="image-20211030145842129"></p>
-<p>接下来，打开顶层文件</p>
-<h3 id="代码分析"><a class="header-anchor" href="#代码分析">¶</a>代码分析</h3>
-<p>head:</p>
-<pre><code>&lt;!-- &lt;meta&gt; 元素可提供有关页面的元信息（meta-information） --&gt;
-&lt;meta charset=&quot;UTF-8&quot;&gt;                          &lt;!-- UTF-8 字符编码 --&gt;
-&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width&quot;&gt;     &lt;!-- 针对移动端网页优化 --&gt;
-&lt;meta name=&quot;theme-color&quot; content=&quot;#222&quot;&gt;             &lt;!-- 主题颜色(修改无效) --&gt;
-&lt;meta name=&quot;generator&quot; content=&quot;Hexo 5.4.0&quot;&gt;          &lt;!-- 网站的制作软件 --&gt;
-</code></pre>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- HTML 超链接（链接） --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;apple-touch-icon&quot;</span> <span class="attr">sizes</span>=<span class="string">&quot;180x180&quot;</span> <span class="attr">href</span>=<span class="string">&quot;/images/apple-touch-icon-next.png&quot;</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;icon&quot;</span> <span class="attr">type</span>=<span class="string">&quot;image/png&quot;</span> <span class="attr">sizes</span>=<span class="string">&quot;32x32&quot;</span> <span class="attr">href</span>=<span class="string">&quot;/images/favicon-32x32-next.png&quot;</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;icon&quot;</span> <span class="attr">type</span>=<span class="string">&quot;image/png&quot;</span> <span class="attr">sizes</span>=<span class="string">&quot;16x16&quot;</span> <span class="attr">href</span>=<span class="string">&quot;/images/favicon-16x16-next.png&quot;</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;mask-icon&quot;</span> <span class="attr">href</span>=<span class="string">&quot;/images/logo.svg&quot;</span> <span class="attr">color</span>=<span class="string">&quot;#222&quot;</span>&gt;</span> <span class="comment">&lt;!-- 遮盖图标 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;/css/main.css&quot;</span>&gt;</span>            <span class="comment">&lt;!-- 样式表 --&gt;</span></span><br><span class="line">...<span class="comment">&lt;!-- HTML css js链接样式表 --&gt;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">图片路径： D:<span class="symbol">\B</span>log1<span class="symbol">\p</span>ublic<span class="symbol">\i</span>mages</span><br><span class="line">css路径：  D:<span class="symbol">\B</span>log1<span class="symbol">\p</span>ublic<span class="symbol">\c</span>ss</span><br></pre></td></tr></table></figure>
-<p><img src="/images/image-20211030153928138.png" alt="image-20211030153928138"></p>
-<h3 id="标签"><a class="header-anchor" href="#标签">¶</a>标签</h3>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="selector-tag">a</span>&gt; 标签定义超链接，用于从一张页面链接到另一张页面。</span><br><span class="line"></span><br><span class="line">&lt;<span class="selector-tag">div</span>&gt; 可定义文档中的分区或节（division/<span class="selector-tag">section</span></span><br></pre></td></tr></table></figure>
-<p>链接到下一页面的链接</p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">&quot;tag-cloud-tags&quot;</span>&gt;</span><br><span class="line">&lt;a href=<span class="string">&quot;/tags/STM32/&quot;</span> style=<span class="string">&quot;font-size: 12px;&quot;</span> <span class="built_in">class</span>=<span class="string">&quot;tag-cloud-0&quot;</span>&gt;STM32&lt;/a&gt; ...</span><br><span class="line">&lt;/<span class="keyword">div</span>&gt;</span><br></pre></td></tr></table></figure>
-<p>再以STM32标签这一页为例</p>
-<p><img src="/images/image-20211031142428887.png" alt="image-20211031142428887"></p>
-<p><code>article</code> 标签中</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- &lt;article&gt; 标签规定独立的自包含内容 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;post-title&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">&quot;post-title-link&quot;</span> <span class="attr">href</span>=<span class="string">&quot;/2021/10/16/STM32%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%8E%E4%B8%AD%E6%96%AD/&quot;</span> <span class="attr">itemprop</span>=<span class="string">&quot;url&quot;</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">span</span> <span class="attr">itemprop</span>=<span class="string">&quot;name&quot;</span>&gt;</span>STM32定时器与中断<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>看看这个链接：</p>
-<p>这个里面就是链接的文字内容分啦，<code>hexo</code>自动将文字渲染后生成一个<code>html</code>文件。</p>
-<p><code>href=&quot;/2021/10/16/STM32%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%8E%E4%B8%AD%E6%96%AD/&quot;</code></p>
-<p><img src="/images/image-20211031151354211.png" alt="image-20211031151354211"></p>
-<p>title中的所有字都会被当成有效文字，注释不能写里面</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span></span><br><span class="line">    文章标签 | 北 海</span><br><span class="line"><span class="tag">&lt;/<span class="name">title</span>&gt;</span>                <span class="comment">&lt;!-- 网站名 --&gt;</span></span><br></pre></td></tr></table></figure>
-<p>看看他们的顺序，为什么要分开写</p>
-<p>网页背景透明度</p>
-<p>是怎么链接的呢？我看全是一些字符串</p>
-<p>rel</p>
-<p>未知代码：</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;body itemscope <span class="attribute">itemtype</span>=<span class="string">&quot;http://schema.org/WebPage&quot;</span>&gt;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+          <h1>LTspice XVII——RC时间常数</h1>
+<p>电容充电公式：  $V =  V _ { i } ( 1 - e ^ { - \frac{t}{RC} } )$<br>
+电容放电公式：  $V= V_i *e ^ { - \frac{t}{RC} }$<br>
+“5RC经验准则”<br>
+<img src="/images/2021040313025824.png" alt="在这里插入图片描述"><br>
+以上，可知电容充电公式：<br>
+$V_t = V_0 + V _ { i } ( 1 - e ^ { - \frac{t}{RC} })$</p>
+<p>若初始电压为0（$V_0 = 0$），则：<br>
+$V =  V _ { i } ( 1 - e ^ { - \frac{t}{RC} } )$</p>
+<p>由上述公式可知，因为指数值只可能无限接近于0，所以电量完全充满，需要无穷大的时间。<br>
+t = RC时  ，$V = 0.63 V _ （i）$；<br>
+t = 2RC时，$V = 0.86V _ （i）$；<br>
+t = 3RC时，$V = 0.95V _ （i）$；<br>
+t = 4RC时，$V = 0.98V _ （i）$；<br>
+t = 5RC时，$V = 0.99V _ （i）$；<br>
+可见，<strong>“5RC经验准则”</strong></p>
+<p>电容充满电后，将电源短路，电容C会通过R放电，则任意时刻，电容上的电压为：<br>
+$V= V_i *e ^ { - \frac{t}{RC} }$</p>
+<h1>LTspice XVII 仿真</h1>
+<p><img src="/images/20210403131716799.png" alt="在这里插入图片描述"><br>
+<img src="/images/20210403132212532.png" alt="在这里插入图片描述"></p>
 
       
     </div>
@@ -3235,7 +3407,7 @@ This text is in Times and green</p>
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://wangyuxiang202.github.io/2021/12/01/16%E8%BF%9B%E5%88%B6%E4%B8%8EASCII%E4%BA%92%E7%9B%B8%E8%BD%AC%E6%8D%A2/">
+    <link itemprop="mainEntityOfPage" href="http://wangyuxiang202.github.io/2021/12/01/hexo%E7%9A%84next%E4%B8%BB%E9%A2%98%E4%B8%AA%E6%80%A7%E5%8C%96/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/uploads/avatar.jpg">
@@ -3248,7 +3420,7 @@ This text is in Times and green</p>
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/12/01/16%E8%BF%9B%E5%88%B6%E4%B8%8EASCII%E4%BA%92%E7%9B%B8%E8%BD%AC%E6%8D%A2/" class="post-title-link" itemprop="url">16进制与ASCII互相转换</a>
+          <a href="/2021/12/01/hexo%E7%9A%84next%E4%B8%BB%E9%A2%98%E4%B8%AA%E6%80%A7%E5%8C%96/" class="post-title-link" itemprop="url">Hexo-Next主题个性化</a>
         </h2>
 
         <div class="post-meta-container">
@@ -3267,11 +3439,11 @@ This text is in Times and green</p>
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/C%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">C语言</span></a>
+          <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
         </span>
           ，
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/C%E8%AF%AD%E8%A8%80/%E4%BB%A3%E7%A0%81/" itemprop="url" rel="index"><span itemprop="name">代码</span></a>
+          <a href="/categories/Web/%E5%8D%9A%E5%AE%A2/" itemprop="url" rel="index"><span itemprop="name">博客</span></a>
         </span>
     </span>
 
@@ -3284,8 +3456,8 @@ This text is in Times and green</p>
       </span>
       <span class="post-meta-item-text">Disqus：</span>
     
-    <a title="disqus" href="/2021/12/01/16%E8%BF%9B%E5%88%B6%E4%B8%8EASCII%E4%BA%92%E7%9B%B8%E8%BD%AC%E6%8D%A2/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/12/01/16进制与ASCII互相转换/" itemprop="commentCount"></span>
+    <a title="disqus" href="/2021/12/01/hexo%E7%9A%84next%E4%B8%BB%E9%A2%98%E4%B8%AA%E6%80%A7%E5%8C%96/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/12/01/hexo的next主题个性化/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -3299,237 +3471,65 @@ This text is in Times and green</p>
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="代码示例"><a class="header-anchor" href="#代码示例">¶</a>代码示例</h2>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*---------如何将16进制数转换为字符串?---------</span></span><br><span class="line"><span class="comment">-----------如何将字符串转换为数据？------------*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdint.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SIZE 7</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> *c1 = <span class="string">&quot;ABCD123400001111&quot;</span>;				<span class="comment">//待测试字符串 高位在前</span></span><br><span class="line"><span class="keyword">uint16_t</span> <span class="built_in">array</span>[SIZE] = &#123;<span class="number">0xABC</span>,<span class="number">0x123</span>,<span class="number">0xFFF</span>,<span class="number">4095</span>,<span class="number">100</span>,<span class="number">8</span>,<span class="number">6</span>&#125;;		<span class="comment">//待测试16进制数组</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i, len;</span><br><span class="line">	<span class="keyword">uint32_t</span> temp[<span class="number">30</span>] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line">	<span class="keyword">char</span> temp1[<span class="number">50</span>] = &#123; <span class="number">0</span> &#125;;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*函数声明*/</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">HexToAscii</span><span class="params">(<span class="keyword">uint8_t</span> *src, <span class="keyword">char</span> *dest, <span class="keyword">int</span> len)</span></span>;	  <span class="comment">//16进制数转换为字符串</span></span><br><span class="line">	<span class="function"><span class="keyword">char</span> <span class="title">lowtocap</span><span class="params">(<span class="keyword">char</span> c)</span></span>;							      <span class="comment">//小写字母转大写字母</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">AsciiToHex</span><span class="params">(<span class="keyword">char</span> *src, <span class="keyword">uint32_t</span> *dest, <span class="keyword">int</span> len)</span></span>;   <span class="comment">//字符串转16进制数</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">	* @brief  字符串长度判断处理</span></span><br><span class="line"><span class="comment">	* @note   字符串两个一组，不足两个当一组处理</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line">	AsciiToHex(c1, temp, <span class="built_in">strlen</span>(c1));   <span class="comment">//字符串 c1 转16进制数</span></span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">strlen</span>(c1) % <span class="number">4</span> &gt; <span class="number">0</span>)				  <span class="comment">//字符串长度为奇数，进1</span></span><br><span class="line">	&#123;</span><br><span class="line">		len = <span class="built_in">strlen</span>(c1) / <span class="number">4</span> + <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span>								  <span class="comment">//字符串长度为偶数					</span></span><br><span class="line">	&#123;</span><br><span class="line">		len = <span class="built_in">strlen</span>(c1) / <span class="number">4</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; len; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot; AsciiToHex int[%d] is %X,%d \n&quot;</span>, i + <span class="number">1</span>, temp[i], temp[i]);  <span class="comment">//％x十六进制 ％d十进制</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	HexToAscii(<span class="built_in">array</span>, temp1, SIZE); <span class="comment">//16进制数组 s 转换为字符串</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;\n HexToAscii temp1 is %s \n\n&quot;</span>, temp1);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * @brief  Hex transform to ascii string</span></span><br><span class="line"><span class="comment">  * @note   16进制数转换为字符串</span></span><br><span class="line"><span class="comment">  * @param  *src  : 字符串指针</span></span><br><span class="line"><span class="comment">  * @param  *dest : 数组指针</span></span><br><span class="line"><span class="comment">  * @param  len   : 字符串长度  strlen(c1)不包括结束字符（即 null 字符）</span></span><br><span class="line"><span class="comment">  * @retval void</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">HexToAscii</span><span class="params">(<span class="keyword">uint16_t</span> *src, <span class="keyword">char</span> *dest, <span class="keyword">int</span> len)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">char</span> dh1, dl2, dl3;  <span class="comment">//字符串的高位和低位</span></span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">if</span> (src == <span class="literal">NULL</span> || dest == <span class="literal">NULL</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;src or dest is NULL\n&quot;</span>);</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (len &lt; <span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;length is NULL\n&quot;</span>);</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; len; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//printf(&quot;i = %d , %x\n&quot;,i, src[i]);</span></span><br><span class="line">		dh1 = <span class="string">&#x27;0&#x27;</span> + src[i] / <span class="number">256</span>;</span><br><span class="line">		dl2 = <span class="string">&#x27;0&#x27;</span> + src[i] % <span class="number">256</span> / <span class="number">16</span>;		<span class="comment">//以0为基准 dh=&#x27;0&#x27;+AB/16=48+10=58 </span></span><br><span class="line">		dl3 = <span class="string">&#x27;0&#x27;</span> + src[i] % <span class="number">16</span>;		<span class="comment">//dl=&#x27;0&#x27;+AB%16=48+11=59</span></span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (dh1 &gt; <span class="string">&#x27;9&#x27;</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			dh1 = dh1 - <span class="string">&#x27;9&#x27;</span> - <span class="number">1</span> + <span class="string">&#x27;A&#x27;</span>; <span class="comment">// 或者 dh1= dh1+ 7;  dh1=65(A)</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (dl2 &gt; <span class="string">&#x27;9&#x27;</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			dl2 = dl2 - <span class="string">&#x27;9&#x27;</span> - <span class="number">1</span> + <span class="string">&#x27;A&#x27;</span>; <span class="comment">// 或者 dl2= dl2 + 7;  dl2=66(B)</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (dl3 &gt; <span class="string">&#x27;9&#x27;</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			dl3 = dl3 - <span class="string">&#x27;9&#x27;</span> - <span class="number">1</span> + <span class="string">&#x27;A&#x27;</span>; <span class="comment">// 或者dl3 = dl3 + 7; dl3=67(C)</span></span><br><span class="line">		&#125;</span><br><span class="line">		dest[<span class="number">3</span> * i] = dh1;</span><br><span class="line">		dest[<span class="number">3</span> * i + <span class="number">1</span>] = dl2;</span><br><span class="line">		dest[<span class="number">3</span> * i + <span class="number">2</span>] = dl3;</span><br><span class="line">	&#125;</span><br><span class="line">	dest[<span class="number">3</span> * i] = <span class="string">&#x27;\0&#x27;</span>;   <span class="comment">//字符串结尾</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * @brief  ascii string transform to 16 jinzhi Hex.</span></span><br><span class="line"><span class="comment">  * @note   字符串转16进制数</span></span><br><span class="line"><span class="comment">  * @param  *src  : 字符串指针</span></span><br><span class="line"><span class="comment">  * @param  *dest : 数组指针</span></span><br><span class="line"><span class="comment">  * @param  len   : 字符串长度  strlen(c1)不包括结束字符（即 null 字符）</span></span><br><span class="line"><span class="comment">  * @retval void</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">AsciiToHex</span><span class="params">(<span class="keyword">char</span> *src, <span class="keyword">uint32_t</span> *dest, <span class="keyword">int</span> len)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span>  dh1 , dh2 , dl1 , dl2;							<span class="comment">// 16进制的高4位和低4位</span></span><br><span class="line">	<span class="keyword">char</span> ch1 , ch2 , cl1 , cl2;							<span class="comment">//字符串的高位和低位</span></span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">if</span> (src == <span class="literal">NULL</span> || dest == <span class="literal">NULL</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;src or dest is NULL\n&quot;</span>);</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (len &lt; <span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;length is NULL\n&quot;</span>);</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; len; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		ch1 = src[<span class="number">4</span> * i];					<span class="comment">//字符串高位</span></span><br><span class="line">		ch2 = src[<span class="number">4</span> * i + <span class="number">1</span>];				<span class="comment">//字符串高位</span></span><br><span class="line">		cl1 = src[<span class="number">4</span> * i + <span class="number">2</span>];				<span class="comment">//字符串低位</span></span><br><span class="line">		cl2 = src[<span class="number">4</span> * i + <span class="number">3</span>];				<span class="comment">//字符串低位</span></span><br><span class="line">		dh1 = lowtocap(ch1) - <span class="string">&#x27;0&#x27;</span>;			<span class="comment">//dh1 = &#x27;A&#x27;- &#x27;0&#x27; = 17 (ASCII)  16进制高四位  </span></span><br><span class="line">		<span class="keyword">if</span> (dh1 &gt; <span class="number">9</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">/*lowtocap可以用库函数toupper*/</span></span><br><span class="line">			dh1 = lowtocap(ch1) - <span class="string">&#x27;A&#x27;</span> + <span class="number">10</span>;   <span class="comment">//dh1 = &#x27;A&#x27;- &#x27;A&#x27; + 10 = 10 (ASCII)</span></span><br><span class="line">		&#125;</span><br><span class="line">		dh2 = lowtocap(ch2) - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">		<span class="keyword">if</span> (dh2 &gt; <span class="number">9</span>)						  <span class="comment">//dh2 = &#x27;B&#x27;- &#x27;0&#x27; = 18 (ASCII)</span></span><br><span class="line">		&#123;</span><br><span class="line">			dh2 = lowtocap(ch2) - <span class="string">&#x27;A&#x27;</span> + <span class="number">10</span>;   <span class="comment">//dh2 = &#x27;B&#x27;- &#x27;A&#x27; + 10 = 11 (ASCII)</span></span><br><span class="line">		&#125;</span><br><span class="line">		dl1 = lowtocap(cl1) - <span class="string">&#x27;0&#x27;</span>;			  <span class="comment">//dl1 = &#x27;C&#x27;- &#x27;0&#x27; = 19 (ASCII)</span></span><br><span class="line">		<span class="keyword">if</span> (dl1 &gt; <span class="number">9</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			dl1 = lowtocap(cl1) - <span class="string">&#x27;A&#x27;</span> + <span class="number">10</span>;   <span class="comment">//dl = &#x27;C&#x27;- &#x27;A&#x27; + 10 = 12 (ASCII)</span></span><br><span class="line">		&#125;</span><br><span class="line">		dl2 = lowtocap(cl2) - <span class="string">&#x27;0&#x27;</span>;			  <span class="comment">//dl = &#x27;D&#x27;- &#x27;0&#x27; = 20 (ASCII)</span></span><br><span class="line">		<span class="keyword">if</span> (dl2 &gt; <span class="number">9</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			dl2 = lowtocap(cl2) - <span class="string">&#x27;A&#x27;</span> + <span class="number">10</span>;   <span class="comment">//dl = &#x27;D&#x27;- &#x27;A&#x27; + 10 = 13  (ASCII)</span></span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		dest[i] = dh1 * <span class="number">4096</span> + dh2 * <span class="number">256</span> + dl1 * <span class="number">16</span> + dl2;	<span class="comment">//数组赋值 dest[0] = 10*4096 + 11*256 + 12*16 + 13 = 43981</span></span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (len % <span class="number">4</span> &gt; <span class="number">0</span>)						<span class="comment">//字符串个数为奇数 len = 11</span></span><br><span class="line">	&#123;</span><br><span class="line">		dest[len / <span class="number">4</span>] = src[len - <span class="number">1</span>] - <span class="string">&#x27;0&#x27;</span>;  <span class="comment">//落单字符单独成组  数组从0开始计数</span></span><br><span class="line">		<span class="keyword">if</span> (dest[len / <span class="number">4</span>] &gt; <span class="number">9</span>)				<span class="comment">// &gt;9 使用字母表示，以A为基准 &lt;9 直接数字表示</span></span><br><span class="line">		&#123;</span><br><span class="line">			dest[len / <span class="number">4</span>] = lowtocap(src[len - <span class="number">1</span>]) - <span class="string">&#x27;A&#x27;</span> + <span class="number">10</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * @brief  lowercase letters transform to capital letter</span></span><br><span class="line"><span class="comment">  * @note   小写字母转大写字母</span></span><br><span class="line"><span class="comment">  * @param  c  : 入口参数 char字符</span></span><br><span class="line"><span class="comment">  * @retval char</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="function"><span class="keyword">char</span> <span class="title">lowtocap</span><span class="params">(<span class="keyword">char</span> c)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> ((c &gt;= <span class="string">&#x27;a&#x27;</span>) &amp;&amp; (c &lt;= <span class="string">&#x27;z&#x27;</span>))</span><br><span class="line">	&#123;</span><br><span class="line">		c = c - <span class="number">32</span>;       <span class="comment">// 或者c = c + (&#x27;a&#x27; - &#x27;A&#x27;);</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> c;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="运行结果"><a class="header-anchor" href="#运行结果">¶</a>运行结果</h2>
-<p><img src="/images/d740ef66de9a4ad39189541e5faaae69.png" alt="在这里插入图片描述"></p>
+          <h2 id="1-fork-me-on-github标签"><a class="header-anchor" href="#1-fork-me-on-github标签">¶</a>1. fork me on github标签</h2>
+<p>修改代码：</p>
+<p>路径：D:\Blog1\themes\hexo-theme-next-master\layout\layout.njk</p>
+<p>添加喜欢样式的代码,连接如下。</p>
+<p><a target="_blank" rel="noopener" href="https://tholman.com/github-corners/">GitHub Corners</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.blog/2008-12-19-github-ribbons/">这个也行</a></p>
+<p><img src="/images/image-20211024134934324.png" alt="image-20211024134934324"></p>
+<p>效果：</p>
+<p><img src="/images/image-20211024134759947.png" alt="image-20211024134759947"></p>
+<h2 id="2-自定义页面"><a class="header-anchor" href="#2-自定义页面">¶</a>2. 自定义页面</h2>
+<p>站点配置文件下</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># Directory 目录</span><br><span class="line">source_dir: source</span><br><span class="line">public_dir: public</span><br><span class="line">tag_dir: tags</span><br><span class="line">archive_dir: archives</span><br><span class="line">category_dir: categories</span><br><span class="line"># home_dir: home   # 自己加的</span><br><span class="line">code_dir: downloads/code</span><br><span class="line">i18n_dir: lang</span><br><span class="line">skip_render: home/*.html		# 跳过渲染</span><br></pre></td></tr></table></figure>
+<p>路径：</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">skip_render: home/*<span class="string">.html</span>		<span class="comment"># 跳过渲染</span></span><br></pre></td></tr></table></figure>
+<p>注意：只对<code>source</code>文件夹有效，如果跳过了<code>home</code>文件夹。hexo将不再对该文件夹进行渲染，此时可以放入<code>.html</code>文件，可直接显示。</p>
+<p>一个好的方法是：为了使整体风格一致，可用HEXO渲染的<code>html</code>文件修改。</p>
 <p>【参考链接】</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/kkconan/article/details/102745195">16进制与字符串相互转换（C语言）</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://wangyuxiang202.github.io/2021/12/01/ADI%E5%85%83%E5%99%A8%E4%BB%B6%E5%B0%81%E8%A3%85%E4%B8%8B%E8%BD%BD%E5%8F%8A%E4%BD%BF%E7%94%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-      <meta itemprop="name" content="Wang Yuxiang">
-      <meta itemprop="description" content="心之所向，素履以往">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="北 海">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/12/01/ADI%E5%85%83%E5%99%A8%E4%BB%B6%E5%B0%81%E8%A3%85%E4%B8%8B%E8%BD%BD%E5%8F%8A%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">ADI元器件封装下载及使用</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-12-01 00:00:00" itemprop="dateCreated datePublished" datetime="2021-12-01T00:00:00+08:00">2021-12-01</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E8%B7%AF/" itemprop="url" rel="index"><span itemprop="name">硬件电路</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E8%B7%AF/Altium-Designer/" itemprop="url" rel="index"><span itemprop="name">Altium Designer</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/2021/12/01/ADI%E5%85%83%E5%99%A8%E4%BB%B6%E5%B0%81%E8%A3%85%E4%B8%8B%E8%BD%BD%E5%8F%8A%E4%BD%BF%E7%94%A8/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/12/01/ADI元器件封装下载及使用/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1>ADI元器件封装下载及使用</h1>
-<h2 id="第一步：找到对应芯片的原理图符号及封装"><a class="header-anchor" href="#第一步：找到对应芯片的原理图符号及封装">¶</a>第一步：找到对应芯片的原理图符号及封装</h2>
-<p><img src="/images/20210401103424214.png" alt="在这里插入图片描述"></p>
-<h2 id="第二步：下载对应的BXL文件"><a class="header-anchor" href="#第二步：下载对应的BXL文件">¶</a>第二步：下载对应的BXL文件</h2>
-<p><img src="/images/20210401103659343.png" alt="在这里插入图片描述"></p>
-<h2 id="第三步：下载Ultra-Librarian-Reader-安装后重启电脑生效"><a class="header-anchor" href="#第三步：下载Ultra-Librarian-Reader-安装后重启电脑生效">¶</a>第三步：下载Ultra Librarian Reader    安装后重启电脑生效</h2>
-<p><img src="/images/20210401103854465.png" alt="在这里插入图片描述"></p>
-<h2 id="第四步：导入BXL文件-如图"><a class="header-anchor" href="#第四步：导入BXL文件-如图">¶</a>第四步：导入BXL文件,如图</h2>
-<p><img src="/images/20210401104300437.png" alt="在这里插入图片描述"><br>
-step 3后会生成一个 .txt文件。显示转换文件存放路径<br>
-<img src="/images/20210401104553266.png" alt="在这里插入图片描述"></p>
-<h2 id="第五步：将文件路径下的-UL-Import-PrjScr-文件导入AD的脚本中运行"><a class="header-anchor" href="#第五步：将文件路径下的-UL-Import-PrjScr-文件导入AD的脚本中运行">¶</a>第五步：将文件路径下的 UL_Import.PrjScr 文件导入AD的脚本中运行</h2>
-<p><img src="/images/20210401105241211.png" alt="在这里插入图片描述"></p>
-<h2 id="第六步：选择-pas文件运行-然后稍等片刻"><a class="header-anchor" href="#第六步：选择-pas文件运行-然后稍等片刻">¶</a>第六步：选择 .pas文件运行  然后稍等片刻</h2>
-<p><img src="/images/20210401105623594.png" alt="在这里插入图片描述"><br>
-<img src="/images/20210401105830598.png" alt="在这里插入图片描述"><br>
-<img src="/images/20210401110721199.png" alt="在这里插入图片描述"></p>
-<h2 id="第七步：添加step文件"><a class="header-anchor" href="#第七步：添加step文件">¶</a>第七步：添加step文件</h2>
-<p>用AD打开封装看看，并没有3D效果。   点击【Place】-&gt;【3D Body】，按下Tab键，在Properties里选中Generic，Embed Model里点击【Choose】选择文件夹下的step文件。</p>
-<table>
-    <tr>
-        <td ><center><img src="https://img-blog.csdnimg.cn/2021040111163295.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_QOelpeeOieaxql9DU0RO,size_16,color_FFFFFF,t_70" >PCB封装 </center></td>
-        <td ><center><img src="https://img-blog.csdnimg.cn/20210401112457648.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_QOelpeeOieaxql9DU0RO,size_16,color_FFFFFF,t_70"  >导入STEP</center></td>
-    </tr>
-</table>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://wangyuxiang202.github.io/2021/12/01/LTspice%20XVII%EF%BC%88%E4%B8%80%EF%BC%89------RC%E6%97%B6%E9%97%B4%E5%B8%B8%E6%95%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-      <meta itemprop="name" content="Wang Yuxiang">
-      <meta itemprop="description" content="心之所向，素履以往">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="北 海">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/12/01/LTspice%20XVII%EF%BC%88%E4%B8%80%EF%BC%89------RC%E6%97%B6%E9%97%B4%E5%B8%B8%E6%95%B0/" class="post-title-link" itemprop="url">LTspice XVII（一）------RC时间常数</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-12-01 00:00:00" itemprop="dateCreated datePublished" datetime="2021-12-01T00:00:00+08:00">2021-12-01</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E8%B7%AF/" itemprop="url" rel="index"><span itemprop="name">硬件电路</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%A1%AC%E4%BB%B6%E7%94%B5%E8%B7%AF/%E4%BB%BF%E7%9C%9F/" itemprop="url" rel="index"><span itemprop="name">仿真</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/2021/12/01/LTspice%20XVII%EF%BC%88%E4%B8%80%EF%BC%89------RC%E6%97%B6%E9%97%B4%E5%B8%B8%E6%95%B0/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/12/01/LTspice XVII（一）------RC时间常数/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1>LTspice XVII——RC时间常数</h1>
-<p>电容充电公式：  $V =  V _ { i } ( 1 - e ^ { - \frac{t}{RC} } )$<br>
-电容放电公式：  $V= V_i *e ^ { - \frac{t}{RC} }$<br>
-“5RC经验准则”<br>
-<img src="/images/2021040313025824.png" alt="在这里插入图片描述"><br>
-以上，可知电容充电公式：<br>
-$V_t = V_0 + V _ { i } ( 1 - e ^ { - \frac{t}{RC} })$</p>
-<p>若初始电压为0（$V_0 = 0$），则：<br>
-$V =  V _ { i } ( 1 - e ^ { - \frac{t}{RC} } )$</p>
-<p>由上述公式可知，因为指数值只可能无限接近于0，所以电量完全充满，需要无穷大的时间。<br>
-t = RC时  ，$V = 0.63 V _ （i）$；<br>
-t = 2RC时，$V = 0.86V _ （i）$；<br>
-t = 3RC时，$V = 0.95V _ （i）$；<br>
-t = 4RC时，$V = 0.98V _ （i）$；<br>
-t = 5RC时，$V = 0.99V _ （i）$；<br>
-可见，<strong>“5RC经验准则”</strong></p>
-<p>电容充满电后，将电源短路，电容C会通过R放电，则任意时刻，电容上的电压为：<br>
-$V= V_i *e ^ { - \frac{t}{RC} }$</p>
-<h1>LTspice XVII 仿真</h1>
-<p><img src="/images/20210403131716799.png" alt="在这里插入图片描述"><br>
-<img src="/images/20210403132212532.png" alt="在这里插入图片描述"></p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/76220131c7e9">hexo设置skip_render, 指定不进行渲染的文件或文件夹</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42554305/article/details/104290637">Hexo博客插入自定义不渲染页面</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45428737/article/details/105768010?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_title~default-0.no_search_link&amp;spm=1001.2101.3001.4242.1">hexo博客自定义一个不受主题渲染的独立页面</a></p>
+<h2 id="3-文件调用"><a class="header-anchor" href="#3-文件调用">¶</a>3. 文件调用</h2>
+<p>为了清楚文件时如何调用的，现在复制<code>publish</code>文件夹下的<code>tags</code>出来研究。把<code>tags</code>文件夹下的文件放入<code>home</code>中（图1），<code>home</code>是跳过渲染的文件夹，所以此时<code>home</code>(首页)标签页下的内容与<code>tags</code>一致（图2）。</p>
+<p><img src="/images/image-20211030145231199.png" alt="image-20211030145231199"></p>
+<p><img src="/images/image-20211030145535678.png" alt="image-20211030145535678"></p>
+<p>文件夹结构如下：</p>
+<p>每一个文件夹下对应一个<code>html</code>文件，另外还有一个单独的<code>html</code>文件（称为顶层吧）。可以看出，单独的<code>html</code>显示的就是上面的截图，而文件夹下的文件对应的是链接里面的文件。</p>
+<p><img src="/images/image-20211030145842129.png" alt="image-20211030145842129"></p>
+<p>接下来，打开顶层文件</p>
+<h3 id="代码分析"><a class="header-anchor" href="#代码分析">¶</a>代码分析</h3>
+<p>head:</p>
+<pre><code>&lt;!-- &lt;meta&gt; 元素可提供有关页面的元信息（meta-information） --&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;                          &lt;!-- UTF-8 字符编码 --&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width&quot;&gt;     &lt;!-- 针对移动端网页优化 --&gt;
+&lt;meta name=&quot;theme-color&quot; content=&quot;#222&quot;&gt;             &lt;!-- 主题颜色(修改无效) --&gt;
+&lt;meta name=&quot;generator&quot; content=&quot;Hexo 5.4.0&quot;&gt;          &lt;!-- 网站的制作软件 --&gt;
+</code></pre>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- HTML 超链接（链接） --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;apple-touch-icon&quot;</span> <span class="attr">sizes</span>=<span class="string">&quot;180x180&quot;</span> <span class="attr">href</span>=<span class="string">&quot;/images/apple-touch-icon-next.png&quot;</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;icon&quot;</span> <span class="attr">type</span>=<span class="string">&quot;image/png&quot;</span> <span class="attr">sizes</span>=<span class="string">&quot;32x32&quot;</span> <span class="attr">href</span>=<span class="string">&quot;/images/favicon-32x32-next.png&quot;</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;icon&quot;</span> <span class="attr">type</span>=<span class="string">&quot;image/png&quot;</span> <span class="attr">sizes</span>=<span class="string">&quot;16x16&quot;</span> <span class="attr">href</span>=<span class="string">&quot;/images/favicon-16x16-next.png&quot;</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;mask-icon&quot;</span> <span class="attr">href</span>=<span class="string">&quot;/images/logo.svg&quot;</span> <span class="attr">color</span>=<span class="string">&quot;#222&quot;</span>&gt;</span> <span class="comment">&lt;!-- 遮盖图标 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;/css/main.css&quot;</span>&gt;</span>            <span class="comment">&lt;!-- 样式表 --&gt;</span></span><br><span class="line">...<span class="comment">&lt;!-- HTML css js链接样式表 --&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">图片路径： D:<span class="symbol">\B</span>log1<span class="symbol">\p</span>ublic<span class="symbol">\i</span>mages</span><br><span class="line">css路径：  D:<span class="symbol">\B</span>log1<span class="symbol">\p</span>ublic<span class="symbol">\c</span>ss</span><br></pre></td></tr></table></figure>
+<p><img src="/images/image-20211030153928138.png" alt="image-20211030153928138"></p>
+<h3 id="标签"><a class="header-anchor" href="#标签">¶</a>标签</h3>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="selector-tag">a</span>&gt; 标签定义超链接，用于从一张页面链接到另一张页面。</span><br><span class="line"></span><br><span class="line">&lt;<span class="selector-tag">div</span>&gt; 可定义文档中的分区或节（division/<span class="selector-tag">section</span></span><br></pre></td></tr></table></figure>
+<p>链接到下一页面的链接</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="keyword">div</span> <span class="built_in">class</span>=<span class="string">&quot;tag-cloud-tags&quot;</span>&gt;</span><br><span class="line">&lt;a href=<span class="string">&quot;/tags/STM32/&quot;</span> style=<span class="string">&quot;font-size: 12px;&quot;</span> <span class="built_in">class</span>=<span class="string">&quot;tag-cloud-0&quot;</span>&gt;STM32&lt;/a&gt; ...</span><br><span class="line">&lt;/<span class="keyword">div</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>再以STM32标签这一页为例</p>
+<p><img src="/images/image-20211031142428887.png" alt="image-20211031142428887"></p>
+<p><code>article</code> 标签中</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- &lt;article&gt; 标签规定独立的自包含内容 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;post-title&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">&quot;post-title-link&quot;</span> <span class="attr">href</span>=<span class="string">&quot;/2021/10/16/STM32%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%8E%E4%B8%AD%E6%96%AD/&quot;</span> <span class="attr">itemprop</span>=<span class="string">&quot;url&quot;</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">span</span> <span class="attr">itemprop</span>=<span class="string">&quot;name&quot;</span>&gt;</span>STM32定时器与中断<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>看看这个链接：</p>
+<p>这个里面就是链接的文字内容分啦，<code>hexo</code>自动将文字渲染后生成一个<code>html</code>文件。</p>
+<p><code>href=&quot;/2021/10/16/STM32%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%8E%E4%B8%AD%E6%96%AD/&quot;</code></p>
+<p><img src="/images/image-20211031151354211.png" alt="image-20211031151354211"></p>
+<p>title中的所有字都会被当成有效文字，注释不能写里面</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span></span><br><span class="line">    文章标签 | 北 海</span><br><span class="line"><span class="tag">&lt;/<span class="name">title</span>&gt;</span>                <span class="comment">&lt;!-- 网站名 --&gt;</span></span><br></pre></td></tr></table></figure>
+<p>看看他们的顺序，为什么要分开写</p>
+<p>网页背景透明度</p>
+<p>是怎么链接的呢？我看全是一些字符串</p>
+<p>rel</p>
+<p>未知代码：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;body itemscope <span class="attribute">itemtype</span>=<span class="string">&quot;http://schema.org/WebPage&quot;</span>&gt;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
       
     </div>
