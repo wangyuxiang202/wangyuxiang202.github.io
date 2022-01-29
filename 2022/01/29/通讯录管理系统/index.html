@@ -21,12 +21,12 @@
   <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"wangyuxiang202.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":"ture","bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
-<meta name="description" content="¶1、系统需求 通讯录是一个可以记录亲人、好友信息的工具。 本教程主要利用C++来实现一个通讯录管理系统 系统中需要实现的功能如下：  添加联系人：向通讯录中添加新人，信息包括（姓名、性别、年龄、联系电话、家庭住址）最多记录1000人 显示联系人：显示通讯录中所有联系人信息 删除联系人：按照姓名进行删除指定联系人 查找联系人：按照姓名查看指定联系人信息 修改联系人：按照姓名重新修改指定联系人 清空">
+<meta name="description" content="¶1、系统需求 系统中需要实现的功能如下：  添加联系人：向通讯录中添加新人，信息包括（姓名、性别、年龄、联系电话、家庭住址）最多记录1000人 显示联系人：显示通讯录中所有联系人信息 删除联系人：按照姓名进行删除指定联系人 查找联系人：按照姓名查看指定联系人信息 修改联系人：按照姓名重新修改指定联系人 清空联系人：清空通讯录中所有信息 退出通讯录：退出当前使用的通讯录  ¶2、创建项目 创建项目">
 <meta property="og:type" content="article">
-<meta property="og:title" content="通讯录管理系统">
+<meta property="og:title" content="C++__通讯录管理系统">
 <meta property="og:url" content="http://wangyuxiang202.github.io/2022/01/29/%E9%80%9A%E8%AE%AF%E5%BD%95%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/index.html">
 <meta property="og:site_name" content="北 海">
-<meta property="og:description" content="¶1、系统需求 通讯录是一个可以记录亲人、好友信息的工具。 本教程主要利用C++来实现一个通讯录管理系统 系统中需要实现的功能如下：  添加联系人：向通讯录中添加新人，信息包括（姓名、性别、年龄、联系电话、家庭住址）最多记录1000人 显示联系人：显示通讯录中所有联系人信息 删除联系人：按照姓名进行删除指定联系人 查找联系人：按照姓名查看指定联系人信息 修改联系人：按照姓名重新修改指定联系人 清空">
+<meta property="og:description" content="¶1、系统需求 系统中需要实现的功能如下：  添加联系人：向通讯录中添加新人，信息包括（姓名、性别、年龄、联系电话、家庭住址）最多记录1000人 显示联系人：显示通讯录中所有联系人信息 删除联系人：按照姓名进行删除指定联系人 查找联系人：按照姓名查看指定联系人信息 修改联系人：按照姓名重新修改指定联系人 清空联系人：清空通讯录中所有信息 退出通讯录：退出当前使用的通讯录  ¶2、创建项目 创建项目">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://wangyuxiang202.github.io/images/1544151401138.png">
 <meta property="og:image" content="http://wangyuxiang202.github.io/images/1544151579620.png">
@@ -58,10 +58,10 @@
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://wangyuxiang202.github.io/2022/01/29/%E9%80%9A%E8%AE%AF%E5%BD%95%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/","path":"2022/01/29/通讯录管理系统/","title":"通讯录管理系统"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://wangyuxiang202.github.io/2022/01/29/%E9%80%9A%E8%AE%AF%E5%BD%95%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/","path":"2022/01/29/通讯录管理系统/","title":"C++__通讯录管理系统"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>通讯录管理系统 | 北 海</title>
+<title>C++__通讯录管理系统 | 北 海</title>
   
 
   <script src="/js/third-party/analytics/baidu-analytics.js"></script>
@@ -245,7 +245,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          通讯录管理系统
+          C++__通讯录管理系统
         </h1>
 
         <div class="post-meta-container">
@@ -304,8 +304,6 @@
     
     <div class="post-body" itemprop="articleBody">
         <h2 id="1、系统需求"><a class="header-anchor" href="#1、系统需求">¶</a>1、系统需求</h2>
-<p>通讯录是一个可以记录亲人、好友信息的工具。</p>
-<p>本教程主要利用C++来实现一个通讯录管理系统</p>
 <p>系统中需要实现的功能如下：</p>
 <ul>
 <li>添加联系人：向通讯录中添加新人，信息包括（姓名、性别、年龄、联系电话、家庭住址）最多记录1000人</li>
@@ -506,7 +504,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="http://wangyuxiang202.github.io/2022/01/29/%E9%80%9A%E8%AE%AF%E5%BD%95%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" title="通讯录管理系统">http://wangyuxiang202.github.io/2022/01/29/通讯录管理系统/</a>
+      <a href="http://wangyuxiang202.github.io/2022/01/29/%E9%80%9A%E8%AE%AF%E5%BD%95%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" title="C++__通讯录管理系统">http://wangyuxiang202.github.io/2022/01/29/通讯录管理系统/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
