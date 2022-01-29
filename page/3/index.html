@@ -92,9 +92,9 @@
 <nav class="site-nav">
   <ul class="main-menu menu">
         <li class="menu-item menu-item-home"><a href="/home/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">6</span></a></li>
-        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">15</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">26</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">7</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">18</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">29</span></a></li>
         <li class="menu-item menu-item-book"><a href="/book/" rel="section"><i class="fa fa-book fa-fw"></i>book</a></li>
         <li class="menu-item menu-item-movie"><a href="/movie/" rel="section"><i class="fa fa-film fa-fw"></i>movie</a></li>
         <li class="menu-item menu-item-source"><a href="/source/" rel="section"><i class="fa fa-file-pdf fa-fw"></i>source</a></li>
@@ -145,18 +145,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">29</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -200,6 +200,357 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://wangyuxiang202.github.io/2021/10/03/%E4%B8%B2%E5%8F%A3%E9%80%9A%E8%AE%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Wang Yuxiang">
+      <meta itemprop="description" content="心之所向，素履以往">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="北 海">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/10/03/%E4%B8%B2%E5%8F%A3%E9%80%9A%E8%AE%AF/" class="post-title-link" itemprop="url">串口通讯协议</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-10-03 00:00:00 / 修改时间：13:41:54" itemprop="dateCreated datePublished" datetime="2021-10-03T00:00:00+08:00">2021-10-03</time>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2021/10/03/%E4%B8%B2%E5%8F%A3%E9%80%9A%E8%AE%AF/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/10/03/串口通讯/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>@[toc]</p>
+<h1>一、概念</h1>
+<p>单片机与外部设备交换信息时，通常采用串行通讯和并行通讯。<br>
+<strong>并行通信</strong>通常是将数据字节的各位用多条数据线同时进行传送 。<br>
+特点：控制简单、传输速度快；由于传输线较多，长距离传送时成本高且接收方的各位同时接收存在困难。<br>
+<img src="/images/20200327213429822.png" alt="在这里插入图片描述"><br>
+<strong>串行通信</strong>是将数据字节分成一位一位的形式在一条传输线上逐个地传送。<br>
+特点：传输线少，长距离传送时成本低，且可以利用电话网等现成的设备，但数据的传送控制比并行通信复杂 。</p>
+<p><img src="/images/20200327213440164.png" alt="在这里插入图片描述"><br>
+串行通讯分为同步传送和异步传送<br>
+<strong>1</strong> <strong>、异步通信</strong><br>
+发送与接收设备使用各自的时钟控制数据的发送和接收过程。为使双方的收发协调，要求发送和接收设备的时钟尽可能一致。<br>
+<img src="/images/20200327213447230.png" alt="在这里插入图片描述"><br>
+<strong>2</strong> <strong>、同步通信</strong><br>
+同步通信时要建立发送方时钟对接收方时钟的直接控制，使双方达到完全同步。此时，传输数据的位之间的距离均为“位间隔”的整数倍，同时传送的字符间不留间隙，即保持位同步关系，也保持字符同步关系。发送方对接收方的同步可以通过两种方法实现。<br>
+<img src="/images/20200327213454595.png" alt="在这里插入图片描述"></p>
+<h1>二、寄存器</h1>
+<p>串行口相关寄存器：<br>
+<img src="/images/20200327213807434.png" alt="在这里插入图片描述"></p>
+<h2 id="1-串行口控制寄存器SCON和PCON"><a class="header-anchor" href="#1-串行口控制寄存器SCON和PCON">¶</a>1).串行口控制寄存器SCON和PCON</h2>
+<h3 id="a-串行控制寄存器-SCON"><a class="header-anchor" href="#a-串行控制寄存器-SCON">¶</a>a&gt;.<strong>串行控制寄存器</strong> <strong>SCON</strong></h3>
+<p><img src="/images/20200327213832926.png" alt="在这里插入图片描述"><br>
+SMO、SM1确定串行口工作方式：<br>
+<img src="/images/20200327213851154.png" alt="在这里插入图片描述"><br>
+SM2:允许多机通讯控制位（这里不管）<br>
+REN：串行接收控制位（1：允许接收，0：禁止接收）<br>
+TB8/RB8：发送/接收数据第9位（这里不管）<br>
+TI:发送中断请求标志位（停止位开始发送时内部硬件置位1，软件复位0）<br>
+RI:接收中断请求标志位（接收到停止位内部硬件置位1，软件复位0）<br>
+*TI/RI方式0除外，任何工作方式下必须软件清零。</p>
+<h3 id="b-串行控制寄存器-PCON"><a class="header-anchor" href="#b-串行控制寄存器-PCON">¶</a>b&gt;.<strong>串行控制寄存器</strong> <strong>PCON</strong></h3>
+<p><img src="/images/20200327213911237.png" alt="在这里插入图片描述"><br>
+SMOD：波特率选择位（SMOD=1 方式1、2、3波特率加倍）<br>
+其它位与串口无关</p>
+<h2 id="2）-串行口数据缓冲寄存器SBUF"><a class="header-anchor" href="#2）-串行口数据缓冲寄存器SBUF">¶</a>2）.串行口数据缓冲寄存器SBUF</h2>
+<p>串行口数据缓冲寄存器SBUF地址99H，逻辑上，SBUF只有一个。实际上，是两个缓冲器。1个只读寄存器，1个只写寄存器。如果CPU写SBUF，数据就会被送入发送寄存器准备发送；如果CPU读SBUF，则读入的数据一定来自接收缓冲器。即CPU对SBUF的读写，实际上是分别访问上述两个不同的寄存器。  *区分  a = SBUF; SBUF = a。</p>
+<h2 id="3）-从机地址控制寄存器SADEN-SADDR"><a class="header-anchor" href="#3）-从机地址控制寄存器SADEN-SADDR">¶</a>3）.从机地址控制寄存器SADEN/SADDR</h2>
+<h2 id="4）-串行口中断相关寄存器IE-IPH-IP"><a class="header-anchor" href="#4）-串行口中断相关寄存器IE-IPH-IP">¶</a>4）.串行口中断相关寄存器IE/IPH/IP</h2>
+<p>无关</p>
+<h3 id="a-中断允许寄存器IE"><a class="header-anchor" href="#a-中断允许寄存器IE">¶</a>a&gt;.中断允许寄存器IE</h3>
+<p><img src="/images/20200327213927958.png" alt="在这里插入图片描述"><br>
+EA:CPU中断允许（1：允许，0：禁止）<br>
+ES：串行口中断允许位（1：允许，0：禁止）</p>
+<h3 id="b-IPH-IP中断优先级控制寄存器高-低"><a class="header-anchor" href="#b-IPH-IP中断优先级控制寄存器高-低">¶</a>b&gt;.IPH/IP中断优先级控制寄存器高/低</h3>
+<p>过</p>
+<h1>三、串行口工作模式1</h1>
+<h2 id="1）-计算波特率"><a class="header-anchor" href="#1）-计算波特率">¶</a>1）.计算波特率</h2>
+<p>知：<br>
+$$<br>
+波特率=\frac{2^{SMOD}}{32}<em>T1溢出率<br>
+$$<br>
+$$<br>
+T1溢出率=\frac{fosc}{12</em>(256-TH1)}<br>
+$$<br>
+故：<br>
+$$<br>
+波特率=\frac{2^{SMOD}<em>fosc}{32</em>12*(256-T_初)}<br>
+$$</p>
+<h2 id="2）-相关寄存器配置"><a class="header-anchor" href="#2）-相关寄存器配置">¶</a>2）.相关寄存器配置</h2>
+<p>设置T1的工作方式（编程TMOD寄存器）；<br>
+计算T1的初值，装载TH1、TL1；<br>
+启动T1（编程TCON中的TR1位）；<br>
+确定串行口控制（编程SCON寄存器）；<br>
+如需串行口在中断方式工作时，要进行中断设置编程IE寄存器。</p>
+<h1>四、代码块</h1>
+<p>串口初始化</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/*串口初始化*/</span></span><br><span class="line">void UART_init()</span><br><span class="line">&#123;</span><br><span class="line">	TMOD = <span class="number">0</span>x20;  	<span class="regexp">//</span>T1工作模式<span class="number">2</span>  <span class="number">8</span>位自动重装</span><br><span class="line">	TH1 = <span class="number">0</span>xfd;</span><br><span class="line">	TL1 = <span class="number">0</span>xfd; 	<span class="regexp">//</span>比特率<span class="number">9600</span></span><br><span class="line"><span class="regexp">//</span>TH1=TL1=<span class="number">256</span>-fosc<span class="regexp">/12/</span><span class="number">32</span>/BADU</span><br><span class="line">	TR1 = <span class="number">1</span>;		<span class="regexp">//</span>启动T1定时器</span><br><span class="line">	SM0 = <span class="number">0</span>;</span><br><span class="line">	SM1 = <span class="number">1</span>; 		<span class="regexp">//</span>串口工作方式<span class="number">1</span></span><br><span class="line">	REN = <span class="number">1</span>;		<span class="regexp">//</span>串口允许接收</span><br><span class="line">	EA  = <span class="number">1</span>;		<span class="regexp">//</span>开总中断</span><br><span class="line">	ES  = <span class="number">1</span>;		<span class="regexp">//</span>串口中断打开</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>TI:发送中断请求标志位（停止位开始发送时内部硬件置位1，软件复位0）<br>
+RI:接收中断请求标志位（接收到停止位内部硬件置位1，软件复位0）</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/*串口中断服务程序*/</span></span><br><span class="line">void UART() interrupt <span class="number">4</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span>(RI)	<span class="regexp">//</span>检测是否接收完成</span><br><span class="line">	&#123;	</span><br><span class="line">		RI = <span class="number">0</span>;</span><br><span class="line">		num = SBUF;	  <span class="regexp">//</span>num 取出接收缓存器的值</span><br><span class="line">		P1 = SBUF;</span><br><span class="line">		num++;</span><br><span class="line">		SBUF = num;	</span><br><span class="line">		<span class="keyword">while</span>(!TI);  <span class="regexp">//</span>TI=<span class="number">1</span>则置零</span><br><span class="line">		TI = <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://wangyuxiang202.github.io/2021/10/03/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89------%E6%8C%89%E9%94%AE%E8%9C%82%E9%B8%A3%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Wang Yuxiang">
+      <meta itemprop="description" content="心之所向，素履以往">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="北 海">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/10/03/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89------%E6%8C%89%E9%94%AE%E8%9C%82%E9%B8%A3%E5%99%A8/" class="post-title-link" itemprop="url">FPGA学习笔记（三）------按键蜂鸣器</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-10-03 00:00:00" itemprop="dateCreated datePublished" datetime="2021-10-03T00:00:00+08:00">2021-10-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/FPGA/" itemprop="url" rel="index"><span itemprop="name">FPGA</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/FPGA/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2021/10/03/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89------%E6%8C%89%E9%94%AE%E8%9C%82%E9%B8%A3%E5%99%A8/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/10/03/FPGA学习笔记（三）------按键蜂鸣器/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1>顶层代码模块</h1>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//***********Copyright (c)************//</span></span><br><span class="line"><span class="comment">//-------------------------------------</span></span><br><span class="line"><span class="comment">// File name:           my_key_led</span></span><br><span class="line"><span class="comment">// Last modified Date:  2020/6/11 10:30</span></span><br><span class="line"><span class="comment">// Last Version:        V1.1</span></span><br><span class="line"><span class="comment">// Descriptions:        按键蜂鸣器</span></span><br><span class="line"><span class="comment">//	key0    				 	右-左流水灯</span></span><br><span class="line"><span class="comment">//	key1      				左-右流水灯</span></span><br><span class="line"><span class="comment">//	key2      				全闪烁</span></span><br><span class="line"><span class="comment">//	key3       				全亮</span></span><br><span class="line"><span class="comment">//-------------------------------------</span></span><br><span class="line"><span class="comment">// 引脚分配，高电平响</span></span><br><span class="line"><span class="comment">// sys_clk     E1</span></span><br><span class="line"><span class="comment">// sys_rst_n   M1</span></span><br><span class="line"><span class="comment">//	key			E16</span></span><br><span class="line"><span class="comment">//	beep			D12</span></span><br><span class="line"><span class="comment">//-------------------------------------</span></span><br><span class="line"><span class="comment">//*************************************//</span></span><br><span class="line"><span class="comment">//顶层代码模块</span></span><br><span class="line"><span class="keyword">module</span> top_key_beep (</span><br><span class="line"><span class="comment">//input</span></span><br><span class="line"><span class="keyword">input</span> sys_clk, <span class="comment">//时钟信号50Mhz</span></span><br><span class="line"><span class="keyword">input</span> sys_rst_n, <span class="comment">//复位信号</span></span><br><span class="line"><span class="keyword">input</span> key, <span class="comment">//按键信号</span></span><br><span class="line"><span class="comment">//output</span></span><br><span class="line"><span class="keyword">output</span> beep <span class="comment">//蜂鸣器控制信号</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">//wire define</span></span><br><span class="line"><span class="keyword">wire</span> key_value;</span><br><span class="line"><span class="keyword">wire</span> key_flag;</span><br><span class="line"></span><br><span class="line"><span class="comment">//**************************************</span></span><br><span class="line"><span class="comment">//**				 main code</span></span><br><span class="line"><span class="comment">//**************************************</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//例化按键消抖模块</span></span><br><span class="line">key_debounce u_key_debounce</span><br><span class="line">(</span><br><span class="line">	<span class="variable">.sys_clk</span> 			(sys_clk),</span><br><span class="line">	<span class="variable">.sys_rst_n</span> 			(sys_rst_n),</span><br><span class="line"></span><br><span class="line">	<span class="variable">.key</span>            (key),</span><br><span class="line">	<span class="variable">.key_flag</span>       (key_flag),</span><br><span class="line">	<span class="variable">.key_value</span>      (key_value)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">//例化蜂鸣器控制模块</span></span><br><span class="line">beep_control u_beep_control (</span><br><span class="line">    <span class="variable">.sys_clk</span>        (sys_clk), </span><br><span class="line">    <span class="variable">.sys_rst_n</span>      (sys_rst_n),</span><br><span class="line">    </span><br><span class="line">    <span class="variable">.key_flag</span>       (key_flag),      </span><br><span class="line">    <span class="variable">.key_value</span>      (key_value),</span><br><span class="line">    <span class="variable">.beep</span>           (beep)</span><br><span class="line">);</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<h1>蜂鸣器控制模块</h1>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//蜂鸣器控制模块</span></span><br><span class="line"><span class="keyword">module</span> beep_control</span><br><span class="line">(</span><br><span class="line">	<span class="comment">//input</span></span><br><span class="line">	<span class="keyword">input</span>	sys_clk,</span><br><span class="line">	<span class="keyword">input</span>	sys_rst_n,		<span class="comment">//复位信号，低电平有效</span></span><br><span class="line">	<span class="keyword">input</span>	key_flag,		<span class="comment">//按键有效信号</span></span><br><span class="line">	<span class="keyword">input</span>	key_value,		<span class="comment">//按键信号</span></span><br><span class="line">	<span class="comment">//output</span></span><br><span class="line">	<span class="keyword">output</span>	<span class="keyword">reg</span>	beep	<span class="comment">//蜂鸣器控制信号</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">//**************************************</span></span><br><span class="line"><span class="comment">//**				 main code</span></span><br><span class="line"><span class="comment">//**************************************</span></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> sys_clk <span class="keyword">or</span> <span class="keyword">negedge</span> sys_rst_n)</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">	<span class="keyword">if</span>(!sys_rst_n)</span><br><span class="line">	beep&lt;=<span class="number">1&#x27;b1</span>;    <span class="comment">//复位蜂鸣器响</span></span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		<span class="keyword">if</span>(key_flag&amp;&amp;(~key_value)) <span class="comment">//按键有效按下</span></span><br><span class="line">			beep=~beep;					<span class="comment">//交替响</span></span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			beep&lt;=beep;	</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+<h1>按键消抖模块代码</h1>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//按键消抖模块代码</span></span><br><span class="line"><span class="keyword">module</span>	key_debounce</span><br><span class="line">(</span><br><span class="line">	<span class="comment">//input</span></span><br><span class="line">	<span class="keyword">input</span> sys_clk,</span><br><span class="line">	<span class="keyword">input</span> sys_rst_n,</span><br><span class="line">	<span class="keyword">input</span>	key,</span><br><span class="line">	<span class="comment">//output  需要赋值 reg</span></span><br><span class="line">	<span class="keyword">output</span>	<span class="keyword">reg</span>	key_value,	<span class="comment">//按键消抖后的数据</span></span><br><span class="line">	<span class="keyword">output</span>	<span class="keyword">reg</span>	key_flag 	<span class="comment">//按键数据有效信号</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">//reg	define</span></span><br><span class="line"><span class="keyword">reg</span>	[<span class="number">19</span>:<span class="number">0</span>]	delay_count;	<span class="comment">//计数延时</span></span><br><span class="line"><span class="keyword">reg</span>				key_reg;</span><br><span class="line"></span><br><span class="line"><span class="comment">//**************************************</span></span><br><span class="line"><span class="comment">//**				 main code</span></span><br><span class="line"><span class="comment">//**************************************</span></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> sys_clk <span class="keyword">or</span> <span class="keyword">negedge</span> sys_rst_n)</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">	<span class="keyword">if</span>(!sys_rst_n)			<span class="comment">//如果复位</span></span><br><span class="line">		<span class="keyword">begin</span></span><br><span class="line">			key_reg &lt;=<span class="number">1&#x27;b1</span>;</span><br><span class="line">			delay_count&lt;=<span class="number">20&#x27;d0</span>;</span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		<span class="keyword">begin</span></span><br><span class="line">			key_reg &lt;=key;</span><br><span class="line">			<span class="keyword">if</span>(key_reg!=key)</span><br><span class="line">				delay_count&lt;=<span class="number">20&#x27;d1000_000</span>;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(key_reg==key)</span><br><span class="line">				<span class="keyword">begin</span></span><br><span class="line">				<span class="keyword">if</span>(delay_count&gt;<span class="number">20&#x27;d0</span>)</span><br><span class="line">					delay_count&lt;=delay_count-<span class="number">1&#x27;b1</span>;</span><br><span class="line">				<span class="keyword">else</span></span><br><span class="line">					delay_count&lt;=<span class="number">20&#x27;d0</span>;		</span><br><span class="line">				<span class="keyword">end</span></span><br><span class="line">		<span class="keyword">end</span>	</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> sys_clk <span class="keyword">or</span> <span class="keyword">negedge</span> sys_rst_n)</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">	<span class="keyword">if</span>(!sys_rst_n)</span><br><span class="line">		<span class="keyword">begin</span></span><br><span class="line">			key_flag&lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">			key_value&lt;=<span class="number">1&#x27;b1</span>;</span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		<span class="keyword">begin</span></span><br><span class="line">			<span class="keyword">if</span>(delay_count==<span class="number">20&#x27;d1</span>)</span><br><span class="line">				<span class="keyword">begin</span></span><br><span class="line">					key_flag&lt;=<span class="number">1&#x27;b1</span>;</span><br><span class="line">					key_value&lt;=key;</span><br><span class="line">				<span class="keyword">end</span></span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				<span class="keyword">begin</span></span><br><span class="line">					key_flag&lt;=<span class="number">1&#x27;b0</span>;</span><br><span class="line">					key_value&lt;=key_value;</span><br><span class="line">				<span class="keyword">end</span></span><br><span class="line">		<span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://wangyuxiang202.github.io/2021/10/03/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89------BCD%E8%AE%A1%E6%95%B0%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Wang Yuxiang">
+      <meta itemprop="description" content="心之所向，素履以往">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="北 海">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/10/03/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89------BCD%E8%AE%A1%E6%95%B0%E5%99%A8/" class="post-title-link" itemprop="url">FPGA学习笔记（七）------BCD计数器</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-10-03 00:00:00" itemprop="dateCreated datePublished" datetime="2021-10-03T00:00:00+08:00">2021-10-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/FPGA/" itemprop="url" rel="index"><span itemprop="name">FPGA</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/FPGA/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2021/10/03/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%83%EF%BC%89------BCD%E8%AE%A1%E6%95%B0%E5%99%A8/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/10/03/FPGA学习笔记（七）------BCD计数器/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1>硬件电路</h1>
+<p><img src="/images/20200821223409775.png" alt="在这里插入图片描述"></p>
+<h1>代码</h1>
+<h2 id="my-BCD-counter"><a class="header-anchor" href="#my-BCD-counter">¶</a>my_BCD_counter</h2>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//BCD counter</span></span><br><span class="line"><span class="function"><span class="keyword">module</span>	<span class="title">my_BCD_counter</span><span class="params">(clk,<span class="built_in">cin</span>,rst_n,<span class="built_in">cout</span>,q)</span></span>;</span><br><span class="line">	input clk,<span class="built_in">cin</span>,rst_n;</span><br><span class="line">	</span><br><span class="line">	output  <span class="built_in">cout</span>;		<span class="comment">//时序变组合 去掉reg</span></span><br><span class="line">	output [<span class="number">3</span>:<span class="number">0</span>] q;</span><br><span class="line">	</span><br><span class="line">	reg	[<span class="number">3</span>:<span class="number">0</span>]	cnt;</span><br><span class="line">	</span><br><span class="line">always @ (posedge clk <span class="keyword">or</span> negedge rst_n)</span><br><span class="line">	<span class="keyword">if</span>(!rst_n)</span><br><span class="line">		cnt &lt;= <span class="number">4&#x27;</span>d0;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(<span class="built_in">cin</span> == <span class="number">1&#x27;b</span>1)begin</span><br><span class="line">		<span class="keyword">if</span>(cnt == <span class="number">4&#x27;</span>d9)</span><br><span class="line">			cnt &lt;= <span class="number">4&#x27;b</span>0;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			cnt &lt;= cnt + <span class="number">1&#x27;b</span>1;</span><br><span class="line">	end</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		cnt &lt;= cnt;</span><br><span class="line"></span><br><span class="line"><span class="comment">//产生进位输出信号		</span></span><br><span class="line"><span class="comment">//时序逻辑有延迟</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">always @ (posedge clk or negedge rst_n)</span></span><br><span class="line"><span class="comment">	if(!rst_n)	</span></span><br><span class="line"><span class="comment">		cout &lt;= 1&#x27;b0;</span></span><br><span class="line"><span class="comment">	else if(cin == 1&#x27;b1 &amp;&amp; cnt == 4&#x27;d9)</span></span><br><span class="line"><span class="comment">		cout &lt;= 1&#x27;b1;</span></span><br><span class="line"><span class="comment">	else</span></span><br><span class="line"><span class="comment">		cout &lt;= 1&#x27;b0;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> if(cin == 1&#x27;b1 &amp;&amp; cnt == 4&#x27;d9)</span></span><br><span class="line"><span class="comment">*/</span>	</span><br><span class="line"></span><br><span class="line"><span class="comment">//产生进位输出信号	</span></span><br><span class="line"><span class="comment">//assign cout = (cin == 1&#x27;b1 &amp;&amp; cnt == 4&#x27;d9)?1&#x27;b1:1&#x27;b0;  //两种皆可</span></span><br><span class="line">assign <span class="built_in">cout</span> = (<span class="built_in">cin</span> == <span class="number">1&#x27;b</span>1 &amp;&amp; cnt == <span class="number">4&#x27;</span>d9);</span><br><span class="line"></span><br><span class="line">assign q = cnt	;</span><br><span class="line">			</span><br><span class="line">endmodule</span><br></pre></td></tr></table></figure>
+<h2 id="my-BCD-counter-top-三次例化"><a class="header-anchor" href="#my-BCD-counter-top-三次例化">¶</a>my_BCD_counter_top	   三次例化</h2>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">module</span>	<span class="title">my_BCD_counter_top</span>	<span class="params">(clk,<span class="built_in">cin</span>,rst_n,<span class="built_in">cout</span>,q)</span></span>;</span><br><span class="line"></span><br><span class="line">	input clk,<span class="built_in">cin</span>,rst_n;</span><br><span class="line">	</span><br><span class="line">	output  <span class="built_in">cout</span>;		<span class="comment">//不赋值，直接输出 去掉reg </span></span><br><span class="line">	output [<span class="number">11</span>:<span class="number">0</span>] q;</span><br><span class="line">	</span><br><span class="line">	wire cout0,cout1;</span><br><span class="line">	wire [<span class="number">3</span>:<span class="number">0</span>] q0,q1,q2;</span><br><span class="line">	</span><br><span class="line">	assign q=&#123;q2,q1,q0&#125;;	<span class="comment">//拼接</span></span><br><span class="line"></span><br><span class="line"><span class="function">my_BCD_counter <span class="title">my_BCD_counter0</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">	.clk		(clk),</span></span></span><br><span class="line"><span class="params"><span class="function">	.<span class="built_in">cin</span>		(<span class="built_in">cin</span>),</span></span></span><br><span class="line"><span class="params"><span class="function">	.rst_n	(rst_n),</span></span></span><br><span class="line"><span class="params"><span class="function">	.<span class="built_in">cout</span>		(cout0),</span></span></span><br><span class="line"><span class="params"><span class="function">	.q			(q0)</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function">my_BCD_counter <span class="title">my_BCD_counter1</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">	.clk		(clk),</span></span></span><br><span class="line"><span class="params"><span class="function">	.<span class="built_in">cin</span>		(cout0),</span></span></span><br><span class="line"><span class="params"><span class="function">	.rst_n	(rst_n),</span></span></span><br><span class="line"><span class="params"><span class="function">	.<span class="built_in">cout</span>		(cout1),</span></span></span><br><span class="line"><span class="params"><span class="function">	.q			(q1)</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function">my_BCD_counter <span class="title">my_BCD_counter2</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">	.clk		(clk),</span></span></span><br><span class="line"><span class="params"><span class="function">	.<span class="built_in">cin</span>		(cout1),</span></span></span><br><span class="line"><span class="params"><span class="function">	.rst_n	(rst_n),</span></span></span><br><span class="line"><span class="params"><span class="function">	.<span class="built_in">cout</span>		(<span class="built_in">cout</span>),</span></span></span><br><span class="line"><span class="params"><span class="function">	.q			(q2)</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>;</span><br><span class="line">endmodule</span><br></pre></td></tr></table></figure>
+<h1>激励文件</h1>
+<h2 id="my-BCD-counter-tb"><a class="header-anchor" href="#my-BCD-counter-tb">¶</a>my_BCD_counter_tb</h2>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">`timescale <span class="number">1</span>ns/<span class="number">1</span>ns</span><br><span class="line"></span><br><span class="line">`define clock_period <span class="number">20</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> my_BCD_counter_tb;</span><br><span class="line"></span><br><span class="line">reg	clk,<span class="built_in">cin</span>,rst_n;  <span class="comment">//激励信号</span></span><br><span class="line"></span><br><span class="line">wire	<span class="built_in">cout</span>;				<span class="comment">//输出信号</span></span><br><span class="line">wire	[<span class="number">3</span>:<span class="number">0</span>] q;</span><br><span class="line"></span><br><span class="line"><span class="function">my_BCD_counter <span class="title">my_BCD_counter0</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">	.clk		(clk),</span></span></span><br><span class="line"><span class="params"><span class="function">	.<span class="built_in">cin</span>		(<span class="built_in">cin</span>),</span></span></span><br><span class="line"><span class="params"><span class="function">	.rst_n	(rst_n),</span></span></span><br><span class="line"><span class="params"><span class="function">	.<span class="built_in">cout</span>		(<span class="built_in">cout</span>),</span></span></span><br><span class="line"><span class="params"><span class="function">	.q			(q)</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//T=20ns  给激励信号</span></span><br><span class="line">initial clk = <span class="number">1&#x27;b</span>1;</span><br><span class="line">always	#(`clock_period / <span class="number">2</span>)	clk = ~clk;</span><br><span class="line"></span><br><span class="line">initial begin</span><br><span class="line">	rst_n = <span class="number">1&#x27;b</span>0;		<span class="comment">//初始态</span></span><br><span class="line">	<span class="built_in">cin</span>   = <span class="number">1&#x27;b</span>0;</span><br><span class="line">	#(`clock_period * <span class="number">200</span>);</span><br><span class="line">	rst_n = <span class="number">1&#x27;b</span>1;</span><br><span class="line">	#(`clock_period * <span class="number">20</span>);</span><br><span class="line">	repeat(<span class="number">30</span>)begin</span><br><span class="line">		<span class="built_in">cin</span>   = <span class="number">1&#x27;b</span>1;</span><br><span class="line">		#`clock_period ;</span><br><span class="line">		<span class="built_in">cin</span>   = <span class="number">1&#x27;b</span>0;</span><br><span class="line">		#(`clock_period * <span class="number">5</span>);</span><br><span class="line">	end</span><br><span class="line">		#(`clock_period * <span class="number">5</span>);</span><br><span class="line">		$stop;</span><br><span class="line">end</span><br><span class="line">endmodule</span><br></pre></td></tr></table></figure>
+<h2 id="my-BCD-counter-top-tb"><a class="header-anchor" href="#my-BCD-counter-top-tb">¶</a>my_BCD_counter_top_tb</h2>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">`timescale <span class="number">1</span>ns/<span class="number">1</span>ns</span><br><span class="line"></span><br><span class="line">`define clock_period <span class="number">20</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> my_BCD_counter_top_tb;</span><br><span class="line"></span><br><span class="line">reg	clk,<span class="built_in">cin</span>,rst_n;  <span class="comment">//激励信号</span></span><br><span class="line"></span><br><span class="line">wire	<span class="built_in">cout</span>;				<span class="comment">//输出信号</span></span><br><span class="line">wire	[<span class="number">11</span>:<span class="number">0</span>] q;</span><br><span class="line"></span><br><span class="line"><span class="function">my_BCD_counter_top <span class="title">my_BCD_counter_top0</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">	.clk		(clk),</span></span></span><br><span class="line"><span class="params"><span class="function">	.<span class="built_in">cin</span>		(<span class="built_in">cin</span>),</span></span></span><br><span class="line"><span class="params"><span class="function">	.rst_n	(rst_n),</span></span></span><br><span class="line"><span class="params"><span class="function">	.<span class="built_in">cout</span>		(<span class="built_in">cout</span>),</span></span></span><br><span class="line"><span class="params"><span class="function">	.q			(q)</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//T=20ns  给激励信号</span></span><br><span class="line">initial clk = <span class="number">1&#x27;b</span>1;</span><br><span class="line">always	#(`clock_period / <span class="number">2</span>)	clk = ~clk;</span><br><span class="line"></span><br><span class="line">initial begin</span><br><span class="line">	rst_n = <span class="number">1&#x27;b</span>0;		<span class="comment">//初始态</span></span><br><span class="line">	<span class="built_in">cin</span>   = <span class="number">1&#x27;b</span>0;</span><br><span class="line">	#(`clock_period * <span class="number">200</span>);			<span class="comment">//4000ns</span></span><br><span class="line">	rst_n = <span class="number">1&#x27;b</span>1;</span><br><span class="line">	#(`clock_period * <span class="number">20</span>);			<span class="comment">//4400ns</span></span><br><span class="line">	<span class="built_in">cin</span>   = <span class="number">1&#x27;b</span>1;</span><br><span class="line">	#(`clock_period * <span class="number">5000</span>);		<span class="comment">//10_4400ns</span></span><br><span class="line">	$stop;</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">endmodule</span><br></pre></td></tr></table></figure>
+<h1>需要注意</h1>
+<p>1&gt;.时序逻辑有时钟的延迟,时钟上升沿触发一次。</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">always</span> @ (posedge clk or negedge rst_n)</span><br><span class="line">	<span class="attribute">if</span>(!rst_n)	</span><br><span class="line">		<span class="attribute">cout</span> &lt;= <span class="number">1</span>&#x27;b<span class="number">0</span>;</span><br><span class="line">	<span class="attribute">else</span> if(cin == <span class="number">1</span>&#x27;b<span class="number">1</span> &amp;&amp; cnt == <span class="number">4</span>&#x27;d<span class="number">9</span>)</span><br><span class="line">		<span class="attribute">cout</span> &lt;= <span class="number">1</span>&#x27;b<span class="number">1</span>;</span><br><span class="line">	<span class="attribute">else</span></span><br><span class="line">		<span class="attribute">cout</span> &lt;= <span class="number">1</span>&#x27;b<span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/20200821222718331.png" alt="在这里插入图片描述"><br>
+2&gt;.组合逻辑无时钟延迟</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">//</span>产生进位输出信号	</span><br><span class="line"><span class="regexp">//</span>assign cout = (cin == <span class="number">1</span><span class="string">&#x27;b1 &amp;&amp; cnt == 4&#x27;</span>d9)?<span class="number">1</span><span class="string">&#x27;b1:1&#x27;</span>b0;  <span class="regexp">//</span>两种皆可</span><br><span class="line">assign cout = (cin == <span class="number">1</span><span class="string">&#x27;b1 &amp;&amp; cnt == 4&#x27;</span>d9);</span><br></pre></td></tr></table></figure>
+<p><img src="/images/20200821223133973.png" alt="在这里插入图片描述"></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -884,7 +1235,7 @@ $$</p>
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/10/03/demo/" class="post-title-link" itemprop="url">FPGA学习笔记（九）------按键消抖</a>
+          <a href="/2021/10/03/demo/" class="post-title-link" itemprop="url">demo</a>
         </h2>
 
         <div class="post-meta-container">
@@ -965,8 +1316,8 @@ $$</p>
 
 
 <div class="copyright">
-  &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  &copy; 2021 – 
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -1016,5 +1367,5 @@ $$</p>
 <script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"Wang","count":true,"i18n":{"disqus":"disqus"}}</script>
 <script src="/js/third-party/comments/disqus.js"></script>
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-wanko"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
+</body>
 </html>
